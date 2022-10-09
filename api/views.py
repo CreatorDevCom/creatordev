@@ -1,4 +1,3 @@
-from rest_framework import response
 from api.send_emails import send_congrates_new_account_mail
 from api.models import PrivacyPolices
 from django.shortcuts import redirect, render
