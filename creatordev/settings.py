@@ -1,13 +1,11 @@
 from pathlib import Path
-import os
-import django_heroku
-import dj_database_url
+import os 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
  
 SECRET_KEY = 'django-insecure-w3g+c8v@fo^#5ttn&-x(lca)7om676aj%#zchlw7nqibm%p5w7'
  
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['creatorsdev.herokuapp.com','*']
  
