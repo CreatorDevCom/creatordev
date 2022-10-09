@@ -1,1 +1,1 @@
-web gunicorn creatordev.wsgi:application --log-file -
+web:gunicorn creatordev.wsgi:application --log-file -
