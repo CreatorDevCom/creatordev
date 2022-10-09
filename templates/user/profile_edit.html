@@ -73,7 +73,7 @@
       {% for i in profile %}
        <div class="cover_pic border-1 ">
         {% if i.cover_pic %}
-         <img src="http://127.0.0.1:8000/media/{{i.cover_pic}}" alt="cover pic">
+         <img src="https://creatorsdev.herokuapp.com/media{{i.cover_pic}}" alt="cover pic">
         {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="cover pic">
         {% endif %} 
@@ -87,7 +87,7 @@
        </div>
        <div class="profile_pic mt--6 rounded-circle ">
         {% if i.profile_pic %}
-          <img src="http://127.0.0.1:8000/media/{{i.profile_pic}}" class="shadow" alt="cover pic">
+          <img src="https://creatorsdev.herokuapp.com/media{{i.profile_pic}}" class="shadow" alt="cover pic">
         {% else %}
          <img src="/static/assets/img/icons/user_profile_pic_default.png" class="shadow" alt="cover pic">
         {% endif %} 

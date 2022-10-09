@@ -132,7 +132,7 @@ table{
   <div class="sec-header   " id="sec-header">
     <div class="sec-header-content">
       <div class="sec-header-author-info">
-        <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" class="sec-header-user-pic" alt="asstes-loading">
+        <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="sec-header-user-pic" alt="asstes-loading">
         <div class="sec-header-text-info">
           <div class="flex items-center">
             <span class="font-sm  ml-2">by <span class="sec-head-username">
@@ -166,13 +166,13 @@ table{
 
   {% if article %}
   <div class="top-content" id="top-content">
-    <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="bg-image" id="bg-img">
+    <img src="https://creatorsdev.herokuapp.com/media{{article.mainImage}}" alt="asstes-loading" class="bg-image" id="bg-img">
     <div class="top-content-div">
       <div class="showcase-article">
         <div class="left-container">
           <h2 class="main-title-article">{{article.title}}</h2>
           <div class="flex  authorallinfo items-center">
-            <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" alt="asstes-loading" class="profielPic">
+            <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" alt="asstes-loading" class="profielPic">
             <div class="author_info mx-2">
               <span class="info mx-2 ">article by
                 <a href="/user/profile/{{article.author.username}}" class="username mx-1">
@@ -211,7 +211,7 @@ table{
         </div>
         </div>
         <div class="right-container ">
-          <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="mainImage">
+          <img src="https://creatorsdev.herokuapp.com/media{{article.mainImage}}" alt="asstes-loading" class="mainImage">
         </div>
       </div>
     </div>
@@ -234,12 +234,12 @@ table{
              <!-- Autho info -->
         <div class="div-bg" >
           <div class=" ">
-            <img src="https://creatordev.vercel.app/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
+            <img src="https://creatorsdev.herokuapp.com/media{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="/user/profile/{{article.author.username}}">
-                    <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" class="rounded-circle border-primary">
+                    <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="rounded-circle border-primary">
                   </a>
                 </div>
               </div>
@@ -302,7 +302,7 @@ table{
                     {% if comments %} 
                     {% for comment in comments %}
                     <div class="user-comment-box my-2" id="{{comment.id}}">
-                      <!-- <img src="https://creatordev.vercel.app/{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
+                      <!-- <img src="https://creatorsdev.herokuapp.com/media{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
                       <div class="flex flex-col w-full pt-2 rounded-lg  " style="border: 1px solid var(--text-light);">
                         <span class="comment-author-name">{{comment.author.first_name}} {{comment.author.last_name}} <span
                             class="comment-commented-at">{{comment.commented_at | naturaltime }}</span></span>
@@ -458,7 +458,7 @@ table{
     }
 
   // Social Share
-  share(postTitle = '{{article.title}}', postImg ='https://creatordev.vercel.app/{{article.mainImage}}' )
+  share(postTitle = '{{article.title}}', postImg ='https://creatorsdev.herokuapp.com/media{{article.mainImage}}' )
 
 </script>
  

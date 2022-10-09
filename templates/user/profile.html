@@ -21,7 +21,7 @@
 
         <div class="cover_pic"> 
           {% if profile.cover_pic %}
-          <img src="http://127.0.0.1:8000/media/{{profile.cover_pic}}" alt="">
+          <img src="https://creatorsdev.herokuapp.com/media{{profile.cover_pic}}" alt="">
           {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
           {% endif %}
@@ -32,7 +32,7 @@
        <div class="author-info-div">
         <div class="user_info">
           {% if profile.profile_pic %}
-          <img src="http://127.0.0.1:8000/media/{{profile.profile_pic}}" alt="">
+          <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" alt="">
           {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
           {% endif %}
@@ -73,7 +73,7 @@
          {% for article in articles %}
          <div class="articel-box">
           <div class="main-image-div">
-            <img src="http://127.0.0.01:8000/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
+            <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
           </div>
           <div class="article-info-div">
              <h2 class="article-title">{{article.title}}</h2>

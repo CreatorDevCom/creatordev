@@ -52,7 +52,7 @@
       <div class="row p-2 align-items-center">
         <!-- Author Image -->
         <div class="pl-md-5 pl-2"> 
-          <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
+          <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
         </div> 
         <div class="col  pl-4">
           <!-- Author Other info -->
@@ -110,7 +110,7 @@
           {% endif %}
           {% for comment in comments %}
           <div class="user-comment-box my-2" id="{{comment.id}}">
-            <!-- <img src="https://creatordev.vercel.app/{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
+            <!-- <img src="https://creatorsdev.herokuapp.com/media{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
             <div class="flex flex-col w-full pt-2 rounded-lg  " style="border: 1px solid var(--text-light);">
               <span class="comment-author-name">{{comment.author.first_name}} {{comment.author.last_name}} <span
                   class="comment-commented-at">{{comment.commented_at | naturaltime }}</span></span>
