@@ -1,0 +1,40 @@
+:root {
+  --primary-highlight:rgb(171, 98, 255);
+  --head-color: rgb(255, 255, 255);
+  --primary: rgb(10, 5, 12);
+  --bg-gray: rgb(233, 233, 233);
+  --div-bg: white;
+  --text-light: rgb(177, 177, 177);
+  --text-gray: rgb(77, 77, 77);
+  --text-extra-gray: rgb(59, 59, 59); 
+  --shadow: rgb(201, 201, 201); 
+  --dark-white: rgb(16, 18, 27);
+  --hover-color:rgb(241, 248, 255);
+}
+.dark {
+  --primary-highlight:rgb(171, 98, 255);
+  --head-color: rgb(5, 7, 12);
+  --primary: rgb(5, 7, 12);
+  --bg-gray: rgb(5, 7, 12);
+  --div-bg: rgb(16, 18, 24);
+  --text-light: rgb(114, 114, 114);
+  --text-gray: rgb(155, 155, 155);
+  --shadow: rgb(0, 0, 0); 
+  --text-extra-gray: rgb(179, 179, 179);
+  --dark-white: rgb(247, 247, 247);
+  --hover-color:rgb(27, 29, 39);
+
+}
+.text-extra-gray{
+  color: var(--text-extra-gray);
+}
+
+.text-red {
+  color: rgb(233, 52, 52);
+}
+.text-yellow {
+  color: rgb(233, 155, 52);
+}
+.text-blue {
+  color: rgb(61, 123, 236);
+}

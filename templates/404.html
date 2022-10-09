@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/inbox.css' %}  ? {U}  ">
+<link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U} ">  
+<link rel="stylesheet" href="{% static 'css/theme.css' %} ? {U} ">  
+
+{% endblock headlinks %}
+{% block body %}
+<style>
+  .flex-col{
+    flex-direction: column;
+  }
+</style>
+ <div class="col-md-8 mx-auto col-12"> 
+    <div class="p-4 flex justify-content-center align-items-center flex-col"> 
+      <h1 style="font-size: 8rem; font-weight: 700;" class="text-primary">404</h1>
+      <h2 class="text-primary text-lg"><b>OOps!</b> Not Found</h2> 
+      <p>We did't found this page please redirect to  <i><a href="/">home page</a> </i></p>
+    </div>
+ </div>
+
+{% endblock body %}
+

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}  ">
+  <link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U} "> 
+
+{% endblock headlinks %}
+{% block body %}  
+<div class="main-content " id="main-content" style="color: var(--bg-gray);">
+
+    <div class="container-fluid bg-gradient-primary p-lg-4 p-2">
+      <div class="col-lg-10  mx-auto text-white">
+       <div class="row">
+          <div class="col-lg-6 col-12 text-md-left text-center my-auto col mt-md-auto ">
+            <h1 class="text-white  display-3 font-weight-700 mt-4">Explore your ideas and projects to all over the world</h1>
+            <span class="text-white text-md ">Register now and make yourself <i class="ni ni-user-run mx-1"></i> like a Pro <i class="ni ni-spaceship mx-1"></i></span><br/>
+            <a href="/user/register" class="btn btn-neutral my-md-3 my-4 text-primary  px-5">Register</a>
+          </div>
+          <div class="col-lg-5 mt-4 col-12 flex justify-content-md-end justify-content-center ">
+            <img src="static/assets/img/theme/img (1).jpg" alt="asstes" class=" ">
+          </div>
+       </div>
+      </div>
+    </div>
+   
+    <div class=" mt-5 px-0">
+      <h2 class="display-3 mx-md-8 mt-5  mx-4 text-primary" id="createarticle">Create Articles <i class="fas fa-arrow-up display-4 mx-1"></i></h2>
+      <div class="row mx-auto col-lg-10 col-12 mt-2"> 
+        <div class="div-bg  col-lg-3 mx-auto  mt-4 rounded-lg  col-9"> 
+            <div class="col py-5 flex flex-col align-center justify-content-center ">
+              <center>
+                <i class="ni ni-bulb-61 display-2 text-gray "></i>
+                <h2 style="color: var(--dark-white);">Explore Your Ideas </h2>
+                <span class="description" style="color:var(--text-gray);">Create an article and explore ideas  <i class="ni ni-world-2"></i></span>
+              </center>
+            </div> 
+        </div>
+        <div class="div-bg  col-lg-3 mx-auto  mt-4  col-9 rounded-lg"> 
+            <div class="col py-5 flex flex-col align-center justify-content-center ">
+              <center>
+                <i class="ni ni-spaceship display-2 text-gray "></i>
+                <h2 style="color: var(--dark-white);">Make your pro Profile</h2>
+                <span class="description" style="color:var(--text-gray);">Show to the world who are you? , how is you ideas <i class="ni ni-bulb-61"></i></span>
+              </center>
+      
+          </div> 
+        </div>
+        <div class=" div-bg rounded-lg col-lg-3 mx-auto  mt-4  col-9">
+          <div class="col py-5 flex flex-col align-center justify-content-center "> 
+              <center>
+                <i class="ni ni-paper-diploma display-2  text-gray"></i>
+                <h2  style="color: var(--dark-white);">Read articles & learn</h2>
+                <span class="description" style="color:var(--text-gray);">Read our professional and help articles.</span>
+              </center>
+        
+          </div> 
+        </div>
+      </div>
+
+      <h2 class="display-3 mx-md-8 mt-8  mx-4 text-primary row" id="about">About <b class=" mx-2">  Creator Dev </b> <i class="ni ni-hat-3 mx-1 "></i> </h2>
+      <div class="row mx-auto col-lg-10 col-12 mt-2">  
+        <div class="col-lg-6 mx-auto mt-4">
+            <img src="static/assets/img/theme/img (4).jpg" alt="asstes" class="w-100">
+        </div>
+        <div class="col-lg-6 bg-gradient-primary mx-auto mt-4 border border-primary">
+          <p class="text-white py-2 ">
+          <b>Creator dev is the best aritlce platform </b> where you can upload your article for free and make your profile standered .sit amet consectetur adipisicing elit. Quidem voluptatum laudantium repellendus ullam repellat error laboriosam dolorem molestiae! Pariatur nihil sint beatae aut repellat voluptate ipsam? Ullam earum quo nihil.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem voluptatum laudantium repellendus ullam repellat error laboriosam dolorem molestiae! Pariatur nihil sint beatae aut repellat voluptate ipsam? Ullam earum quo nihil.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem voluptatum laudantium repellendus ullam repellat error laboriosam dolorem molestiae! Pariatur nihil sint beatae aut repellat voluptate ipsam? Ullam earum quo nihil.
+
+          </p>
+        </div>
+      </div>
+
+      <h2 class="display-3 mx-md-8 mt-8  mx-4 text-primary row" id="how"> How <b class=" mx-2">  Creator Dev </b> is popular  <i class="ni ni-world-2 mx-2 "></i> </h2>
+      <div class="row mx-auto bg-gradient-danger p-2 py-5  mt-4">   
+        <div class="row col-lg-10 col-12 mx-auto">
+          <div class=" p-3 py-4 mx-auto px-4 rounded-lg div-bg my-4 flex flex-col justify-content-center align-items-center">
+            <i class="ni ni-chart-bar-32 display-3 bg-primary rounded-lg text-white shadow px-4 py-2 "></i>
+            <h2 class="my-3 " style="color: var(--dark-white);">Daily Traffic</h2>
+            <h1 class="text-primary display-3 mt--2" >231,009+ </h1>
+            <span class="describtion " style="color: var(--text-gray);">200k+ people visits our site Daily </span>
+          </div>
+          <div class=" p-3 py-4 mx-auto px-4 rounded-lg div-bg my-4 flex flex-col justify-content-center align-items-center">
+            <i class="fas fa-users display-3 bg-green rounded-lg text-white shadow px-4 py-2 "></i>
+            <h2 class="my-3 " style="color: var(--dark-white);">Registered users</h2>
+            <h1 class="text-green display-3 mt--2" >123,49+ </h1>
+            <span class="describtion " style="color: var(--text-gray);">We have 100k+ registered users  </span>
+          </div>
+          <div class=" p-3 py-4 mx-auto px-4 rounded-lg div-bg my-4 flex flex-col justify-content-center align-items-center">
+            <i class="ni ni-paper-diploma display-3 bg-red rounded-lg text-white shadow px-4 py-2 "></i>
+            <h2 class="my-3 " style="color: var(--dark-white);">Total articles</h2>
+            <h1 class="text-red display-3 mt--2" >104,2+ </h1>
+            <span class="describtion " style="color: var(--text-gray);">Users upload 1k+ articles on our site </span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="display-3 mx-md-8 mt-5  mx-4 text-primary row" id="why"> Why <b class=" mx-2">  Creator Dev </b> ? </h2>
+        <div class="col">
+
+          <div class="row col-lg-10 py-5 col-12 mx-auto  ">
+            <div class="col-lg-6 col-12  my-auto">
+              <div class=" rounded-lg px-2 w-100 div-bg my-auto mx-auto"> 
+                <h2 class=" text-white text-gray p-2"  >1. To Explore <i class="ni ni-world-2 mx-2"></i></h2> 
+                <p class="  font-weight-500 px-3 py-1 mt--2" style="color: var(--text-gray);"> 
+                  This is why we develope <b>Creator Dev</b> because someone wants to share there ideas , logics with others.Here you can chat with <i>Professionals , Developers</i>. And you can share your idea as an Article.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6 flex justify-content-md-end justify-content-center col-12 mt-4 ">
+              <img src="static/assets/img/theme/img (2).jpg" alt="asstes" class="mx-auto" >
+            </div>
+          </div>
+
+          <div class="row col-lg-10  py-5 col-12  mx-auto ">
+            <div class="col-lg-5 col-12 mt-4 flex justify-content-center order-lg-1 order-2  ">
+              <img src="static/assets/img/theme/img (1).jpg" alt="asstes" class="mx-auto" >
+            </div>
+            <div class="col-lg-6 col-12  mt-4 my-md-auto    order-lg-1 ">
+              <div class="rounded-lg w-100 px-2 div-bg my-auto mx-auto"> 
+                <h2 class="p-2 text-gray"  >2. To make like Pro <i class="ni ni-spaceship mx-2"></i></h2> 
+                <p class=" font-weight-500 px-3 py-1 mt--2" style="color: var(--text-gray);"> 
+                   Make yourself like a Pro with us. Make your awesome articles and explore knoweldge . People will <b>Follow , Like</b> you , and you'll Grow and be Famous
+                </p>
+              </div>
+            </div>
+         
+          </div>
+
+          <div class="row col-lg-10 py-5 col-12 mx-auto">
+            <div class="col-lg-6 col-12  my-auto">
+              <div class="rounded-lg w-100 px-2 div-bg my-auto mx-auto"> 
+                <h2 class="p-2 text-gray" >3. To Learn <i class="ni ni-book-bookmark mx-2"></i></h2> 
+                <p class=" font-weight-500 px-3 py-1 mt--2" style="color: var(--text-gray);"> 
+                   Make yourself like a Pro with us. Make your awesome articles and explore knoweldge . People will <b>Follow , Like</b> you , and you'll Grow and be Famous
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6 flex justify-content-md-end justify-content-center col-12 mt-4 ">
+              <img src="static/assets/img/theme/img (3).jpg" alt="asstes" class="mx-auto" >
+            </div>
+            
+         
+          </div>
+        </div>
+
+
+
+
+
+
+      {% include "includes/footer.html" %}
+
+
+    </div> 
+</div> 
+
+{% endblock body%}
+
+ 

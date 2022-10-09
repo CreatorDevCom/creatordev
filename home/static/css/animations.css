@@ -1,0 +1,16 @@
+@keyframes animate-TtoB {
+  from{transform: translateY(-100%);}
+  to{transform: translateY(0%);}
+}
+@keyframes animate-BtoT {
+  from{transform: translateY(100%);}
+  to{transform: translateY(0%);}
+}
+@keyframes animate-LtoR {
+  from{transform: translateX(-100%);}
+  to{transform: translateX(0%);}
+}
+@keyframes animate-RtoL {
+  from{transform: translateX(100%);}
+  to{transform: translateX(0%);}
+}

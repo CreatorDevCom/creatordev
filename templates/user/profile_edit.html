@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/user/profile.css' %}  ">
+{% endblock headlinks%}
+{% block title %} Profile Edit {% endblock title%}
+
+{% block body %} 
+ <style>
+  .cover_pic{
+    width: 70%;
+    display: flex;  
+    height: 20rem;
+    margin: 0 auto;
+    position: relative;
+  }
+  .cover_pic img{
+    width: 100%;
+    object-fit: cover;
+  }
+ 
+  .pic_select_btn{
+    position: absolute;
+    bottom: 10px;
+    z-index: 222;
+    right:4px; 
+  }
+  .pic_select_btn.profile_pic_btn{
+    right: 90px;
+    bottom: 2px;
+  }
+  .profile_pic{
+    width:33%;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    z-index:211;
+  }
+  .profile_pic img{
+    object-fit: cover;
+    width: 100%;
+    z-index: 221; 
+  }
+  h1,h2,h3{
+    color: var(--text-gray);
+  }
+  input{
+    background-color: var(--div-bg);
+  }
+  @media (max-width:768px) {
+    .cover_pic{
+      height: 15rem; 
+      width: 100%;
+    }
+    .profile_pic{
+      width: 60%;
+    }
+  }
+ </style>
+
+<div class="container col-lg-8 col-12  my-lg-2 rounded-lg shadow p-2  div-bg">
+  <div class="header div-bg">
+    <h1>Edit Profile</h1>
+  </div>
+ 
+
+  <div class="col mx-lg-10 my-2">
+  <form action="/user/editprofile/edit" method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- User Profile Pics -->
+    <div class="col"> 
+      {% for i in profile %}
+       <div class="cover_pic border-1 ">
+        {% if i.cover_pic %}
+         <img src="http://127.0.0.1:8000/media/{{i.cover_pic}}" alt="cover pic">
+        {% else %}
+          <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="cover pic">
+        {% endif %} 
+        <label  class="pic_select_btn" > 
+          <input type="file" name="cover_pic"  onchange="cover_change()"  id="cover_pic" class="d-none">
+          <div  class=" bg-white p-2 shadow rounded-lg border-0 text-primary " id="is_selected">
+            <i class="fas fa-edit text-lg"></i>
+            <span class="text-sm">Change </span>
+          </div>
+        </label>
+       </div>
+       <div class="profile_pic mt--6 rounded-circle ">
+        {% if i.profile_pic %}
+          <img src="http://127.0.0.1:8000/media/{{i.profile_pic}}" class="shadow" alt="cover pic">
+        {% else %}
+         <img src="/static/assets/img/icons/user_profile_pic_default.png" class="shadow" alt="cover pic">
+        {% endif %} 
+        <label  class="pic_select_btn profile_pic_btn" > 
+          <input type="file" name="pro_pic"  onchange="profile_change()"    id="pro_pic" class="d-none">
+          <div  class=" bg-white p-2 shadow rounded-lg border-0 text-primary " id="is_selected_proifle">
+            <i class="fas fa-edit text-lg"></i>
+            <span class="text-sm">Change </span>
+          </div>
+        </label>
+       </div> 
+      {% endfor %}
+    </div>
+ 
+      <div class=" my-2 mt-4">
+        <div class=" p-2 border-bottom div-bg">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Personal info </h3>
+            </div>
+            
+          </div>
+        </div>
+        <div class="card-body"> 
+            <h6 class="heading-small text-muted mb-4">User information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group ">
+                    <label class="form-control-label" for="input-username">Username</label>
+                    <input type="text" id="input-username" name="username  " class="div-bg form-control " placeholder="Username" value="{{ request.user.username }}">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group ">
+                    <label class="form-control-label" for="input-email">Email address <span class="describtion text-muted"> (Email does't change)</span></label>
+                    <span class="form-control disabled">{{request.user.email}}</span> 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group ">
+                    <label class="form-control-label" for="input-first-name">First name</label>
+                    <input type="text" id="input-first-name" class=" div-bg form-control " name="first_name" placeholder="First name" value="{{request.user.first_name}}">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group ">
+                    <label class="form-control-label" for="input-last-name">Last name</label>
+                    <input type="text" id="input-last-name" class=" div-bg form-control " name="last_name" placeholder="Last name" value="{{request.user.last_name}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />  
+            <!-- Description -->
+            <h6 class="heading-small text-muted mb-4">About me (BIO)</h6>
+            <div class="pl-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Describe about your self</label>
+                <textarea rows="4" class="div-bg form-control" name="bio" placeholder="A few words about you ..."  >{% for i in profile %} {{i.bio}} {% endfor %}</textarea>
+              </div>
+            </div> 
+            <button type="submit" class="btn btn-neutral bg-primary text-white  ">Save</button>
+        </div>
+      </div>  
+    </form>
+  </div>
+
+</div>
+
+
+{% block scripts %}
+<script>
+  const cover_change = ()=>{ 
+     document.getElementById("is_selected").innerHTML = '<span class="bg-white text-success shadow rounded-lg p-2  "> <i class="ni ni-check-bold mr-1 text-bold  "></i>File Selected</span>';
+  }
+  const profile_change = ()=>{ 
+     document.getElementById("is_selected_proifle").innerHTML = '<span class="bg-white text-success shadow rounded-lg p-2  "> <i class="ni ni-check-bold mr-1 text-bold  "></i>File Selected</span>';
+  }
+</script>
+{% endblock scripts %}
+{% endblock body%}

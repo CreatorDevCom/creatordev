@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/user/profile.css' %}  ">
+{% endblock headlinks%}
+{% block title %} Profile {% endblock title%}
+
+{% block body %} 
+{% load humanize %}
+<style>
+  .w-100{
+    width: 100%;
+  }
+</style>
+<div class="main-content " id="main-content">
+  <div class="content">  
+   {% if profile %}
+    <div class="profile-content">
+      <!-- Profile head info -->
+      <div class="head_info">
+
+        <div class="cover_pic"> 
+          {% if profile.cover_pic %}
+          <img src="http://127.0.0.1:8000/media/{{profile.cover_pic}}" alt="">
+          {% else %}
+          <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
+          {% endif %}
+        </div>
+
+
+        <!-- Profile user info -->
+       <div class="author-info-div">
+        <div class="user_info">
+          {% if profile.profile_pic %}
+          <img src="http://127.0.0.1:8000/media/{{profile.profile_pic}}" alt="">
+          {% else %}
+          <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
+          {% endif %}
+          <div class="user_info_text w-100 ">
+            <div class="flex justify-content-between">
+              <span class="flname  ">
+                {{profile.author.first_name}} {{profile.author.last_name}} 
+              </span> 
+              {% if profile.author == request.user %}
+              <a href="/user/editprofile/edit" class="text-blue border-0 bg-white   flex align-items-center" >
+                <i class="fas fa-edit mx-2"></i>
+                <span class="text-sm">Edit profile</span>
+              </a>
+              {% endif %}
+            </div>
+            <span class="username">@{{profile.author.username}} </span>
+            <div class="flex">
+              <span class="followers ">Followers {{profile.count_followers}}</span>
+              <span class="followers " style="margin-left:.6rem;">Following {{profile.count_following}}</span>
+            </div>
+            <span class="followers ">Stars {{profile.Stars}}</span>
+          </div>
+        </div>
+        <!-- User Bio -->
+        <div class="bio">
+          <span class="followers ">
+            <b>Bio</b> <br>
+            <p>{{profile.bio}}</p>
+        </div>
+       </div>
+      </div>
+      <!-- Profile contents (Articles / blogs / forunm) -->
+      <div class="user-contents-div">
+         <h2 class="h1">Articles ({{articles | length }})</h2>
+        <div class="content-box-div">
+          <!-- Article-box -->
+         {% if articles %}
+         {% for article in articles %}
+         <div class="articel-box">
+          <div class="main-image-div">
+            <img src="http://127.0.0.01:8000/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
+          </div>
+          <div class="article-info-div">
+             <h2 class="article-title">{{article.title}}</h2>
+             <div class="bottom-info">
+              <div>
+                <span class="font-sm">likes {{article.count_article_likes}}</span>
+              </div>
+              <a href="/article/{{article.id}}" class="preview-btn">Preview</a> 
+             </div>
+          </div>
+        </div> 
+         {% endfor %} 
+
+         {% endif %}
+        </div>
+      </div>
+    </div>
+   {% endif %}
+  </div>
+</div>
+
+{% block scripts %}
+<script>
+  const activeEditProfilePopUp = () =>{
+    alert("hi")
+  }
+</script>
+{% endblock scripts %}
+ <script src="{% static '/js/profile.js' %}"></script>
+{% endblock body%}

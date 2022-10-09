@@ -1,0 +1,63 @@
+@import url('./theme.css');
+
+.max-w-5xl{
+  max-width: 50rem; 
+}
+.mx-auto{
+  margin: 0 auto; 
+}
+.inbox-content{ 
+  background: var(--div-bg); 
+}
+.dark .main-content{
+  background: var(--primary);
+}
+.inbox-content h2{
+  color: var(--text-extra-gray  );
+  font-size: 1.8rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--text-gray);
+}
+.inbox-actions-div{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.inbox-actions-div .action-box{
+  margin: .2rem 1rem;
+  padding: .5rem ;
+  padding-bottom: 0px;
+  border-bottom: 1px solid var(--text-light);
+}
+.inbox-actions-div .action-box .author-name{
+  color: var(--text-extra-gray);
+  font-weight: 500;
+}
+.font-sm{
+  font-size: 14px;
+}
+.action-date{ 
+  color:var(--text-gray); 
+  font-size: 14px;
+  padding: .2rem .3rem ;
+  border-radius: 50px;
+  background-color: var(--bg-gray);
+}
+.text-gray{
+  color:var(--text-gray);
+}
+.action-box .action-text{ 
+  color: var(--text-gray);
+  margin-top: .2rem;
+}
+
+
+@media (max-width:768px) {
+  .inbox-content{
+    margin: 0;
+  }
+  .inbox-actions-div .action-box{
+    margin: 0;
+    padding: .5rem 0 0 0  ;
+  }
+}

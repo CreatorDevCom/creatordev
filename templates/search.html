@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+  <link rel="stylesheet" href="{% static 'css/article/article.css' %} ? {U}  "> 
+{% endblock headlinks %}
+{% block body %} 
+{% load humanize %}
+<style>
+
+</style>
+<div class="main-content" id="main-content">
+  <div class="content">
+    <div class="flex align-items-center">
+      <h2 class="content-main-heading text-gray">Search result for </h2>
+      <span class="">{{query}}</span>
+    </div>
+
+   <div class="articles-div container-fluid flex justify-content-center  ">
+      <!-- Article Box -->
+      {% if articles %}
+        {% for article in articles %}
+          <div class="card col-lg-3 p-0 col-12  mx-2 rounded-lg overflow-hidden">
+            <div class="main-image-div">
+              <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="main-image">
+            </div>
+            <div class="article-info-div">
+              <h2 class="article-title">{{article.title}}</h2>
+              <div class="flex author-info">
+                <span class="font-sm mx-1 text-gray">By <span class="article-username">{{article.author.first_name}} {{article.author.last_name}}</span> 
+                 <span class="posted_at"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
+                 <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
+                </span>
+                <span ><a href="/article/{{article.id}}" class="preview-btn">Preview</a></span> 
+              </div>
+            </div>
+          </div> 
+        {% endfor %}
+        <!-- Pagenator --> 
+
+            
+
+        <div class="pagenator-div">  
+
+         <div class="card-footer py-4 bg-secondary border-0">
+          <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+              {% if articles.has_previous %}
+                <li class="page-item ">
+                  <a class="page-link" href="/article/?page={{articles.previous_page_number}}" tabindex="1">
+                    <i class="fas fa-angle-left text-primary"></i> 
+                  </a>
+                </li> 
+              {% endif %} 
+              <li class="page-item active"> 
+                <a class="page-link" href="#">{{current_page}}</ 
+              </li>
+              {% if articles.has_next  %} 
+              <li class="page-item">
+                <a class="page-link" href="/article/?page={{articles.next_page_number}}">{{articles.next_page_number}} <span class="sr-only">(current)</span></a>
+              </li> 
+              <li class="page-item">
+                <a class="page-link" href="/article/?page={{articles.next_page_number}}">
+                  <i class="fas fa-angle-right text-primary"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+         </div>
+        </div>
+        <!-- Pagenator ----END----  -->
+        {% else %}
+        Loading
+      {% endif %}
+   </div>
+  </div>
+</div>
+
+{% endblock body%}

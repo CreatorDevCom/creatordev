@@ -1,0 +1,466 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/article/article_preview.css' %}    ">
+<link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U}">
+ 
+<!-- for code hilighter -->
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+{% endblock headlinks %}
+{% block body %}
+{% load humanize %}
+{% load extras %}
+<style>  
+.share{
+  display: flex; 
+  flex-direction: column;
+}
+
+.share a i{
+  transition: all .2s ease;
+}
+.share a{
+  font-size:25px;
+  color: var(--text-gray);
+  margin: .5rem 0;
+}
+.top-0{
+  top: 0px;
+}
+.absolute{
+  position: absolute;
+}
+/* Social share color */
+.fa-facebook:hover{
+  color: #3b5896;
+  transform: scale(2); 
+}
+.fa-facebook:active{
+  transform: scale(1);
+}
+.fa-twitter:hover{
+  color: #1da1f2;
+  transform: scale(2);
+}
+.fa-twitter:active{
+  transform: scale(1);
+}
+.fa-linkedin:hover{
+  color: #0077b5;
+  transform: scale(2);
+}
+.fa-linkedin:active{
+  transform: scale(1);
+}
+.fa-pinterest:hover{
+  color: #bd081c;
+  transform: scale(2);
+}
+.fa-pinterest:active{
+  transform: scale(1);
+}
+.fa-whatsapp:hover{
+  color: #25d366;
+  transform: scale(2);
+}
+.fa-whatsapp:active{
+  transform: scale(1);
+}
+
+/*  Social share color end */
+.h1-contents {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.h1-contents a,
+.h1-contents a span {
+  color: var(--primary);
+  display: block;
+  margin: .3rem 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+.div-bg{
+  background-color: var(--div-bg);
+}
+.article-main-div-body{
+  overflow: hidden;
+}
+body{
+  overflow-x: hidden;
+}
+.article-body h1,h2,h3,h4,h5,h6 , p{
+    color: var(--text-gray);
+}
+.article-body p , li{
+  font-size: 16px; 
+} 
+table{
+  overflow: auto;
+}
+@media (max-width:768px) {
+  .top-100{
+    top: 0;
+    position: relative;
+  }
+  .top-50{
+    top: 0;
+    position: relative;
+  }
+  .share{
+    flex-direction: row;
+  }
+  .share a{
+    margin: 1rem auto;
+    font-size: 30px;
+    margin-left: 5px;
+  }
+  
+}
+
+.article-main-div-body pre{ 
+  position: relative;
+}
+
+</style>
+<div class="main-content" id="main-content">
+  <!-- Secound Head of an article -->
+  <div class="sec-header   " id="sec-header">
+    <div class="sec-header-content">
+      <div class="sec-header-author-info">
+        <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" class="sec-header-user-pic" alt="asstes-loading">
+        <div class="sec-header-text-info">
+          <div class="flex items-center">
+            <span class="font-sm  ml-2">by <span class="sec-head-username">
+              {% if article.author.first_name %}
+                {{article.author.first_name}} {{article.author.last_name}}
+              {% else %}
+               {{article.author.username}} 
+              {% endif %}
+            </span>
+            </span>
+            <span class="font-sm  sec-head-info-date mx-1">{{ article.posted_at | naturaltime }}</span>
+            {% if request.user.is_authenticated and article.author != request.user %} 
+              {% if isFollowing == True  %}
+              <span class="sec-header-follow-btn" >.Following</span>
+              {% else %}
+              <button class="sec-header-follow-btn" onclick="addFollower('{{article.author.username}}')">Follow</button>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="flex mx-2 mt-1  align-items-center ">
+            <span class="mx-2 font-sm "><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
+            <span class="mx-2 font-sm "><i class="fas fa-comment"></i> {{comments | length }}</span>
+            <span class="mx-2 font-sm "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+ 
+
+
+  {% if article %}
+  <div class="top-content" id="top-content">
+    <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="bg-image" id="bg-img">
+    <div class="top-content-div">
+      <div class="showcase-article">
+        <div class="left-container">
+          <h2 class="main-title-article">{{article.title}}</h2>
+          <div class="flex  authorallinfo items-center">
+            <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" alt="asstes-loading" class="profielPic">
+            <div class="author_info mx-2">
+              <span class="info mx-2 ">article by
+                <a href="/user/profile/{{article.author.username}}" class="username mx-1">
+                  {% if article.author.first_name %}
+                   {{article.author.first_name}} {{article.author.last_name}}
+                  {% else %}
+                   {{article.author.username}} 
+                  {% endif %}
+                </a>
+                {% if request.user.is_authenticated and article.author != request.user %} 
+                  {% if isFollowing %}
+                    <span class="follow-btn following-text" >Following</span> 
+                  {% else %}
+                    <button class="follow-btn" onclick="addFollower('{{article.author.username}}')">Follow</button>
+                  {% endif %}
+                {% endif %}
+                </span>
+             <div class="row">
+              <span class="info ml-4 text-sm ">posted on<span class="date mx-1 ">{{article.posted_at.date }}</span></span>
+              {% if request.user.is_authenticated %}
+                {% if article.author == request.user %}
+                <div class="mx-5"> <a href="/article/edit/{{article.id}}" class="font-sm text-white" ><i class="fas fa-pen"></i>edit</a></div>
+                {% endif %}
+              {% endif %}
+             </div>
+              <span class="info mx-2 top-div-likes-comments"><i class="ni ni-like-2 mx-1"></i>{{article.count_article_likes}}
+                 <span class="info mx-2"><i class="fas fa-comment mx-1 "></i>{{comments |length }} </span> 
+                 <span class="info "> <i class="fas fa-eye"></i> {{article.count_article_views}}</span> 
+              </span>
+            </div>
+          </div>
+          <!-- Tags body -->
+        <div class="row align-items-center mx-4">
+          <i class="fas fa-tag"></i>
+          <div class="flex  tags-div" id="tags"></div>
+        </div>
+        </div>
+        <div class="right-container ">
+          <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="mainImage">
+        </div>
+      </div>
+    </div>
+  </div>
+
+   
+
+
+  <!-- starts -->
+  <div class=" mt-5 px-0 p-0 px-md-4 ">
+    <div class="row ">  
+      <!-- Table of content -->
+      <div class="col col-md-4 col-xl-3    sticky top-50 h-100 ">
+        <div class="">
+          <div class=" mb-3 p-2  div-bg  ">
+              <h5 class="display-4 text-gray text-md">Table of Content</h5>
+              <div  class="tableofcontent" id="tableofcontent"></div>
+          </div>
+        </div> 
+             <!-- Autho info -->
+        <div class="div-bg" >
+          <div class=" ">
+            <img src="https://creatordev.vercel.app/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="/user/profile/{{article.author.username}}">
+                    <img src="https://creatordev.vercel.app/{{profile.profile_pic}}" class="rounded-circle border-primary">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class=" flex  mt-7 justify-content-center align-items-center">
+            {% if request.user.is_authenticated and article.author != request.user %} 
+
+              {% if isFollowing %}
+              <div class="bg-primary shadow rounded-lg text-white h4 p-1">Following</div> 
+              {% else %}
+              <button class="btn btn-sm btn-primary " onclick="addFollower('{{article.author.username}}')">Follow</button> 
+              {% endif %}
+             {% else %}
+
+             {% endif %}
+              <div class="mx-2 h4 text-gray ">
+                Followers   <span class="h3 text-primary mx-1">{{profile.count_followers}}</span >
+              </div>
+            </div>          
+     
+            <div class="card-body text-gray  ">
+              <div class="row"> 
+              </div>
+              <div class="text-center">
+                <h5 class="h3 text-gray ">
+                  {{ article.author.username }}
+                </h5>
+                <div class="h5 text-gray  font-weight-300">
+                  {{ article.author.email }}
+                </div>
+                <div class="h5 text-gray  mt-4">
+                  {{profile.bio}}
+                </div>
+                <div>
+                  Article Writer on Creator Dev 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Main Article Body -->
+      <div class="col-md-8 col-xl-7     ">
+        <div class=" div-bg px-0  "> 
+          <div class=" px-2   px-md-3 py-2 "> 
+            <div class="  main-container flex wrap p-0"> 
+                <div class="article-main-div-body  p-0" id="articleBody">
+                  <!-- Article mainbody -->
+                  <div class="article-body p-0  " id="article-body" onfocus="increseView()">{{article.body | safe}}</div>
+
+                  <!-- Like Button -->
+                  <button class="btn btn-sm btn-primary" onclick="handleLikeArticle()">
+                    <i class="ni ni-like-2 display-4 "></i>
+                  </button> 
+
+                  <!-- Comments -->
+                  <div class=" mx-md-3 col-md-10">
+                    <h2 class="text-gray">Comments <i class="fas fa-comment"></i> ({{comments | length}})</h2>
+                    {% if comments %} 
+                    {% for comment in comments %}
+                    <div class="user-comment-box my-2" id="{{comment.id}}">
+                      <!-- <img src="https://creatordev.vercel.app/{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
+                      <div class="flex flex-col w-full pt-2 rounded-lg  " style="border: 1px solid var(--text-light);">
+                        <span class="comment-author-name">{{comment.author.first_name}} {{comment.author.last_name}} <span
+                            class="comment-commented-at">{{comment.commented_at | naturaltime }}</span></span>
+                        <div class="p-2 mx-3 text-gray">{{comment.text}}</div>
+                        <div class="likes-replay-div flex text-primary  pb-2" style="border-bottom: 1px solid var(--text-light);">
+                
+                          <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="ni ni-like-2"></i> {{comment.count_comment_likes}}</span>
+               
+                          <span class="comment-replay ">  
+                            <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
+                            {{reply |get_val:comment.id | length}}
+                          </span>
+                          </div>
+                        <!-- Replay send form -->
+                        <form action="/article/sendreply/{{comment.id}}" method="post" class="w-full ">
+                          {% csrf_token %}
+                          <div class="replay-input-box border border-primary m-3 mx-4 rounded-lg " id="replay-box{{comment.id}}">
+                            {% if request.user.is_authenticated %} 
+                            <input type="hidden" name="article-id" value="{{article.id}}">
+                            <input type="text" required name="replay-text" id="replay" class="replay-input-field text-primary"
+                              placeholder="Write replay here...">
+                            <button class="btn btn-primary btn-sm" onclick="sentReplay('{{comment.id}}')">reply</button>
+                            {% else %}
+                              <p>To send reply , you must <a href="/user/login">login</a> first </p>
+                            {% endif %}
+                          </div>
+                        </form>
+          
+                        <!-- Replaly show -->
+                        <div class="replay-display-box ml-4 my-2 " id="rep-display-box{{comment.id}}">
+                          {% if reply|get_val:comment.id  %}
+                          <span class="reply-username  mx-1 ">replies ({{reply|get_val:comment.id | length}}) <button
+                              class="replay_btn underline" id="seeAll-btn{{comment.id}}"
+                              onclick="seeAllReplies('{{comment.id}}')">see all</button></span>
+                          {% endif %}
+                          {% for rep in reply|get_val:comment.id %}
+                          <div class="rounded-lg  p-2 my-2" id="{{rep.id}}" style="border: 1px solid var(--text-light);">
+                            <span class="comment-author-name mx-1">{{rep.author.first_name}} {{rep.author.last_name}} <span
+                                class="reply-date"> {{rep.commented_at | naturaltime}}</span></span>
+                            <div class="flex flex-col ">
+                              <span class="px-2 mx-1 text-gray  ">{{rep.text}}</span>
+                              {% if article.author.first_name %}
+                              <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="ni ni-like-2"></i> {{rep.count_comment_likes}} </span>
+                              {% else %}
+                              {% endif %}
+          
+                            </div>
+                          </div>
+          
+                          {% endfor %}
+                        </div>
+                      </div>
+          
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <span class="mx-2 text-gray">Be first to comment</span>
+                    {% endif %}
+          
+                    <!-- Create comment if user is logined -->
+                    {% if request.user.is_authenticated %}
+                    <div class="comment-input-div">
+                      <h2>Leave your comment</h2>
+                      <form action="/article/postacomment/{{article.id}}" method="post">
+                        {% csrf_token %}
+                        <input type="text" required name="comment-text" class="comment-text" id="comment-text"
+                          placeholder="Write your comment here...">
+                        <br>
+                        <button class="btn btn-primary float-right my-2">Comment</button>
+                      </form>
+                    </div>
+                    {% else %}
+                    <span class="text-gray">Want to add your comment , you need to <a href="/user/login">login</a> first</span>
+                    {% endif %}
+                  </div>
+                  <!-- Comments End -->
+                  
+                </div>
+              </div>  
+          </div>
+        </div>
+      </div>
+
+      <!-- Share to Social -->
+      <div class="col-md-1   mt-xl-0 mt-md-7  my-2  sticky  top-50 h-100   ml-md-0 ml-4 ">
+        <span class="text-gray">share </span>
+        <div class="share" id="share">
+          <a href="#" target="_blank" class="facebook-btn">
+            <i class="fab fa-facebook" ></i>
+          </a>
+           
+          <a href="#" target="_blank" class="twitter-btn">
+            <i class="fab fa-twitter" ></i>
+          </a>
+           
+          <a href="#" target="_blank" class="pinterest-btn">
+            <i class="fab fa-pinterest" ></i>
+          </a> 
+          <a href="#" target="_blank" class="linkedin-btn">
+            <i class="fab fa-linkedin" ></i>
+          </a>
+           
+          <a href="#" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp" ></i>
+          </a>
+           
+        </div>
+      </div>
+    </div> 
+  </div>
+  {% endif %}
+  
+</div>
+
+{% include 'includes/footer.html' %}
+
+
+<script src="/static/js/article_preview.js"></script>
+<script src="{% static 'js/socialshare.js' %} ? {U}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+  
+  // Setting upop Tags
+  let tags_dev = document.getElementById('tags')
+  let tags = "{{article.tags}}"
+  tags = tags.split(",")
+  tags.map((tag, ind) => {
+    tags_dev.innerHTML += `<span key=${ind} class="tags">#${tag}</span>`;
+  });
+
+  async function handleLikeArticle() {
+    try {
+      await fetch('http://127.0.0.1:8000/article/likearticle/{{article.id}}'); 
+    } catch (error) {
+      console.log(error);
+    }
+  } 
+
+    // Code Copy btn
+    if (document.querySelector('.article-main-div-body pre')){
+      let codeSnippets = document.querySelector('.article-main-div-body pre code').innerText;
+ 
+      document.querySelector('.article-main-div-body pre').innerHTML +=`
+        <button class="btn btn-sm btn-primary absolute top-0 right-0 m-4" onClick="copytoclipboard()">Copy</button>
+      `; 
+  
+      // Call Copy function
+      function copytoclipboard() {
+        console.log(codeSnippets); 
+      }
+
+    }
+
+  // Social Share
+  share(postTitle = '{{article.title}}', postImg ='https://creatordev.vercel.app/{{article.mainImage}}' )
+
+</script>
+ 
+
+{% endblock body %}

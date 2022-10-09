@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Forums {% endblock title%} 
+<link rel="stylesheet" href="{% static 'css/theme.css' %} ? {U}">
+{% block body %} 
+{% load humanize %}
+<style>
+  .max-h-70{
+    max-height: 100px;
+    overflow: hidden;
+  }
+  .title{
+    color: var(--text-gray);
+  }
+  .body *{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.3rem;
+    display: inline; 
+  }
+  .shadow-top{
+    box-shadow: -10px 0px 10px 1px var(--shadow), 
+                -20px 0px 15px 3px var(--shadow),
+                -30px 0px 19px 4px var(--shadow);
+  }
+</style>
+<div class="container main-content   ">
+  <h1 class="title h1">Forums</h1>
+  <div class="row  px-3">
+   {% for forum in forums %}
+    <div class="col-lg-5 col-12 w-100 div-bg my-md-4 my-2 mx-auto overflow-hidden border border-gray">
+     <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{forum.id}}">{{forum.title}}</a></h2>
+     <div class="mx-1 mt--2 max-h-70 body">{{forum.body | safe}}</div>  
+     <!-- Author Info -->
+     <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
+      <span class="text-sm ">By<b class="h4 text-gray">
+      {% if forum.author.first_name %}
+        {{forum.author.first_name}} {{forum.author.last_name}}
+      {% else %}
+        {{forum.author.username}} 
+      {% endif %}
+      </b> </span>
+      <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
+      <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
+    
+    </div>
+    </div>  
+    {% endfor %}
+  </div>  
+
+  <h1 style="color: var(--text-gray);" class="my-4">Guests forums</h1>
+  <div class="row px-3"> 
+   {% for guestform in guestForums %}
+    <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden border border-gray">
+     <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{guestform.id}}">{{guestform.title}}</a></h2>
+     <div class="mx-1 mt--2 max-h-70 body">{{guestform.body | safe}}</div>  
+     <!-- Author Info -->
+     <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
+      <span class="text-sm ">By<b class="h4 text-gray"> {{guestform.author}}</b> </span>
+      <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ guestform.posted_at | naturaltime}}</span></span>
+      <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{guestform.count_forum_likes}}</span>
+    
+    </div>
+    </div> 
+   {% endfor %}
+  </div>
+</div>
+{% include 'includes/footer.html' %}
+
+{% endblock body %}  
+
+ 

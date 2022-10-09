@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/inbox.css' %}  ? {U}  ">
+<link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U} ">  
+<link rel="stylesheet" href="{% static 'css/theme.css' %} ? {U} ">  
+
+{% endblock headlinks %}
+{% block body %}  
+
+<style>
+  li{
+    list-style: inside;
+  }
+  p , h1 ,h2 , span{
+    color: var(--text-gray);
+  }
+</style>
+<div class="col-md-8 div-bg mx-auto p-md-4 p-2 ">
+  {% for i in privacy_polices %}
+  <div class="row px-2 privacy_body align-items-center">
+    <h1> Privacy Policy for Creator Dev </h1>
+    <span class="mx-2"><span >Updated on</span> {{i.updated_on.date}}</span>
+  </div>
+  {{i.text | safe}}
+  {% endfor %}
+
+</div>
+
+{% include 'includes/footer.html' %}
+
+{% endblock body %}
+
+
+
+

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Creator Dev {% endblock title%}
+{% block headlinks %}
+<link rel="stylesheet" href="{% static 'css/inbox.css' %}  ? {U}  ">
+<link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U} ">  
+<link rel="stylesheet" href="{% static 'css/theme.css' %} ? {U} ">  
+
+{% endblock headlinks %}
+{% block body %}
+{% load humanize %}
+
+<style>
+  
+.isSeen-False{
+  background-color:var(--hover-color);
+}
+
+</style>
+ 
+<div class="container p-0 " id="main-content">
+  <div class="container-fluid  col-xl-9   inbox-content card py-md-3 mt-0">  
+    <div class=" px-md-2 py-2">
+      <h1 class="display-3 row px-2 py-1 align-items-center border-1 border-bottom border-primary text-primary">Inbox  <span class="mx-2 display-4"> <i class="fas fa-arrow-right"></i> {{request.user}}</span></h1>
+      {% if actions|length > 0 %}
+      <div class="px-3  row justify-content-between w-100   ">
+        <h6 class="text-lg text-muted m-0">You have <strong class="text-primary">{{ unreadActions | length}}</strong> unread notifications.</h6>
+        <div class="col-lg-6 col-5 text-right">
+          <a href="/user/inbox/clearall" class="btn btn-sm btn-neutral bg-red border-0 text-white">Clear all</a> 
+        </div> 
+      </div>
+    </div>
+      <!-- List group -->
+      {% for action in actions %} 
+      <div class="list-group  list-group-flush  box-content ">
+   
+        <a href="http://127.0.0.1:8000{{action.redirect_link}}" onclick="actionSeen('{{action.id}}')" class=" py-3 px-1 isSeen-{{action.isSeen}}">
+            <div class="row align-items-center "> 
+            <div class="col-auto ">
+              <!-- Avatar -->
+              <img alt="Image placeholder" src="/static/assets/img/theme/team-1.jpg" class="avatar rounded-circle">
+            </div>
+            <div class="col ml--2">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="mb-0 text-md text-gray"> {{action.by.first_name}} {{action.by.last_name}}</h4>
+                </div>
+                <div class="text-right text-muted text-gray">
+                  <small>{{action.action_at | naturaltime }}</small>
+                </div>
+              </div>
+              <p class="text-md mb-0 text-gray">{{action.action}}</p>
+            </div>
+          </div>
+        </a>
+   
+
+      
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="p-2 flex my-7 flex-col justify-content-center align-items-center w-100 ">
+        <i class="ni ni-basket text-muted display-1"></i>
+        <h1 class="text-muted  ">You have no any notifactions</h1>
+      </div>
+    {% endif %} 
+  </div> 
+</div>
+
+ {% block sctipts %}
+ <script>
+  const actionSeen = async(id)=>{ 
+    await fetch(`http://127.0.0.1:8000/user/actionseen/${id}`)
+  }
+ </script>
+ {% endblock sctipts %}
+
+{% endblock body%}
+
+ 

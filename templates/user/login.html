@@ -1,0 +1,112 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/main.css' %} ? {U} ">
+  <link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U}">
+  <link rel="stylesheet" href="{% static 'css/user/forms.css' %} ? {U}">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="/static/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
+  <title>Creator dev / login</title>
+</head>
+<body>
+  {% load socialaccount %}
+
+  <!-- Header -->
+  <header class=" py-2 px-lg-8 px-4 bg-gradient-primary">
+    <div class="head-content">
+      <div class="flex items-center wrap">
+        <a href="\"><h2 class="brand-name text-white"> Creator Dev</h2></a>
+      </div>
+    </div>
+  </header>
+ <!-- Header end -->
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="message-body" id="message-body">
+    <div class="message-body-content">
+      <div class="message-head">
+        <span class="message-head-text">Success</span>
+        <button onclick="hideMessage()" class="message-x-btn">x</button>
+      </div>
+      <div class="message-text-body">
+        <span>{{message}}</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="container pb-5 bg-secondary" id="main-content">
+  <!-- Table -->
+  <div class="row justify-content-center my-2">
+    <div class="col-lg-6 mt-4 col-md-8">
+      <div class="card bg-white border-0">
+        <div class="card-header bg-gradient-primary bg-transparent pb-4">
+          <div class="text-white text-lg text-center mt-2 mb-4"><small>Login with</small></div>
+          <div class="text-center">
+            <a target="_blank" href="{% provider_login_url "github" method="oauth2" %}" class="btn d-block border-primary  col-12 my-4 div-bg btn-neutral btn-icon mr-4">
+              <span class="btn-inner--icon"><img src="/static/assets/img/icons/common/github.svg"></span>
+              <span class="btn-inner--text "style="color:var(--text-gray)">Continue with Github</span>
+            </a>
+            <a target="_blank" href="{% provider_login_url "google" method="oauth2" %}" class="btn d-block border-primary col-12 my-4 div-bg btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="/static/assets/img/icons/common/google.svg"></span>
+              <span class="btn-inner--text "style="color:var(--text-gray)">Sign up with Google</span>
+            </a>
+            <a target="_blank" href="{% provider_login_url "facebook" method="oauth2" %}" class="btn d-block border-primary col-12 my-4 div-bg btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="/static/assets/img/icons/common/facebook.png"></span>
+              <span class="btn-inner--text "style="color:var(--text-gray)">Connect with Facebook</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-4">
+          <div class="text-center text-muted mb-4">
+            <span>Or login with credentials</span> 
+          </div>
+          <form role="form" action="/user/login" method="POST">
+            {% csrf_token %} 
+            <div class="form-group">
+              <div class="input-group input-group-merge input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control text-primary " required placeholder="Email address" type="email" name="email">
+              </div>
+            </div> 
+
+            <div class="form-group">
+              <div class="input-group input-group-merge input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control text-primary " required placeholder="Password" type="password" name="password">
+              </div>
+            </div>
+          
+     
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary mt-4">Login</button>
+            </div>
+            <div class="mt-2 text-center ">
+              <span class="text-muted mt-2">Don't have an account? <a href="/user/register">register now</a></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
+

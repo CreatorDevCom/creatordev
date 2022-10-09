@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block headlinks %} 
+<link rel="stylesheet" href="{% static 'css/user/forms.css' %}  ? {U}  "> 
+<link rel="stylesheet" href="{% static 'css/article/article.css' %} ? {U} "> 
+{% endblock headlinks %}
+{% block title %} Create an Article {% endblock title%}
+{% block body %} 
+<div class="main-container" id="main-content">
+  <div class="form-content">
+    <h1>Create new Article</h1> 
+    <form action="/article/createnew" method="post" enctype="multipart/form-data">
+      {% csrf_token %}  
+      <div class="input-form-div">
+        <!-- input Box --> 
+       <div class="flex-wrap">
+          <div class="input-box w-hf">
+            <label for="title" class="input-label">Article Title</label>
+            <input type="text" required name="title" id="title" placeholder="Enter article title" class="input-field">
+          </div>
+          <div class="input-box w-hf">
+            <label for="tags" class="input-label">Create tags (optional)</label>
+            <input type="text"   name="tags" id="tags" placeholder="Create tags separated by comma ( , )" class="input-field">
+          </div>  
+       </div>
+          <div class="input-box" >
+            <label for="article-body" class="input-label">Article Content / Body</label>
+            <textarea required name="article-body" id="editor" placeholder="Write your Article content" class="input-field" ></textarea>
+          </div> 
+          <div class="input-box">
+            <label for="article-body" class="input-label">Main image / Thumbnail</label>
+            <label class="main-image-label" >
+              <input type="file" onchange="fileSelect(event)" name="main-image" id="main-image" class="main-image">
+              <div class="main-image-inst" id="main-image-show">
+                <h2 class="main-image-bold-text">Click here to select an Image</h2>
+                <span class="main-image-inst">Type support .PNG , .JPG , .JPEG</span>
+                <span class="main-image-inst">width,height 700 x 500</span>
+              </div>
+            </label>
+          </div>
+        
+        <div class="input-box"> 
+          <button type="submit"  class="input-field button">Create new</button>
+        </div> 
+      </div>
+    </form>
+  </div>
+ </div>
+ {% block scripts %} 
+ <script src="{% static 'js/ckeditor/ckeditor.js' %}"></script>
+ <script>
+ 
+  CKEDITOR.replace('editor');
+
+  function fileSelect (e) { 
+    let _file =e.target.value;
+    console.log(_file.replace("fakepath",'download'));
+    let show_inst = document.getElementById("main-image-show");
+    if (_file !== ""){ 
+      show_inst.innerHTML =`
+      <h2 class="main-image-bold-text">File selected success</h2>
+      <img src="${_file}" alt="asstes-loading"/>
+      `
+    }
+    else{
+      show_inst.innerHTML=`
+        <h2 class="main-image-bold-text">Click here to select an Image</h2>
+        <span class="main-image-inst">Type support .PNG , .JPG , .JPEG</span>
+        <span class="main-image-inst">width,height 700 x 500</span>
+      `;
+    }
+  
+  }
+
+
+ </script>
+ {% endblock scripts %}
+{% endblock body%}
