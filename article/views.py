@@ -1,5 +1,4 @@
 from email import message
-from tkinter import Image
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from article.lib import isFollowing  
