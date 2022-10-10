@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %} Articles {% endblock title%}
 {% block headlinks %}
-  <link rel="stylesheet" href="{% static 'css/article/article.css' %}   "> 
-  <link rel="stylesheet" href="{% static 'css/theme.css' %} ? {U}   "> 
+  <link rel="stylesheet" href="/static/css/article/article.css"> 
+  <link rel="stylesheet" href="/static/css/theme.css "> 
 
 {% endblock headlinks %}
 {% block body %} 
@@ -19,7 +19,7 @@
         {% for article in articles %}
           <div class=" shadow div-bg col-lg-3 p-0 col-12  mx-2 rounded-lg overflow-hidden">
             <div class="main-image-div">
-              <img src="https://creatorsdev.herokuapp.com/media{{article.mainImage}}" alt="asstes-loading" class="main-image">
+              <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
             </div>
             <div class="article-info-div">
               <h2 class="article-title">{{article.title}}</h2>
