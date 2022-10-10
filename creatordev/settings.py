@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
  
 SECRET_KEY = 'django-insecure-w3g+c8v@fo^#5ttn&-x(lca)7om676aj%#zchlw7nqibm%p5w7'
  
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['creatorsdev.herokuapp.com','*']
  
@@ -119,9 +119,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR , 'static')
-# STATICFILES_DIRS = (os.path.join(BASE_DIR , 'static'),)
-# django_heroku.settings(locals())
+STATIC_ROOT = os.path.join(BASE_DIR , 'static/') 
 
 
 # Media files store

@@ -38,3 +38,9 @@
 .text-blue {
   color: rgb(61, 123, 236);
 }
+.bg-white{
+  background: white;
+}
+.div-bg{
+  background: var(--div-bg);
+}

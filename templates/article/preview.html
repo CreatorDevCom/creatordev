@@ -4,6 +4,7 @@
 {% block headlinks %}
 <link rel="stylesheet" href="{% static 'css/article/article_preview.css' %}    ">
 <link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U}">
+<link rel="stylesheet" href="{% static 'css/comments_style.css' %} ? {U}">
  
 <!-- for code hilighter -->
 <link rel="stylesheet"
@@ -421,7 +422,7 @@ table{
 
 
 <script src="/static/js/article_preview.js"></script>
-<script src="{% static 'js/socialshare.js' %} ? {U}"></script>
+<script src="/static/js/socialshare.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
 <script>
@@ -436,7 +437,7 @@ table{
 
   async function handleLikeArticle() {
     try {
-      await fetch('http://127.0.0.1:8000/article/likearticle/{{article.id}}'); 
+      await fetch('https://creatorsdev.herokuapp.com/article/likearticle/{{article.id}}'); 
     } catch (error) {
       console.log(error);
     }

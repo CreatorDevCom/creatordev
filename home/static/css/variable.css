@@ -60,3 +60,6 @@
   padding: 0px;
   }
 }
+.div-bg{
+  background-color: var(--div-bg);
+}

@@ -4,6 +4,8 @@
 {% block headlinks %}
 <link rel="stylesheet" href="{% static 'css/article/article_preview.css' %} ? {U}  ">
 <link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U}"> 
+<link rel="stylesheet" href="/static/css/theme.css"> 
+<link rel="stylesheet" href="/static/css/comments_style.css"> 
 <!-- for code hilighter -->
 <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
@@ -16,6 +18,9 @@
 <style>
   .max-w-55{
     max-width: 55rem;
+  }
+  .div-bg{
+   background-color: var(--div-bg);
   }
   .w-10{
     width: 65px;
@@ -279,7 +284,7 @@
 
   async function addForumLike() {
       try {
-        await fetch('http://127.0.0.1:8000/forum/likeforum/{{forum.id}}'); 
+        await fetch('https://creatorsdev.herokuapp.com/forum/likeforum/{{forum.id}}'); 
       } catch (error) {
         console.log(error);
       }
@@ -288,7 +293,7 @@
   const addliketocomment = async(commentId) =>{
   
   try {
-      await fetch(`http://127.0.0.1:8000/forum/likecomment/${commentId}`).then(res=>{
+      await fetch(`https://creatorsdev.herokuapp.com/forum/likecomment/${commentId}`).then(res=>{
         console.log(res);
       })
   } catch (error) {
