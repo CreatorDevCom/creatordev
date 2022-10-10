@@ -119,13 +119,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static/')
 
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
+
 STATIC_ROOT = os.path.join(BASE_DIR , 'static/') 
-=======
+
 # STATIC_ROOT = os.path.join(BASE_DIR , 'static')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR , 'static'),)
 # django_heroku.settings(locals())
->>>>>>> 7f087d8d214398222e0f063977ff51b77b456c17
+
 
 
 # Media files store
