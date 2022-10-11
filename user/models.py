@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
   forget_password = models.CharField(max_length=100,null=True , blank=True)
   last_login_time = models.DateTimeField(null=True , blank=True)
   last_logout_time = models.DateTimeField(null=True , blank=True)
+  otp = models.IntegerField(unique = True,null = True , blank = True)
   objects = UserManager()
 
   USERNAME_FIELD = 'email'

@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
  
 SECRET_KEY = 'django-insecure-w3g+c8v@fo^#5ttn&-x(lca)7om676aj%#zchlw7nqibm%p5w7'
  
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['creatorsdev.herokuapp.com','*']
  
@@ -212,6 +212,6 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "creatordevcommunity@gmail.com"
-EMAIL_HOST_PASSWORD = "wbjiokbtkjsnrapu"
+EMAIL_HOST_PASSWORD = "ynetdngvgscswmts"
 
 

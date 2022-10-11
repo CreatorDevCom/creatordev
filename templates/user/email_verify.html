@@ -1,0 +1,131 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="{% static 'css/variable.css' %} ? {U}">  
+  <link rel="stylesheet" href="{% static 'css/user/forms.css' %} ? {U}">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+   
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
+  <title>Creator dev / login</title>
+</head>
+<body>
+  {% load socialaccount %}
+
+  <!-- Header -->
+  <header class=" py-2 px-lg-8 px-4 bg-gradient-primary">
+    <div class="head-content">
+      <div class="flex items-center wrap">
+        <a href="\"><h2 class="brand-name text-white"> Creator Dev</h2></a>
+      </div>
+    </div>
+  </header>
+ <!-- Header end -->
+ {% if messages %} {% for message in messages %}
+ <div class="alert fixed    w-80  z-221 alert-success alert-dismissible fade show "  role="alert">
+   <strong class="">{{messages.head}}</strong> 
+   <span class="text-lg">{{message.message}}</span>
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ {% endfor %} 
+{% endif %} 
+  <div class="container pb-5  flex justify-content-center bg-secondary  align-items-center  " style="background-color: var(--bg-gray); height: 91vh;" id="main-content">
+    <div class="bg-white p-2 col-md-5 border border-primary px-3 justify-content-center align-items-center flex flex-col" > 
+      <h2 class="text-primary">Email verification</h2>
+      <p>We have sent you an verification code to <i class="text-primary " style="text-decoration: underline;">{{request.user.email}}</i> , please ckeck and enter below</p>
+      <form action="/user/email_verification" method="post" class="w-100 ">
+        {% csrf_token %}
+        <label class="form-control-label" for="input-username">Enter OTP code (6 digits code)</label>
+        <div class="flex mt-2">
+          <div class="form-group col-2">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-1" onkeyup="autoFocus(this, 'otp-code-2')" required name="otp-code-1" class="div-bg form-control  text-lg text-primary otp-code ">
+          </div>
+          <div class="form-group col-2">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-2" onkeyup="autoFocus(this, 'otp-code-3')" required name="otp-code-2" class="div-bg form-control  text-lg text-primary otp-code ">
+          </div>
+          <div class="form-group col-2">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-3" onkeyup="autoFocus(this, 'otp-code-4')" required name="otp-code-3" class="div-bg form-control  text-lg text-primary otp-code ">
+          </div>
+          <div class="form-group col-2 ">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-4" onkeyup="autoFocus(this, 'otp-code-5')" required name="otp-code-4" class="div-bg form-control  text-lg text-primary otp-code ">
+          </div>
+          <div class="form-group col-2">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-5" onkeyup="autoFocus(this, 'otp-code-6')" required name="otp-code-5" class="div-bg form-control  text-lg text-primary otp-code ">
+          </div>
+          <div class="form-group col-2">
+            <input type="text" maxlength="1" placeholder="0" id="otp-code-6"  required name="otp-code-6" class="div-bg form-control text-lg text-primary otp-code ">
+          </div>
+        </div>
+        <div class="col-12 flex justify-content-between">  
+          <p></p>
+          <button class="btn btn-primary">Verify</button> 
+        </div>
+      </form>
+      <form action="/user/email_verification" method="post">
+       <input type="hidden" value="resend-true" name="resend">
+       <p class="text-sm ">Does't recieved <span class="not-recieved-time" style="font-weight:600 ;"></span></p>
+      </form>
+    </div>
+  </div>
+  
+
+    <script>
+      var otpInput = document.querySelectorAll('.otp-code');
+      var countDown = 1 ;
+      var counting =true; 
+
+      // resend click
+      function resentClick(){ 
+         if (counting == false || counting == true ) { 
+            counting = true;  
+            countDown= 1; 
+            countDowning(); 
+         }
+     }
+
+
+      // Count Down
+      let resendCode = document.querySelector('.not-recieved-time');
+      countDowning()
+      function countDowning() {  
+         var countTiming = setTimeout(countDowning , 1000)  
+         if (counting == false || counting == true) { 
+            counting = true ;
+            countDown = countDown-1; 
+            if (countDown <10){
+              resendCode.innerHTML = `Resent in 00: 0${countDown}`;
+            }else{
+              resendCode.innerHTML = `Resent in 00: ${countDown}`;
+            }
+           
+        }
+         if (countDown <= 0 && counting == true) {
+            counting = false;
+            resendCode.innerHTML = ` <input type="submit" class="text-primary" style="font-weight: 600; border:0px; background:white;" onclick="resentClick()" value="resend code">`;
+            clearTimeout(countTiming);
+        }          
+
+    }
+
+      
+
+
+
+      function autoFocus(first , last){ // Auto Focus when Enter 1 digit
+          if (first.value.length) {
+              document.getElementById(last).focus() 
+          }
+     }
+    </script>
+
+</body>
+</html>
+
+

@@ -1,14 +1,12 @@
-from random import Random
-
+import math,random
 
 def generateOtp(limit):
+
+  otps  = '1234567890' 
+  OTP = ""
   
-  otps  = []
-  for otp in range(limit):  
-    otp = otp + 1  # it start from 0 whole number , so we add 1 to each number for narutal number
-    otps.append(otp)
+  for i in range(limit):
+    OTP += otps[math.floor(random.random()* 10)]
+  return OTP
 
-  print(otps)
-
-
-generateOtp(6)
+print(generateOtp(6))

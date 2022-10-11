@@ -8,7 +8,8 @@ from article.models import Article
 from user.models import Action, UserProfile
 from user.models import Inbox
 from django.contrib.auth import login , logout , authenticate 
-from api.send_emails import send_congrates_new_account_mail
+from api.send_emails import send_congrates_new_account_mail , send_otp_code 
+from api.lib import generateOtp
 # Create your views here.
 
 
@@ -65,6 +66,7 @@ def userRegister(request):
         # try:
         user = User.objects.create(username = username , password = password  , email = email , first_name = first_name , last_name = last_name)
         user.password = make_password(password)
+        user.otp = generateOtp(6)
         user.save() 
         print("User registered success") 
         try:
@@ -230,3 +232,53 @@ def profileEdit(request):
   else:
     messages.error(request,'Please login First')
     return redirect("/user/login")
+
+
+
+
+# Email varifaction (otp)
+def veifyEmail(request):
+  if request.user.is_authenticated:
+    if not request.user.is_em_verified:
+      # send an otp code
+      username = request.user.username
+      email =  request.user.email 
+      user = User.objects.filter(username = username) 
+      saved_opt = ''
+      # otp code saved in user
+      for i in user: 
+        saved_opt = str(i.otp) 
+
+      try:
+        send_otp_code( username,email,saved_opt )
+        print('email is sended')
+      except ConnectionError as e:
+        print('hi')
+
+  
+      if request.method == "POST": 
+          code1 = request.POST['otp-code-1']
+          code2 = request.POST['otp-code-2']
+          code3 = request.POST['otp-code-3']
+          code4 = request.POST['otp-code-4']
+          code5 = request.POST['otp-code-5']
+          code6 = request.POST['otp-code-6']
+          
+          # Otp code from user input
+          otpCode = str(code1+""+code2+""+code3+""+code4+""+code5+""+code6) 
+
+
+      
+          if saved_opt == otpCode:
+            user.update(is_em_verified = True)
+            messages.success(request,"Your email has been verified")
+          else:
+            messages.error(request,"Otp not matched")
+
+      return render(request,"user/email_verify.html")
+
+    return redirect("/")
+  return redirect("/")
+
+ 
+ 
