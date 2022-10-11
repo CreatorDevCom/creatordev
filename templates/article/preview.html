@@ -223,69 +223,68 @@ table{
 
   <!-- starts -->
   <div class=" mt-5 px-0 p-0 px-md-4 ">
-    <div class="row ">  
-      <!-- Table of content -->
-      <div class="col col-md-4 col-xl-3    sticky top-50 h-100 ">
-        <div class="">
-          <div class=" mb-3 p-2  div-bg  ">
-              <h5 class="display-4 text-gray text-md">Table of Content</h5>
-              <div  class="tableofcontent" id="tableofcontent"></div>
-          </div>
-        </div> 
-             <!-- Autho info -->
-        <div class="div-bg" >
-          <div class=" ">
-            <img src="https://creatorsdev.herokuapp.com/media{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
-            <div class="row justify-content-center">
-              <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
-                  <a href="/user/profile/{{article.author.username}}">
-                    <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="rounded-circle border-primary">
-                  </a>
+    <div class="row ">    
+        <div class="col col-md-4 col-xl-3 order-md-1 order-2 sticky top-50  h-100 "> 
+               <!-- Autho info -->
+          <div class="div-bg" >
+            <div class=" ">
+              <img src="https://creatorsdev.herokuapp.com/media{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
+              <div class="row justify-content-center">
+                <div class="col-lg-3 order-lg-2">
+                  <div class="card-profile-image">
+                    <a href="/user/profile/{{article.author.username}}">
+                      <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="rounded-circle border-primary">
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class=" flex  mt-7 justify-content-center align-items-center">
-            {% if request.user.is_authenticated and article.author != request.user %} 
-
-              {% if isFollowing %}
-              <div class="bg-primary shadow rounded-lg text-white h4 p-1">Following</div> 
-              {% else %}
-              <button class="btn btn-sm btn-primary " onclick="addFollower('{{article.author.username}}')">Follow</button> 
-              {% endif %}
-             {% else %}
-
-             {% endif %}
-              <div class="mx-2 h4 text-gray ">
-                Followers   <span class="h3 text-primary mx-1">{{profile.count_followers}}</span >
-              </div>
-            </div>          
-     
-            <div class="card-body text-gray  ">
-              <div class="row"> 
-              </div>
-              <div class="text-center">
-                <h5 class="h3 text-gray ">
-                  {{ article.author.username }}
-                </h5>
-                <div class="h5 text-gray  font-weight-300">
-                  {{ article.author.email }}
+              <div class=" flex  mt-7 justify-content-center align-items-center">
+              {% if request.user.is_authenticated and article.author != request.user %} 
+  
+                {% if isFollowing %}
+                <div class="bg-primary shadow rounded-lg text-white h4 p-1">Following</div> 
+                {% else %}
+                <button class="btn btn-sm btn-primary " onclick="addFollower('{{article.author.username}}')">Follow</button> 
+                {% endif %}
+               {% else %}
+  
+               {% endif %}
+                <div class="mx-2 h4 text-gray ">
+                  Followers   <span class="h3 text-primary mx-1">{{profile.count_followers}}</span >
                 </div>
-                <div class="h5 text-gray  mt-4">
-                  {{profile.bio}}
+              </div>          
+       
+              <div class="card-body text-gray  ">
+                <div class="row"> 
                 </div>
-                <div>
-                  Article Writer on Creator Dev 
+                <div class="text-center">
+                  <h5 class="h3 text-gray ">
+                    {{ article.author.username }}
+                  </h5>
+                  <div class="h5 text-gray  font-weight-300">
+                    {{ article.author.email }}
+                  </div>
+                  <div class="h5 text-gray  mt-4">
+                    {{profile.bio}}
+                  </div>
+                  <div>
+                    Article Writer on Creator Dev 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-  
+    
       <!-- Main Article Body -->
-      <div class="col-md-8 col-xl-7     ">
+      <div class="col-md-8 col-xl-7  order-md-2 order-1 "> 
         <div class=" div-bg px-0  "> 
+          <div class=" p-2 p-md-4 m-2">
+            <div class=" mb-3 p-2  ">
+                <h5 class="display-4 text-gray text-md">Table of Content</h5>
+                <div  class="tableofcontent " id="tableofcontent" ></div>
+            </div>
+          </div> 
           <div class=" px-2   px-md-3 py-2 "> 
             <div class="  main-container flex wrap p-0"> 
                 <div class="article-main-div-body  p-0" id="articleBody">
@@ -388,8 +387,8 @@ table{
       </div>
 
       <!-- Share to Social -->
-      <div class="col-md-1   mt-xl-0 mt-md-7  my-2  sticky  top-50 h-100   ml-md-0 ml-4 ">
-        <span class="text-gray">share </span>
+      <div class="col-md-1  order-3 mt-xl-0 mt-md-7  my-2  sticky  top-50 h-100   ml-md-0 ml-4 ">
+        <h2  class="text-gray">share <i class="fas fa-share">  </i> </h2 >
         <div class="share" id="share">
           <a href="#" target="_blank" class="facebook-btn">
             <i class="fab fa-facebook" ></i>
@@ -416,6 +415,23 @@ table{
   </div>
   {% endif %}
   
+  <div class="row px-3 my-5">
+    
+    <!-- More like this  -->
+    <div class="col-xl-8 col-lg-7 col-12 p-2 px-md-4">
+      <h1 style="color: var(--text-gray);">More like this</h1>
+      <div class="">   
+        {% include 'includes/more_like_this_article.html' %}  
+      </div>
+    </div>
+    
+    <!-- Feedback  -->
+    <div class="col-lg-4 col-xl-3 col-12">
+      {% include 'includes/feedback.html' %} 
+    </div>
+    
+  </div>
+  
 </div>
 
 {% include 'includes/footer.html' %}
@@ -437,7 +453,11 @@ table{
 
   async function handleLikeArticle() {
     try {
-      await fetch('https://creatorsdev.herokuapp.com/article/likearticle/{{article.id}}'); 
+      await fetch('https://creatorsdev.herokuapp.com/article/likearticle/{{article.id}}').then(res=>{
+        console.log(res);
+      }).then(data=>{
+        console.log(data);
+      }); 
     } catch (error) {
       console.log(error);
     }
@@ -457,7 +477,9 @@ table{
       }
 
     }
-
+ 
+    //  call funtions
+    morelikeThis();
   // Social Share
   share(postTitle = '{{article.title}}', postImg ='https://creatorsdev.herokuapp.com/media{{article.mainImage}}' )
 

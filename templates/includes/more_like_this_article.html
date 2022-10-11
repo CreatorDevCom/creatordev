@@ -1,0 +1,24 @@
+<style>
+.related_article_card:hover{
+  border: 1px solid rgb(60, 83, 212); 
+  box-shadow: 2px 2px 12px 0px rgb(22, 26, 51);
+}
+.related_article_card  h1{
+  color:var(--text-gray);
+}
+.related_article_card:hover > div  h1 ,
+.related_article_card:hover > div  p{
+  color:rgb(60, 83, 212);
+}
+</style>
+
+<div class="flex flex-wrap"> 
+  {% for rel_article in more_like_this %}
+  <a href="/article/{{rel_article.id}}" class="related_article_card div-bg mx-auto p-2 col-xl-5 col-lg-12 col-12 mt-4 ">
+  <div class="">
+      <h1>{{rel_article.title}}</h1>
+      <p style="max-height: 150px ;overflow:hidden ;">{{rel_article.body}}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>

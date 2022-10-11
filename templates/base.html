@@ -95,7 +95,7 @@
   .nav_bar li , .nav_bar .fa-search {
     margin: 0 1rem;
   }
-  @media (max-width:768px) {
+  @media (max-width:868px) {
     .active_nav_bar{ 
     position: fixed; 
     top: 0;
@@ -140,17 +140,17 @@
   <body class="bg-gray-cs">
     <!-- Header -->
     
-    <nav class=" px-2 py-1 navbar-expand div-bg  sticky-top  first_navbar border-bottom border-primary" >
-      <div class="container-fluid col-lg-10 col-12 mx-auto">
+    <nav class=" px-2 py-2 navbar-expand div-bg  sticky-top  first_navbar border-bottom border-primary" >
+      <div class="container-fluid col-lg-11 col-xl-10 col-12 mx-auto">
 
         <!-- Fist Nav Bar -->
         <div class="collapse navbar-collapse">
-          <a href="/" class="row align-items-center mr-4   mx-2">
+          <a href="/" class="row align-items-center mr-4 px-2  mx-2">
             <h2 class="brand-name text-primary   mr-2 "><i class="ni ni-planet"> </i></h2>
           <h2 class="brand-name text-primary h2-xl h3-md d-none d-md-flex ">Creator Dev</h2>
           </a>  
           <!-- Navbar links -->
-          <ul class="   d-md-flex  ml-md-4 nav_bar" id="nav_bar"> 
+          <ul class="   d-lg-flex  ml-md-4 nav_bar" id="nav_bar"> 
 
             <div class="d-md-none p-2 mt-2 d-flex">
               <a href="/" class="row align-items-center mr-4   mx-2">
@@ -163,27 +163,7 @@
               <i class="fas fa-search"></i>
             </li> 
             <li class="nav-item  flex justify-content-center align-items-center">
-              <a href="/"  style="font-size: 17px;">Home</a>
-              <a class=" pr-0 mx-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bold-down "></i>
-              </a>
-              <div class="  dropdown-menu   mt-2 " >
-                <div class="dropdown-header border-bottom div-bg  noti-title">
-                  <h6 class="text-overflow m-0" style="color: var(--dark-white);">Home</h6>
-                </div>
-                <a href="/#createarticle" class="dropdown-item"> 
-                  <span>Create Article</span>
-                </a>
-                <a href="/#about" class="dropdown-item"> 
-                  <span>About</span>
-                </a>
-                <a href="/#how" class="dropdown-item"> 
-                  <span>Popularity</span>
-                </a>
-                <a href="/#why" class="dropdown-item"> 
-                  <span>Why creator dev ?</span>
-                </a> 
-              </div>
+              <a href="/"  style="font-size: 17px;">Home</a> 
             </li>
             <li class="nav-item  ">
               <a href="/article" class="" style="font-size: 17px;">Articles</a>
@@ -193,21 +173,7 @@
             </li> 
             {% if request.user.is_authenticated %}
             <li class="nav-item  flex justify-content-center align-items-center">
-              <a href="/" class="" style="font-size: 17px;">Upload</a>
-              <a class=" pr-0 mx-1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bold-down  "></i>
-              </a>
-              <div class="dropdown-menu  mt-2  ">
-                <div class="dropdown-header border-bottom noti-title">
-                  <h6 class="text-overflow m-0" style="color: var(--dark-white);">Uploads</h6>
-                </div>
-                <a href="/article/createnew" class="dropdown-item"> 
-                  <span>Article</span>
-                </a>
-                <a href="/forum/uploadforum" class="dropdown-item"> 
-                  <span>Forum</span>
-                </a> 
-              </div>
+              <a href="/upload" class="" style="font-size: 17px;">Upload</a> 
             </li>
             {% endif %}  
             <!-- search bar -->

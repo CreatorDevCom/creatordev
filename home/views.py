@@ -4,3 +4,7 @@ from django.shortcuts import render
 def homeRenderer(request):
   return render(request , "index.html")
 
+
+# Uplaods
+def upload(request):
+  return render(request,'upload/index.html')

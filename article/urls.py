@@ -3,7 +3,7 @@ from article import views
 # 
 urlpatterns = [
   path('',views.articleIndex , name='article_home'),
-  path('createnew',views.createNew , name='create_new'),
+  path('createnew',views.createNew , name='create_new'), 
   path('edit/<str:id>',views.editArticle , name='edit_article'),
   path('likearticle/<str:article_id>',views.likeArticle , name='like_article'),
   path('likecomment/<str:commentId>',views.likeComment , name='like_comment'),

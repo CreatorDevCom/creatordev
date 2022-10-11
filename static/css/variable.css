@@ -8,7 +8,7 @@
 }
 .items-center{
   align-items: center;
-}
+} 
 .wrap{
   flex-wrap: wrap;
 }
@@ -24,6 +24,7 @@
 .max-w-5xl{
   max-width: 50rem;
 }
+ 
 .text-slate{
   color: rgb(155, 155, 155);
 }

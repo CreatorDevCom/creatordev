@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block headlinks %}  
+<link rel="stylesheet" href="/static/css/theme.css"> 
+<link rel="stylesheet" href="/static/css/variable.css">  
+{% endblock headlinks %}
+{% block title %} Create an Article {% endblock title%}
+{% block body %} 
+
+  <div class="container mx-auto div-bg p-3">
+    <div class="header">
+      <h1 style="color:var(--text-gray);">Upload what you want</h1>
+    </div>
+    <h2 style="color:var(--text-gray);" class="m-2 px-4">select to upload</h2>
+    <div class="row flex justify-content-center m-2 p-4">
+     <a href="/article/createnew">
+      <div class="border border-primary p-4 flex justify-content-center align-items-center flex-col">
+        <i class="ni ni-paper-diploma display-2 text-gray"></i>
+        <h2>Upload Article</h2>
+        <p class="description">Click to upload an article</p>
+      </div>
+     </a>
+    </div>
+  </div>
+{% endblock body %} 

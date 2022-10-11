@@ -42,68 +42,83 @@
  .article-main-div-body pre{ 
   position: relative;
 }
+  .sticky{
+    position: sticky;
+  }
+  .top-50{
+    top: 65px;
+  }
+
+  @media (max-width:768px) {
+    .sticky{
+    position: relative;
+    top:0px;
+    }
+  }
 </style>
-
-<div class="container div-bg my-md-2 max-w-55    p-2">
-
-  <!-- Header Content --> 
-  <div>
-      <!-- Title -->
-      <div class=" p-2">
-        <h1 class="text-gray">{{forum.title}}</h1>
+ 
+<div class="container-fluid">
+  <div class="row flex justify-content-center ">
+    <div class=" p-3 div-bg my-md-2 col-xl-7 col-lg-8  col-12   p-2">
+    
+      <!-- Header Content --> 
+      <div>
+          <!-- Title -->
+          <div class=" p-2">
+            <h1 class="text-gray">{{forum.title}}</h1>
+          </div>
+        
+          <!-- Author Info -->
+          <div class="row p-2 align-items-center">
+            <!-- Author Image -->
+            <div class="pl-md-5 pl-2"> 
+              <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
+            </div> 
+            <div class="col  pl-4">
+              <!-- Author Other info -->
+              <div class="row">
+                <span class="text-sm mx-2  ">Posted by</span>
+                <span class="  text-gray font-weight-500">
+                  {% if forum.author.first_name %}
+                    {{forum.author.first_name}} {{forum.author.last_name}}
+                  {% else %} 
+                  {% endif %}
+                  {% if forum.author.username %} 
+                  {{article.author.username}}  
+                  {% else %}
+                  <div class="row mx-1">  
+                  {{ forum.author }} <div class="bg-secondary px-1 ml-1 rounded-lg text-primary text-sm">guest post</div>
+                  </div>
+                  {% endif %}
+                </span>
+            
+              </div>
+              <div class="row flex justify-content-between w-100">  
+                  <span class="text-sm mx-2">posted on  </i><span class=" text-gray text-sm">{{forum.posted_at.date }}</span></span>
+                {% if request.user.is_authenticated %}
+                  {% if forum.author == request.user %}
+                  <div class="mx-5 "> <a href="/forum/edit/{{forum.id}}" class="font-sm"><i class="fas fa-pen"></i>edit</a></div>
+                  {% endif %}
+                {% endif %}</div>
+              <!-- Forum info -->
+              <div class="row">
+                <span class="text-primary text-md  px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
+                <span class="text-primary text-md  px-2"><i class="fas fa-comment"></i> {{comments|length}}</span>
+              </div>
+            </div>
+          </div>
       </div>
     
-      <!-- Author Info -->
-      <div class="row p-2 align-items-center">
-        <!-- Author Image -->
-        <div class="pl-md-5 pl-2"> 
-          <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
-        </div> 
-        <div class="col  pl-4">
-          <!-- Author Other info -->
-          <div class="row">
-            <span class="text-sm mx-2  ">Posted by</span>
-            <span class="  text-gray font-weight-500">
-              {% if forum.author.first_name %}
-               {{forum.author.first_name}} {{forum.author.last_name}}
-              {% else %} 
-              {% endif %}
-              {% if forum.author.username %} 
-              {{article.author.username}}  
-              {% else %}
-              <div class="row mx-1">  
-              {{ forum.author }} <div class="bg-secondary px-1 ml-1 rounded-lg text-primary text-sm">guest post</div>
-              </div>
-              {% endif %}
-            </span>
-        
-          </div>
-          <div class="row flex justify-content-between w-100">  
-              <span class="text-sm mx-2">posted on  </i><span class=" text-gray text-sm">{{forum.posted_at.date }}</span></span>
-            {% if request.user.is_authenticated %}
-             {% if forum.author == request.user %}
-              <div class="mx-5 "> <a href="/forum/edit/{{forum.id}}" class="font-sm"><i class="fas fa-pen"></i>edit</a></div>
-             {% endif %}
-            {% endif %}</div>
-          <!-- Forum info -->
-          <div class="row">
-            <span class="text-primary text-md  px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
-            <span class="text-primary text-md  px-2"><i class="fas fa-comment"></i> {{comments|length}}</span>
-          </div>
-        </div>
+      <!-- Forum Main Body -->
+      <div class="forum-body text-gray">{{forum.body | safe}}</div>
+    
+      <div class="row  m-4 align-items-center">
+      <button class="btn btn-primary" onclick="addForumLike()">
+        <i class="ni ni-like-2 text-lg"></i>
+      </button>
+      <p class="mx-2">Click to like </p>
       </div>
-  </div>
-
-  <!-- Forum Main Body -->
-  <div class="p-md-4 p-2 forum-body text-gray">{{forum.body | safe}}</div>
-
-   <div class="row  m-4 align-items-center">
-    <button class="btn btn-primary" onclick="addForumLike()">
-      <i class="ni ni-like-2 text-lg"></i>
-    </button>
-    <p class="mx-2">Click to like </p>
-   </div>
-
+    
       <div class="pb-5 px-3">
         <!-- Comments -->
         <div class="comments-div mx-md-2  ">
@@ -144,7 +159,7 @@
                   {% endif %}
                 </div>
               </form>
-
+    
               <!-- Replaly show -->
               <div class="replay-display-box ml-4 my-2 " id="rep-display-box{{comment.id}}">
                 {% if reply|get_val:comment.id %}
@@ -162,20 +177,20 @@
                     <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="ni ni-like-2"></i> {{rep.count_comment_likes}} </span>
                     {% else %}
                     {% endif %}
-
+    
                   </div>
                 </div>
-
+    
                 {% endfor %}
               </div>
             </div>
-
+    
           </div>
           {% endfor %}
           {% else %}
           <span class="mx-2 text-gray">Be first to comment</span>
           {% endif %}
-
+    
           <!-- Create comment if user is logined -->
           {% if request.user.is_authenticated %}
           <div class="comment-input-div">
@@ -192,10 +207,18 @@
           <span class="text-gray">Want to add your comment , you need to <a href="/user/login">login</a> first</span>
           {% endif %}
         </div>
-      </div>
-</div> 
+      </div> 
+    
+    </div> 
+    <div class="col-lg-3 col-12 col-12 sticky top-50   "style="height: 500px;">
+      {% include 'includes/feedback.html' %} 
+    </div>
+    </div> 
 
-<div class="container my-4 div-bg   p-2">
+  </div>
+</div>
+
+<div class="container my-4 div-bg    p-2">
   {% if request.user.is_authenticated %}
    <div class="p-4 div-bg">
     <h2 class="text-gray">Create your forum</h2>

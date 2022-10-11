@@ -1,4 +1,5 @@
 from email import message
+import time
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from article.lib import isFollowing  
@@ -65,12 +66,20 @@ def previewArticle(request , id):
 
 
   isfollowing = isFollowing(request , followers) 
+
+ 
+  title_contains = Article.objects.filter(title__icontains = article.title)
+
+
+  more_like_this  = title_contains
+  
   context={
   "article":article,
   "profile":profile,
   "comments":comments,
   "isFollowing":isfollowing,
   "reply":repDict, 
+  "more_like_this":more_like_this, 
   }
   return render(request , 'article/preview.html' , context)
 
@@ -257,3 +266,4 @@ def editArticle(request,id):
       return render(request,"upload/edit_article.html",context)
     else:
       return redirect('/404.html')
+ 
