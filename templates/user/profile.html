@@ -19,9 +19,9 @@
       <!-- Profile head info -->
       <div class="head_info">
 
-        <div class="cover_pic"> 
+        <div class="cover_pic "> 
           {% if profile.cover_pic %}
-          <img src="https://creatorsdev.herokuapp.com/media{{profile.cover_pic}}" alt="">
+          <img src="https://creatorsdev.herokuapp.com/media/{{profile.cover_pic}}" alt="">
           {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
           {% endif %}
@@ -32,7 +32,7 @@
        <div class="author-info-div">
         <div class="user_info">
           {% if profile.profile_pic %}
-          <img src="https://creatorsdev.herokuapp.com/media{{profile.profile_pic}}" alt="">
+          <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" alt="">
           {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="">
           {% endif %}
@@ -42,7 +42,7 @@
                 {{profile.author.first_name}} {{profile.author.last_name}} 
               </span> 
               {% if profile.author == request.user %}
-              <a href="/user/editprofile/edit" class="text-blue border-0 bg-white   flex align-items-center" >
+              <a href="/user/editprofile/edit" class="text-blue border-0    flex align-items-center" style="color: var(--dark-white);">
                 <i class="fas fa-edit mx-2"></i>
                 <span class="text-sm">Edit profile</span>
               </a>
@@ -52,8 +52,7 @@
             <div class="flex">
               <span class="followers ">Followers {{profile.count_followers}}</span>
               <span class="followers " style="margin-left:.6rem;">Following {{profile.count_following}}</span>
-            </div>
-            <span class="followers ">Stars {{profile.Stars}}</span>
+            </div> 
           </div>
         </div>
         <!-- User Bio -->

@@ -73,7 +73,7 @@
       {% for i in profile %}
        <div class="cover_pic border-1 ">
         {% if i.cover_pic %}
-         <img src="https://creatorsdev.herokuapp.com/media{{i.cover_pic}}" alt="cover pic">
+         <img src="https://creatorsdev.herokuapp.com/media/{{i.cover_pic}}" alt="cover pic">
         {% else %}
           <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="cover pic">
         {% endif %} 
@@ -87,7 +87,7 @@
        </div>
        <div class="profile_pic mt--6 rounded-circle ">
         {% if i.profile_pic %}
-          <img src="https://creatorsdev.herokuapp.com/media{{i.profile_pic}}" class="shadow" alt="cover pic">
+          <img src="https://creatorsdev.herokuapp.com/media/{{i.profile_pic}}" class="shadow" alt="cover pic">
         {% else %}
          <img src="/static/assets/img/icons/user_profile_pic_default.png" class="shadow" alt="cover pic">
         {% endif %} 
@@ -117,27 +117,32 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group ">
-                    <label class="form-control-label" for="input-username">Username</label>
+                    <label class="form-control-label" style="color:var(--text-gray);" for="input-username">Username</label>
                     <input type="text" id="input-username" name="username  " class="div-bg form-control " placeholder="Username" value="{{ request.user.username }}">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group ">
-                    <label class="form-control-label" for="input-email">Email address <span class="describtion text-muted"> (Email does't change)</span></label>
-                    <span class="form-control disabled">{{request.user.email}}</span> 
+                    <label class="form-control-label" style="color:var(--text-gray);" for="input-email">Email address
+                      {% if not request.user.is_em_verified %}
+                      <span class="describtion text-danger"> (Email not verified)</span>
+                      <a href="/user/email_verification" style="text-decoration: underline;">verify email</a>
+                      {% endif %}
+                    </label>
+                    <span class="div-bg form-control disabled">{{request.user.email}}</span> 
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group ">
-                    <label class="form-control-label" for="input-first-name">First name</label>
+                    <label class="form-control-label" style="color:var(--text-gray);" for="input-first-name">First name</label>
                     <input type="text" id="input-first-name" class=" div-bg form-control " name="first_name" placeholder="First name" value="{{request.user.first_name}}">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group ">
-                    <label class="form-control-label" for="input-last-name">Last name</label>
+                    <label class="form-control-label" style="color:var(--text-gray);" for="input-last-name">Last name</label>
                     <input type="text" id="input-last-name" class=" div-bg form-control " name="last_name" placeholder="Last name" value="{{request.user.last_name}}">
                   </div>
                 </div>

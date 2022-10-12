@@ -13,7 +13,7 @@
   const addliketocomment = async(commentId) =>{
   
     try {
-        await fetch(`http://127.0.0.1:8000/article/likecomment/${commentId}`).then(res=>{
+        await fetch(`https://creatorsdev.herokuapp.com/article/likecomment/${commentId}`).then(res=>{
           console.log(res);
         })
     } catch (error) {
@@ -69,7 +69,7 @@
   const addFollower = async (username) => {
     console.log(username);
     try {
-      await fetch(`http://127.0.0.1:8000/user/addfollower/${username}`)
+      await fetch(`https://creatorsdev.herokuapp.com/addfollower/${username}`)
     } catch (error) {
       console.log(error);
     }

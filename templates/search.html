@@ -7,74 +7,108 @@
 {% block body %} 
 {% load humanize %}
 <style>
-
+ .max-h-70{
+    max-height: 100px;
+    overflow: hidden;
+  }
 </style>
 <div class="main-content" id="main-content">
   <div class="content">
     <div class="flex align-items-center">
       <h2 class="content-main-heading text-gray">Search result for </h2>
-      <span class="">{{query}}</span>
+      <span class="text-gray">{{text}}</span>
     </div>
 
-   <div class="articles-div container-fluid flex justify-content-center  ">
-      <!-- Article Box -->
+    <h1 class="m-2 mt-4 mx-md-6" style="color: var(--text-gray);">Articles found ({{articles|length}})</h1>
+    <div class="flex flex-wrap justify-content-center px-2 px-md-0">
       {% if articles %}
-        {% for article in articles %}
-          <div class="card col-lg-3 p-0 col-12  mx-2 rounded-lg overflow-hidden">
-            <div class="main-image-div">
-              <img src="https://creatordev.vercel.app/{{article.mainImage}}" alt="asstes-loading" class="main-image">
-            </div>
-            <div class="article-info-div">
-              <h2 class="article-title">{{article.title}}</h2>
-              <div class="flex author-info">
-                <span class="font-sm mx-1 text-gray">By <span class="article-username">{{article.author.first_name}} {{article.author.last_name}}</span> 
-                 <span class="posted_at"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
-                 <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
-                </span>
-                <span ><a href="/article/{{article.id}}" class="preview-btn">Preview</a></span> 
-              </div>
-            </div>
-          </div> 
-        {% endfor %}
-        <!-- Pagenator --> 
-
-            
-
-        <div class="pagenator-div">  
-
-         <div class="card-footer py-4 bg-secondary border-0">
-          <nav aria-label="...">
-            <ul class="pagination justify-content-end mb-0">
-              {% if articles.has_previous %}
-                <li class="page-item ">
-                  <a class="page-link" href="/article/?page={{articles.previous_page_number}}" tabindex="1">
-                    <i class="fas fa-angle-left text-primary"></i> 
-                  </a>
-                </li> 
-              {% endif %} 
-              <li class="page-item active"> 
-                <a class="page-link" href="#">{{current_page}}</ 
-              </li>
-              {% if articles.has_next  %} 
-              <li class="page-item">
-                <a class="page-link" href="/article/?page={{articles.next_page_number}}">{{articles.next_page_number}} <span class="sr-only">(current)</span></a>
-              </li> 
-              <li class="page-item">
-                <a class="page-link" href="/article/?page={{articles.next_page_number}}">
-                  <i class="fas fa-angle-right text-primary"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
+      {% for article in articles %}
+        <div class=" shadow div-bg col-lg-3 p-0 col-12 my-md-0 my-2 mx-2 rounded-lg overflow-hidden">
+          <div class="main-image-div">
+            <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
+          </div>
+          <div class="article-info-div">
+            <h2 class="article-title">{{article.title}}</h2>
+            <div class="flex author-info">
+              <span class="font-sm mx-1 text-gray">By <span class="article-username">
+              {% if article.author.first_name %}
+                {{article.author.first_name}} {{article.author.last_name}}
+              {% else %}
+                {{article.author.username}} 
               {% endif %}
-            </ul>
-          </nav>
-         </div>
-        </div>
-        <!-- Pagenator ----END----  -->
-        {% else %}
-        Loading
+              </span> 
+               <span class="posted_at"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
+               <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
+              </span>
+              <span ><a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a></span> 
+            </div>
+          </div>
+        </div> 
+      {% endfor %}
+      {% else %}
+      <h1 style="color: var(--text-gray);">No Articles found</h1>
       {% endif %}
-   </div>
+    </div>
+
+    
+    <!-- Forums --> 
+    <h1 class="m-2  mx-md-6 mt-4"  style="color: var(--text-gray);">Forums found ({{forums|length}})</h1>
+    <div class="row  px-2  px-md-0 flex flex-wrap justify-content-center">
+    {% if forums %}
+    {% for forum in forums %}
+    <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden border border-gray">
+     <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{forum.id}}">{{forum.title}}</a></h2>
+     <div class="mx-1 mt--2 max-h-70 body">{{forum.body | safe}}</div>  
+     <!-- Author Info -->
+     <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
+      <span class="text-sm ">By<b class="h4 text-gray">
+      {% if forum.author.first_name %}
+        {{forum.author.first_name}} {{forum.author.last_name}}
+      {% else %}
+        {{forum.author.username}} 
+      {% endif %}
+      </b> </span>
+      <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
+      <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
+    
+    </div>
+    </div>  
+    {% endfor %}
+    {% else %}
+    <h1 style="color: var(--text-gray);" class="mt-4 m-2  mx-md-6 mt-4">No  Forums found</h1>
+
+    {% endif %}
+    </div>  
+
+    <!-- Guest forums -->
+  
+    <h1 style="color: var(--text-gray);" class="mt-4 m-2  mx-md-6 mt-4">Guests Forums found ({{guest_forums|length}})</h1>
+    <div class="row px-3 flex flex-wrap justify-content-center"> 
+     {% if guest_forums %}
+     {% for guestform in guest_forums %}
+      <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden border border-gray">
+       <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{guestform.id}}">{{guestform.title}}</a></h2>
+       <div class="mx-1 mt--2 max-h-70 body">{{guestform.body | safe}}</div>  
+       <!-- Author Info -->
+       <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
+        <span class="text-sm ">By<b class="h4 text-gray"> {{guestform.author}}</b> </span>
+        <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ guestform.posted_at | naturaltime}}</span></span>
+        <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{guestform.count_forum_likes}}</span>
+      
+      </div>
+      </div> 
+     {% endfor %}
+     {% else %}
+      <h1 style="color: var(--text-gray);" class="mt-4 m-2  mx-md-6 mt-4">No Guest Forums found</h1>
+
+     {% endif %}
+    </div>
+
+
+
+
+
+
   </div>
 </div>
 

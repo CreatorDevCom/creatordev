@@ -1,28 +1,28 @@
-<div class="div-bg border border-primary p-2  px-3 mt-2">
-  <h2>Send feedback</h2>
-  <p class="describtion">Send us feedback , Describe your idea what will be the new features</p>
-  <form action="/forum/guest/uploadforum" method="post" >
-    {% csrf_token %}  
-    <div class=" mt--2 "> 
-        <div class="mt-2"> 
-          <label class="form-control-label" for="input-username">Username</label>
-          <input type="text" required id="username" name='guest-username' class="div-bg form-control" placeholder="Username (e.g John Wick)" >
+<form action="/api/feedback" method="post">
+  {% csrf_token %}  
+  <div class="div-bg border border-primary p-2  px-3 mt-2">
+    <h2>Send feedback </h2>
+    <p class="describtion">Send us feedback , Describe your idea what will be the new features</p>
+  
+      <div class=" mt--2 "> 
+          <div class="mt-2"> 
+            <label class="form-control-label" for="input-username">Username</label>
+            <input type="text" required id="feed_username" name='username' class="div-bg form-control" placeholder="Username (e.g John Wick)" >
+          </div> 
+        <div> 
+          <div class="mt-2">
+            <label class="form-control-label" for="input-username">Email</label>
+            <input type="email" required id="feed_email" class="div-bg form-control" name="email" placeholder="Email ( example@gmail.com )" >
+          </div> 
         </div> 
-      <div> 
-        <div class="mt-2">
-          <label class="form-control-label" for="input-username">Email</label>
-          <input type="email" required id="email" class="div-bg form-control" name="guest-email" placeholder="Email ( example@gmail.com )" >
-        </div>
-      </div> 
-      <div> 
-        <div class="mt-2">
-          <label class="form-control-label" for="input-username">Description</label>
-          <textarea  required  class="div-bg form-control" name="guest-email" placeholder="Describe your feedback" style="height: 120px;" ></textarea>
-        </div>
-      </div> 
+        <div> 
+          <div class="mt-2">
+            <label class="form-control-label" for="input-username">Description</label>
+            <textarea  required  class="div-bg form-control" name="text" placeholder="Describe your feedback" style="height: 120px;" ></textarea>
+          </div>
+        </div> 
 
-      <a href="/api/feedback" class="btn btn-primary col-12 mt-3">Submit</a>
-    </div>
-    
-  </form>
-</div>
+        <input type="submit" class="btn btn-primary col-12 mt-3" value="Submit">
+      </div> 
+  </div>
+</form>

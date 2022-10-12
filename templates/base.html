@@ -98,7 +98,8 @@
   @media (max-width:868px) {
     .active_nav_bar{ 
     position: fixed; 
-    top: 0;
+    top: 0px;
+    margin: 0px;
     flex-direction: column; 
     background: var(--div-bg);
     align-items: flex-start;
@@ -136,8 +137,27 @@
   .dropdown-menu a:hover{
     background-color: rgb(63, 63, 63);
   }
+
+
+  /* Animate menu button */
+  .sidenav-toggler-inner i{
+    margin: 4px 0;
+  }
+  .make_cross .sidenav-toggler-inner .line1{
+    transform: rotate(42deg);
+    transform-origin: 0%;
+  }
+  .make_cross .sidenav-toggler-inner .line3{
+    transform: rotate(-42deg);
+    transform-origin: 0%;
+  }
+  .make_cross .sidenav-toggler-inner .line2{
+    width: 0%;
+  }
+ 
+
   </style>
-  <body class="bg-gray-cs">
+  <body class="bg-gray-cs" style="width: 100wh; overflow-x: hidden;">
     <!-- Header -->
     
     <nav class=" px-2 py-2 navbar-expand div-bg  sticky-top  first_navbar border-bottom border-primary" >
@@ -176,17 +196,22 @@
               <a href="/upload" class="" style="font-size: 17px;">Upload</a> 
             </li>
             {% endif %}  
+
+
             <!-- search bar -->
-            <div id="search-bar" class="div-bg py-md-3 py-2 search-bar px-md-5 px-2 fixed-top top-50 shadow col-md-7 mx-auto rounded-lg">
+            <div id="search-bar" class="div-bg py-md-3 py-2 search-bar px-md-5 px-2 fixed-top   shadow col-md-7 mx-auto rounded-lg">
               <div class="flex">
                 <h2 class="col-11 text-gray">Search here</h2>
                 <span class="col-1"  onclick="toggleSearchBar()">×</span>
               </div>
-              <div class="row relative mx-3  align-items-center">
-                <input type="text" class="div-bg p-2 rounded-lg border pr-5 col-12" style="color:var(--dark-white);" placeholder="Search...">
-                <i class="fas fa-search  z-221  ml--5"></i> 
-              </div>
+              <form action="/search/" method="get">
+                <div class="row relative mx-1 mx-md-3 flex align-items-center rounded-lg border p-2 col-12 col-md-11">
+                  <input type="text" name="text" id="t" class="div-bg p-2 border-0 pr-5 col-9 col-md-10 " value="{{text}}" style="color:var(--dark-white);" placeholder="Search...">
+                  <button type="submit" class=" btn  text-center btn-sm py-md-3 px-1 btn-primary"><i class="fas fa-search  z-221 "></i> </button>
+                </div>
+              </form>
             </div>
+            <!-- search bar END -->
           </ul>
           <!-- Navbar links  -->
           <ul class="navbar-nav align-items-center div-bg ml-auto ">  
@@ -199,10 +224,8 @@
            <li class="my-1 my-md-0 mx-2  dropdown">
             <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="/static/assets/img/theme/team-4.jpg">
-                </span>
-                <div class="media-body  ml-2  d-none d-lg-block">
+                
+                <div class="media-body  ml-2 "> 
                   <span class="mb-0 text-sm font-weight-bold" style="color: var(--dark-white);">
                     {{ request.user.username }}
                   </span>
@@ -235,11 +258,11 @@
 
            <li class="nav-item ml-2 d-lg-none d-flex" onclick="navbarToggle()">
             <!-- Sidenav toggler -->
-            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" >
+            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" id="menuLines" >
               <div class="sidenav-toggler-inner "  >
-                <i class="sidenav-toggler-line" style="background-color: var(--dark-white);"></i>
-                <i class="sidenav-toggler-line" style="background-color: var(--dark-white);"></i>
-                <i class="sidenav-toggler-line" style="background-color: var(--dark-white);"></i>
+                <i class="sidenav-toggler-line line1" style="background-color: var(--dark-white);"></i>
+                <i class="sidenav-toggler-line line2" style="background-color: var(--dark-white);"></i>
+                <i class="sidenav-toggler-line line3"  style="background-color: var(--dark-white);"></i>
               </div>
             </div>
           </li>
@@ -279,8 +302,11 @@
 
 
     <script>
+
+ 
       const navbarToggle = () =>{
-         document.getElementById('nav_bar').classList.toggle('active_nav_bar')
+        document.getElementById('nav_bar').classList.toggle('active_nav_bar')
+        document.getElementById('menuLines').classList.toggle('make_cross')
       }
  
       const toggleSearchBar = ()=>{

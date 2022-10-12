@@ -110,7 +110,7 @@
       </div>
     
       <!-- Forum Main Body -->
-      <div class="forum-body text-gray">{{forum.body | safe}}</div>
+      <div class="forum-body text-gray my-3">{{forum.body | safe}}</div>
     
       <div class="row  m-4 align-items-center">
       <button class="btn btn-primary" onclick="addForumLike()">
@@ -162,8 +162,8 @@
     
               <!-- Replaly show -->
               <div class="replay-display-box ml-4 my-2 " id="rep-display-box{{comment.id}}">
-                {% if reply|get_val:comment.id %}
-                <span class="reply-username  mx-1">replies ({{reply|get_val:comment.id | length}}) <button
+                {% if reply|get_val:comment.id  %}
+                <span class="reply-username  mx-1">replies ({{reply|get_val:comment.id | length }}) <button
                     class="replay_btn underline" id="seeAll-btn{{comment.id}}"
                     onclick="seeAllReplies('{{comment.id}}')">see all</button></span>
                 {% endif %}
@@ -210,9 +210,13 @@
       </div> 
     
     </div> 
-    <div class="col-lg-3 col-12 col-12 sticky top-50   "style="height: 500px;">
-      {% include 'includes/feedback.html' %} 
-    </div>
+
+    <!-- Feedback -->
+    <!-- <div class="col-lg-3 col-12 col-12 sticky top-50   "style="height: 500px;"> 
+      {% include 'includes/feedback.html' %}  
+    </div> -->
+
+
     </div> 
 
   </div>

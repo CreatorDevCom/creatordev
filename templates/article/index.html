@@ -17,7 +17,7 @@
       <!-- Article Box -->
       {% if articles %}
         {% for article in articles %}
-          <div class=" shadow div-bg col-lg-3 p-0 col-12  mx-2 rounded-lg overflow-hidden">
+          <div class=" shadow div-bg col-lg-3 p-0 col-12 my-md-0 my-2 mx-2 rounded-lg overflow-hidden">
             <div class="main-image-div">
               <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
             </div>
@@ -34,7 +34,7 @@
                  <span class="posted_at"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
                  <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
                 </span>
-                <span ><a href="/article/{{article.id}}" class="preview-btn">Preview</a></span> 
+                <span ><a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a></span> 
               </div>
             </div>
           </div> 
