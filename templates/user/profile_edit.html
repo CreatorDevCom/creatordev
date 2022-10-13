@@ -127,6 +127,8 @@
                       {% if not request.user.is_em_verified %}
                       <span class="describtion text-danger"> (Email not verified)</span>
                       <a href="/user/email_verification" style="text-decoration: underline;">verify email</a>
+                      {% else %} 
+                      <span class="describtion text-success"> ( Email is verified ) <i class="fas fa-check"></i></span>
                       {% endif %}
                     </label>
                     <span class="div-bg form-control disabled">{{request.user.email}}</span> 

@@ -122,33 +122,7 @@ def createNew(request):
 def ckEditor(request):
   return render(request , 'ckeditor/index.html')
 
-
-def searchArticle(request):
-  if request.method == "GET":
-    query = request.GET['q'] 
-    query = query.lower()
-    title_contains = Article.objects.filter(title__icontains = query)
-    tags_contains = Article.objects.filter(tags__icontains = query)
-    articles = tags_contains.union(title_contains)
-
-    # Get only 12 article for one page
-    getarticles = Paginator(articles,12)
-    # Get pagenumber from request
-    page_number = request.GET.get("page")
-    articles = getarticles.get_page(page_number)
-
-    current_page = 1 
-    if page_number is not None:
-      current_page = page_number
-      
-    context ={
-      "query":query,
-      "articles":articles,
-      "current_page":current_page,
-    }
-    return render(request , 'search.html',context)
-  return render(request , 'search.html')
-
+ 
 def likeArticle(request,article_id):
   if request.user.is_authenticated: 
     try:
@@ -248,22 +222,38 @@ def getArticleForASpecificUser(request , username):
 def editArticle(request,id):
   if request.user.is_authenticated:
     if Article.objects.filter(id = id).exists():
-      old_article = Article.objects.get(id = id)
-
-      if request.method == "POST": 
-        title = request.POST['title']
-        tags = request.POST['tags']
-        articleBody = request.POST['article-body']  
-        try: 
-          article = Article.objects.filter(id = id)
-          article.update(title = title , tags = tags , body = articleBody )
-          messages.success(request,"Your article has been edited")
-          return redirect(f"/article/{old_article.id}")
-        except :
-            pass
-
-      context = {"old_article":old_article}
-      return render(request,"upload/edit_article.html",context)
+      # Check article
+      ch_article = Article.objects.get(id = id)
+      if request.user == ch_article.author:
+        old_article = Article.objects.get(id = id) 
+        if request.method == "POST": 
+          title = request.POST['title']
+          tags = request.POST['tags']
+          articleBody = request.POST['article-body']  
+          try: 
+            article = Article.objects.filter(id = id)
+            article.update(title = title , tags = tags , body = articleBody )
+            messages.success(request,"Your article has been edited")
+            return redirect(f"/article/{old_article.id}")
+          except :
+              pass 
+        context = {"old_article":old_article}
+        return render(request,"upload/edit_article.html",context)
+      else:
+        return redirect('/404')
     else:
-      return redirect('/404.html')
+      return redirect('/404')
+  return redirect('/404')
  
+
+# Delete Article
+def deteleArticle(request,id):
+  # check article
+  ch_article = Article.objects.get(id = id) 
+  if request.user.is_authenticated and request.user == ch_article.author:
+    article = Article.objects.filter(id = id)
+    article.delete()
+    messages.success(request,"Article is deleted success")
+    return redirect(f'/user/profile/{request.user.username}')
+  else:
+    return redirect('/404')

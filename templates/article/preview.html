@@ -106,6 +106,13 @@ body{
 table{
   overflow: auto;
 }
+.top-50{
+  top: 90px;
+}
+.sticky{
+  position: sticky;
+  position: -webkit-sticky;
+}
 @media (max-width:768px) {
   .top-100{
     top: 0;
@@ -157,8 +164,8 @@ table{
             {% endif %}
           </div>
           <div class="flex mx-2 mt-1  align-items-center ">
-            <span class="mx-2 font-sm "><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
-            <span class="mx-2 font-sm "><i class="fas fa-comment"></i> {{comments | length }}</span>
+            <span class="mx-2 font-sm "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
+            <span class="mx-2 font-sm "><i class="far fa-comment"></i> {{comments | length }}</span>
             <span class="mx-2 font-sm "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
           </div>
         </div>
@@ -202,8 +209,8 @@ table{
                 {% endif %}
               {% endif %}
              </div>
-              <span class="info mx-2 top-div-likes-comments"><i class="ni ni-like-2 mx-1"></i>{{article.count_article_likes}}
-                 <span class="info mx-2"><i class="fas fa-comment mx-1 "></i>{{comments |length }} </span> 
+              <span class="info mx-2 top-div-likes-comments"><i class="far fa-thumbs-up mx-1"></i>{{article.count_article_likes}}
+                 <span class="info mx-2"><i class="far fa-comment mx-1 "></i>{{comments |length }} </span> 
                  <span class="info "> <i class="fas fa-eye"></i> {{article.count_article_views}}</span> 
               </span>
             </div>
@@ -225,13 +232,14 @@ table{
 
 
   <!-- starts -->
-  <div class=" mt-5 px-0 p-0 px-md-4 ">
-    <div class="row ">    
-        <div class="col col-md-4 col-xl-3 order-md-1 order-2 sticky top-50  h-100 "> 
-               <!-- Autho info -->
-          <div class="div-bg" >
+  <div class=" mt-5 px-0 p-0 px-md-4 " >
+ 
+    <div class="row " >     
+      <!-- Autho info -->
+        <div class="col col-md-4 col-xl-3 order-md-1 order-2 mx-md-0 mx-3 my-md-0 my-2  my-2 " > 
+          <div class="div-bg"  >
             <div class=" ">
-              <img src="https://creatorsdev.herokuapp.com/media/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top ">
+              <img src="https://creatorsdev.herokuapp.com/media/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top " style="height: 200px; background-size: cover; object-fit: cover;">
               <div class="row justify-content-center">
                 <div class="col-lg-3 order-lg-2">
                   <div class="card-profile-image">
@@ -262,7 +270,9 @@ table{
                 </div>
                 <div class="text-center">
                   <h5 class="h3 text-gray ">
-                    {{ article.author.username }}
+                    <a href="/user/profile/{{article.author.username}}">
+                      {{ article.author.username }}
+                    </a>
                   </h5>
                   <div class="h5 text-gray  font-weight-300">
                     {{ article.author.email }}
@@ -292,16 +302,16 @@ table{
             <div class="  main-container flex wrap p-0"> 
                 <div class="article-main-div-body  p-0" id="articleBody">
                   <!-- Article mainbody -->
-                  <div class="article-body p-0  " id="article-body" onfocus="increseView()">{{article.body | safe}}</div>
+                  <div class="article-body p-0  py-2 border-bottom " id="article-body" onfocus="increseView()">{{article.body | safe}}</div>
 
                   <!-- Like Button -->
-                  <button class="btn btn-sm btn-primary" onclick="handleLikeArticle()">
-                    <i class="ni ni-like-2 display-4 "></i>
+                  <button class="btn btn-sm btn-primary m-2 my-4" onclick="handleLikeArticle()">
+                    <i class="far fa-thumbs-up display-4 "></i>
                   </button> 
 
                   <!-- Comments -->
                   <div class=" mx-md-3 col-md-10">
-                    <h2 class="text-gray">Comments <i class="fas fa-comment"></i> ({{comments | length}})</h2>
+                    <h2 class="text-gray">Comments <i class="far fa-comment"></i> ({{comments | length}})</h2>
                     {% if comments %} 
                     {% for comment in comments %}
                     <div class="user-comment-box my-2" id="{{comment.id}}">
@@ -312,7 +322,7 @@ table{
                         <div class="p-2 mx-3 text-gray">{{comment.text}}</div>
                         <div class="likes-replay-div flex text-primary  pb-2" style="border-bottom: 1px solid var(--text-light);">
                 
-                          <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="ni ni-like-2"></i> {{comment.count_comment_likes}}</span>
+                          <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="far fa-thumbs-up"></i> {{comment.count_comment_likes}}</span>
                
                           <span class="comment-replay ">  
                             <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
@@ -348,7 +358,7 @@ table{
                             <div class="flex flex-col ">
                               <span class="px-2 mx-1 text-gray  ">{{rep.text}}</span>
                               {% if article.author.first_name %}
-                              <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="ni ni-like-2"></i> {{rep.count_comment_likes}} </span>
+                              <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="far fa-thumbs-up"></i> {{rep.count_comment_likes}} </span>
                               {% else %}
                               {% endif %}
           
@@ -429,9 +439,9 @@ table{
     </div>
     
     <!-- Feedback  -->
-    <!-- <div class="col-lg-4 col-xl-3 col-12">
+    <div class="col-lg-4 col-xl-3 col-12">
       {% include 'includes/feedback.html' %} 
-    </div> -->
+    </div>
     
   </div>
   
@@ -480,9 +490,7 @@ table{
       }
 
     }
- 
-    //  call funtions
-    morelikeThis();
+  
   // Social Share
   share(postTitle = '{{article.title}}', postImg ='https://creatorsdev.herokuapp.com/media/{{article.mainImage}}' )
 

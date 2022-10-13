@@ -2,8 +2,9 @@ from http.client import HTTPResponse
 from api.send_emails import send_congrates_new_account_mail
 from api.models import PrivacyPolices , FeedBack
 from django.shortcuts import redirect, render
-from django.http import HttpResponseRedirect  , Http404
+from django.http import HttpResponseRedirect  , Http404 , HttpResponse
 from django.contrib import messages
+
 
 
 def sendNewAccountCongrates_Mail(request):
@@ -24,16 +25,17 @@ def privacyPolices(request):
   return render(request,'privacy_polices.html' ,context )
 
 
-
+# Create feedback
 def feedback(request): 
   if request.method == "POST": 
     username = request.POST['username']
     email = request.POST['email'] 
     text = request.POST['text']
+    redirect_url = request.POST['redirect-url']
 
-    if text and email :
+    if text and email:
       FeedBack.objects.create(username = username  , email = email , feedtext = text )
       messages.success(request,'Your feedback is submitted success')
-
+      return redirect(redirect_url)
   else:
-    return redirect("/")
+    return redirect(redirect_url)

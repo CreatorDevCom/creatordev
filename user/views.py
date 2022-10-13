@@ -10,6 +10,7 @@ from user.models import Inbox
 from django.contrib.auth import login , logout , authenticate 
 from api.send_emails import send_congrates_new_account_mail , send_otp_code 
 from api.lib import generateOtp
+from forum.models import Forum
 # Create your views here.
 
 
@@ -18,9 +19,12 @@ def userPofilePreview(request , username):
   user = User.objects.get(username = username)
   user_profile = UserProfile.objects.get(author = user)
   articles = Article.objects.filter(author = user)
+  forums = Forum.objects.filter(author = user)
+
   context = {
     "profile":user_profile,
     "articles":articles,
+    "forums":forums,
  
   }
   return render(request , 'user/profile.html' , context)

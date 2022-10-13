@@ -30,21 +30,15 @@
   </header>
  <!-- Header end -->
 
-  {% if messages %}
-  {% for message in messages %}
-  <div class="message-body" id="message-body">
-    <div class="message-body-content">
-      <div class="message-head">
-        <span class="message-head-text">Success</span>
-        <button onclick="hideMessage()" class="message-x-btn">x</button>
-      </div>
-      <div class="message-text-body">
-        <span>{{message}}</span>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-{% endif %}
+ {% if messages %} {% for message in messages %}
+ <div class="alert    col-12    z-221 alert-{{message.tags}} alert-dismissible fade show  "  role="alert" style="position: fixed; top:80px;">
+   <span class="text-lg">{{message.message}}</span>
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ {% endfor %} 
+{% endif %}  
 <div class="container pb-5 bg-secondary" id="main-content">
   <!-- Table -->
   <div class="row justify-content-center my-2">

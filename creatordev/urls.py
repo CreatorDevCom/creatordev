@@ -6,7 +6,7 @@ from django.urls import re_path as url
 from api.views import privacyPolices
 from django.views.static import serve
 urlpatterns = [
-    path("account/", include("allauth.urls")),
+    path("accounts/", include("allauth.urls")),
     path('admin/', admin.site.urls),  
     path("api/",include("api.urls")), 
     path("",include("home.urls")),

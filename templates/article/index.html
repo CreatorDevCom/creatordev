@@ -24,14 +24,16 @@
             <div class="article-info-div">
               <h2 class="article-title">{{article.title}}</h2>
               <div class="flex author-info">
-                <span class="font-sm mx-1 text-gray">By <span class="article-username">
+                <span class="font-sm mx-1 text-gray">
+                  By
+                  <span class="article-username">
                 {% if article.author.first_name %}
                   {{article.author.first_name}} {{article.author.last_name}}
                 {% else %}
                   {{article.author.username}} 
                 {% endif %}
                 </span> 
-                 <span class="posted_at"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>
+                 <span class="posted_at"><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
                  <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
                 </span>
                 <span ><a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a></span> 

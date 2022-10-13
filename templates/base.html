@@ -284,8 +284,7 @@
 
     
     {% if messages %} {% for message in messages %}
-    <div class="alert fixed    w-80  z-221 alert-success alert-dismissible fade show "  role="alert">
-      <strong class="">{{messages.head}}</strong> 
+    <div class="alert    col-12    z-221 alert-{{message.tags}} alert-dismissible fade show  "  role="alert" style="position: fixed; top:80px;">
       <span class="text-lg">{{message.message}}</span>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

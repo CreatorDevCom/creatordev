@@ -22,7 +22,6 @@ def search(request):
     forums = Forum.objects.filter(title__icontains = text )
     guest_forums = GuestForum.objects.filter(title__icontains = text )
 
-
     context= {
       "articles":articles,
       "forums":forums,
@@ -30,11 +29,15 @@ def search(request):
       "text":text,
     }
 
-    return render(request,'search.html',context)
+    return render(request,'search.html',context) 
 
-
-
+  
   return render(request,'search.html')
+
+
+# Not Found 404
+def notfound404(request):
+  return render(request,'404.html')
 
 
 

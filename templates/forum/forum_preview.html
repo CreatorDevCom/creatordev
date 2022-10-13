@@ -39,7 +39,7 @@
   .forum-body h1,h2,h3,h4,h5,h6 , p{
     color: var(--text-gray);
   }
- .article-main-div-body pre{ 
+ .forum-body pre{ 
   position: relative;
 }
   .sticky{
@@ -72,13 +72,16 @@
           <div class="row p-2 align-items-center">
             <!-- Author Image -->
             <div class="pl-md-5 pl-2"> 
-              <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
+             {% if forum.author.firstname %}
+             <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" class="w-10 rounded-circle border-2 border-primary" alt="no net">
+             {% else %}
+             <img src="/static/assets/img/icons/default_profile.jpg" class="w-10 rounded-circle border-2 border-primary" alt="no net">
+             {% endif %}
             </div> 
             <div class="col  pl-4">
               <!-- Author Other info -->
-              <div class="row">
-                <span class="text-sm mx-2  ">Posted by</span>
-                <span class="  text-gray font-weight-500">
+              <div class="row"> 
+                <span class=" mx-2 text-gray font-weight-500"> 
                   {% if forum.author.first_name %}
                     {{forum.author.first_name}} {{forum.author.last_name}}
                   {% else %} 
@@ -94,7 +97,7 @@
             
               </div>
               <div class="row flex justify-content-between w-100">  
-                  <span class="text-sm mx-2">posted on  </i><span class=" text-gray text-sm">{{forum.posted_at.date }}</span></span>
+                  <span class="text-sm mx-2"> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span></span>
                 {% if request.user.is_authenticated %}
                   {% if forum.author == request.user %}
                   <div class="mx-5 "> <a href="/forum/edit/{{forum.id}}" class="font-sm"><i class="fas fa-pen"></i>edit</a></div>
@@ -102,19 +105,19 @@
                 {% endif %}</div>
               <!-- Forum info -->
               <div class="row">
-                <span class="text-primary text-md  px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
-                <span class="text-primary text-md  px-2"><i class="fas fa-comment"></i> {{comments|length}}</span>
+                <span class="text-primary text-md  px-2"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
+                <span class="text-primary text-md  px-2"><i class="far fa-comment"></i> {{comments|length}}</span>
               </div>
             </div>
           </div>
       </div>
     
       <!-- Forum Main Body -->
-      <div class="forum-body text-gray my-3">{{forum.body | safe}}</div>
+      <div class="forum-body text-gray my-2 py-2 border-bottom ">{{forum.body | safe}}</div>
     
       <div class="row  m-4 align-items-center">
-      <button class="btn btn-primary" onclick="addForumLike()">
-        <i class="ni ni-like-2 text-lg"></i>
+      <button class="btn btn-primary  px-2" onclick="addForumLike()">
+        <i class="fas fa-thumbs-up" style="font-size: 18px;"></i>
       </button>
       <p class="mx-2">Click to like </p>
       </div>
@@ -122,7 +125,7 @@
       <div class="pb-5 px-3">
         <!-- Comments -->
         <div class="comments-div mx-md-2  ">
-          <h2 class="text-gray">Comments <i class="fas fa-comment"></i> ({{comments | length}})</h2>
+          <h2 class="text-gray">Comments <i class="far fa-comment"></i> ({{comments | length}})</h2>
           {% if comments %}
           {% if forum.author.first_name %}
           {% else %}
@@ -137,7 +140,7 @@
               <div class="p-2 mx-3 text-gray">{{comment.text}}</div>
               <div class="likes-replay-div flex text-primary pb-2" style="border-bottom: 1px solid var(--text-light);">
                 {% if forum.author.first_name %}
-                <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="ni ni-like-2"></i> {{comment.count_comment_likes}}</span>
+                <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="far fa-thumbs-up"></i> {{comment.count_comment_likes}}</span>
                 {% else %} 
                 {% endif%}
                 <span class="comment-replay ">  
@@ -174,7 +177,7 @@
                   <div class="flex flex-col ">
                     <span class="px-2 mx-1 text-gray  ">{{rep.text}}</span>
                     {% if forum.author.first_name %}
-                    <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="ni ni-like-2"></i> {{rep.count_comment_likes}} </span>
+                    <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="far fa-thumbs-up"></i> {{rep.count_comment_likes}} </span>
                     {% else %}
                     {% endif %}
     
@@ -212,9 +215,9 @@
     </div> 
 
     <!-- Feedback -->
-    <!-- <div class="col-lg-3 col-12 col-12 sticky top-50   "style="height: 500px;"> 
+    <div class="col-lg-3 col-12 col-12 sticky top-50   "style="height: 500px;"> 
       {% include 'includes/feedback.html' %}  
-    </div> -->
+    </div>
 
 
     </div> 
@@ -319,6 +322,9 @@
 
   const addliketocomment = async(commentId) =>{
   
+
+ 
+
   try {
       await fetch(`https://creatorsdev.herokuapp.com/forum/likecomment/${commentId}`).then(res=>{
         console.log(res);
@@ -353,6 +359,22 @@ const addFollower = async (username) => {
     console.log(error);
   }
 }
+
+
+ // Code Copy btn
+ if (document.querySelector('.forum-body pre')){
+    let codeSnippets = document.querySelector('.forum-body pre code').innerText;
+    console.log(codeSnippets);
+    document.querySelector('.forum-body pre').innerHTML +=`
+      <button class="btn btn-sm btn-primary  " onClick="copytoclipboard()" style="position:absolute; top:1rem; right:1rem;">Copy</button>
+    `; 
+
+    // Call Copy function
+    function copytoclipboard() {
+      console.log(codeSnippets); 
+    }
+
+  }
 
 </script>
 
