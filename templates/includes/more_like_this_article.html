@@ -14,7 +14,7 @@
 
 <div class="flex flex-wrap"> 
   {% for rel_article in more_like_this %}
-  <a href="/article/{{rel_article.id}}" class="related_article_card div-bg mx-auto p-2 col-xl-5 col-lg-12 col-12 mt-4 ">
+  <a href="/article/{{rel_article.id}}" class="related_article_card div-bg mx-auto p-2 col-xl-5 col-lg-12 col-12 mt-4 rounded-lg " style="border: 1px solid rgb(185, 185, 185);">
   <div class="">
       <h1>{{rel_article.title}}</h1>
       <p style="max-height: 150px ;overflow:hidden ;">{{rel_article.body}}</p>
