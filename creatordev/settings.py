@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'creatordev.wsgi.application'
 # Database  
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "sql8526241",
-        "USER":"sql8526241",
-        "PASSWORD":"aCNe7CfcjY",
-        "PORT":3306,
-        "HOST":"sql8.freesqldatabase.com"
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "dh29ab6nrguug",
+        "USER":"idrsumequqtkpj",
+        "PASSWORD":"84ef9e0520823b3e9bc34450e995158d78439044155f2a1fc57a4f269e9fdac6",
+        "PORT":5432,
+        "HOST":"ec2-3-220-207-90.compute-1.amazonaws.com"
     }
 }
 DatabaseWrapper.data_types['DateTimeField'] = 'datetime' 
