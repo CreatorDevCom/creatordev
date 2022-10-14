@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Articles {% endblock title%}
+{% block title %} - Articles {% endblock title%}
 {% block headlinks %}
   <link rel="stylesheet" href="/static/css/article/article.css"> 
   <link rel="stylesheet" href="/static/css/theme.css "> 
@@ -36,7 +36,7 @@
                  <span class="posted_at"><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
                  <span class="posted_at"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
                 </span>
-                <span ><a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a></span> 
+                <span ><a href="/article/{{article.id}}" class="btn btn-sm btn-primary ">Preview</a></span> 
               </div>
             </div>
           </div> 

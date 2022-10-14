@@ -63,14 +63,19 @@
         </div>
        </div>
       </div>
+
+
+
+
+
       <!-- Profile contents (Articles / blogs / forunm) -->
       <div class="user-contents-div" style="overflow: auto;">
          <h1 class="text-gray my-4">Articles ({{articles | length }})</h1>
-        <div class="content-box-div mx-auto">
+        <div class="  mx-auto flex flex-wrap"> 
           <!-- Article-box -->
          {% if articles %}
          {% for article in articles %}
-         <div class=" shadow div-bg col-lg-3 p-0  mx-auto col-5 my-md-0 my-2 rounded-lg ">
+         <div class=" shadow div-bg col-lg-3 p-0 col-md-5 mx-auto col-11 my-md-0 my-2 rounded-lg ">
           <div class="main-image-div "   style="overflow: hidden ;">
             <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image" style="height: 150px;  object-fit: cover;">
           </div>
@@ -82,34 +87,36 @@
                 <span class="posted_at mx-1"><i class="fas fa-eye"></i> {{article.count_article_views}}</span>
               </span>
 
-              <!-- Edit article only author -->
-              {% if request.user == profile.author %}
-              <a class=" pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-h"></i>
-              </a>
-              <div class="dropdown-menu  dropdown-menu-right" style="background-color:var(--div-bg);" >
-                <a href="/article/edit/{{article.id}}" class="dropdown-item">
-                  <i class="ni ni-single-02"></i>
-                  <span>Edit</span>
-                </a> 
-                <a  href="/article/delete/{{article.id}}" class="dropdown-item text-danger" >
-                  <i class="fas fa-trash"></i>
-                  <span class="text-danger">Delete</span>
+            <div>
+                <!-- Edit article only author -->
+                {% if request.user == profile.author %}
+                <a class="text-gray mr-2 pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-h"></i>
                 </a>
-                 
-              </div>
-              {% endif %}
-
-
-                <span>
-                  <a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a>
-                </span> 
+                <div class="dropdown-menu  dropdown-menu-right" style="background-color:var(--div-bg);" >
+                  <a href="/article/edit/{{article.id}}" class="dropdown-item">
+                    <i class="ni ni-single-02"></i>
+                    <span>Edit</span>
+                  </a> 
+                  <a  href="/article/delete/{{article.id}}" class="dropdown-item text-danger" >
+                    <i class="fas fa-trash"></i>
+                    <span class="text-danger">Delete</span>
+                  </a> 
+                </div>
+                {% endif %}  
+                  <span>
+                    <a href="/article/{{article.id}}" class="btn btn-sm btn-primary">Preview</a>
+                  </span> 
+            </div>
             </div>
           </div>
-        </div> 
-         {% endfor %} 
-
+         </div> 
+         {% endfor %}  
          {% endif %}
+
+        <!-- Article end -->
+
+        
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 from pathlib import Path
 import os 
+from django.db.backends.mysql.base import DatabaseWrapper
 
 BASE_DIR = Path(__file__).resolve().parent.parent
  
@@ -74,16 +75,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'creatordev.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+# Database  
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "sql8526241",
+        "USER":"sql8526241",
+        "PASSWORD":"aCNe7CfcjY",
+        "PORT":3306,
+        "HOST":"sql8.freesqldatabase.com"
     }
 }
-
+DatabaseWrapper.data_types['DateTimeField'] = 'datetime'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

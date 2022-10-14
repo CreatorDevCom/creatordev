@@ -140,13 +140,13 @@ table{
 </style>
 <div class="main-content" id="main-content" style="width: 100wh ; overflow-x: hidden;">
   <!-- Secound Head of an article -->
-  <div class="sec-header   " id="sec-header">
+  <div class="sec-header  shadow " id="sec-header">
     <div class="sec-header-content">
       <div class="sec-header-author-info">
         <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" class="sec-header-user-pic" alt="asstes-loading">
         <div class="sec-header-text-info">
           <div class="flex items-center">
-            <span class="font-sm  ml-2">by <span class="sec-head-username">
+            <span class="font-sm  ml-2 ">by <span class="sec-head-username">
               {% if article.author.first_name %}
                 {{article.author.first_name}} {{article.author.last_name}}
               {% else %}
@@ -154,7 +154,6 @@ table{
               {% endif %}
             </span>
             </span>
-            <span class="font-sm  sec-head-info-date mx-1">{{ article.posted_at | naturaltime }}</span>
             {% if request.user.is_authenticated and article.author != request.user %} 
               {% if isFollowing == True  %}
               <span class="sec-header-follow-btn" >.Following</span>
@@ -163,10 +162,12 @@ table{
               {% endif %}
             {% endif %}
           </div>
-          <div class="flex mx-2 mt-1  align-items-center ">
-            <span class="mx-2 font-sm "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
-            <span class="mx-2 font-sm "><i class="far fa-comment"></i> {{comments | length }}</span>
-            <span class="mx-2 font-sm "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
+          <div class="flex   align-items-center mx-3 " style="position: relative; top:1px; font-size: 17px;">
+            <span class="font-sm  sec-head-info-date mx-1 mt-1">.{{ article.posted_at | naturaltime }}</span>
+
+            <span class="mx-2  "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
+            <span class="mx-2  "><i class="far fa-comment"></i> {{comments | length }}</span>
+            <span class="mx-2  "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
           </div>
         </div>
       </div>
@@ -176,16 +177,16 @@ table{
 
 
   {% if article %}
-  <div class="top-content" id="top-content">
+  <div class="top-content " id="top-content">
     <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="bg-image" id="bg-img">
-    <div class="top-content-div">
+    <div class="top-content-div ">
       <div class="showcase-article">
         <div class="left-container">
           <h2 class="main-title-article">{{article.title}}</h2>
           <div class="flex  authorallinfo items-center">
             <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" alt="asstes-loading" class="profielPic">
             <div class="author_info mx-2">
-              <span class="info mx-2 ">article by
+              <span class="info mx-2 ">by
                 <a href="/user/profile/{{article.author.username}}" class="username mx-1">
                   {% if article.author.first_name %}
                    {{article.author.first_name}} {{article.author.last_name}}
@@ -195,17 +196,17 @@ table{
                 </a>
                 {% if request.user.is_authenticated and article.author != request.user %} 
                   {% if isFollowing %}
-                    <span class="follow-btn following-text" >Following</span> 
+                    <span class="text-sm " >Following</span> 
                   {% else %}
-                    <button class="follow-btn" onclick="addFollower('{{article.author.username}}')">Follow</button>
+                    <button class="btn btn-primary btn-sm" onclick="addFollower('{{article.author.username}}')">Follow</button>
                   {% endif %}
                 {% endif %}
                 </span>
              <div class="row">
-              <span class="info ml-4 text-sm ">posted on<span class="date mx-1 ">{{article.posted_at.date }}</span></span>
+              <span class="info ml-4 text-sm ">posted <span class="date mx-1 ">{{article.posted_at.date }}</span></span>
               {% if request.user.is_authenticated %}
                 {% if article.author == request.user %}
-                <div class="mx-5"> <a href="/article/edit/{{article.id}}" class="font-sm text-white" ><i class="fas fa-pen"></i>edit</a></div>
+                <div class="mx-md-5 mx-2"> <a href="/article/edit/{{article.id}}" class="font-sm text-white" ><i class="fas fa-pen"></i>edit</a></div>
                 {% endif %}
               {% endif %}
              </div>
@@ -292,9 +293,9 @@ table{
       <!-- Main Article Body -->
       <div class="col-md-8 col-xl-7  order-md-2 order-1 "> 
         <div class=" div-bg px-0  "> 
-          <div class=" p-2 p-md-4 m-2">
+          <div class=" p-2 p-md-4 m-2  ">
             <div class=" mb-3 p-2  ">
-                <h5 class="display-4 text-gray text-md">Table of Content</h5>
+                <h5 class="display-4 text-gray text-md">Main heading in article</h5>
                 <div  class="tableofcontent " id="tableofcontent" ></div>
             </div>
           </div> 
@@ -485,8 +486,8 @@ table{
       `; 
   
       // Call Copy function
-      function copytoclipboard() {
-        console.log(codeSnippets); 
+      function copytoclipboard() { 
+        navigator.clipboard.writeText(codeSnippets)
       }
 
     }

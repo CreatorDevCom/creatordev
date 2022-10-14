@@ -17,7 +17,7 @@
     <!-- Argon CSS -->
     <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
     {% block headlinks %}{% endblock headlinks %}
-    <title>Creator Dev / {% block title %}{% endblock title %}</title>
+    <title>Creator Dev  {% block title %}{% endblock title %}</title>
   </head>
 
   <style> 
@@ -158,9 +158,8 @@
 
   </style>
   <body class="bg-gray-cs" style="width: 100wh; overflow-x: hidden;">
-    <!-- Header -->
-    
-    <nav class=" px-2 py-2 navbar-expand div-bg  sticky-top  first_navbar border-bottom border-primary" >
+    <!-- Header --> 
+    <nav class=" px-2 py-1 navbar-expand div-bg  sticky-top  first_navbar border-bottom border-primary" >
       <div class="container-fluid col-lg-11 col-xl-10 col-12 mx-auto">
 
         <!-- Fist Nav Bar -->
@@ -180,7 +179,7 @@
             </div>
 
             <li onclick="toggleSearchBar()" class="nav-item   mx-1 mr-4   rounded-circle border-1 border-white">
-              <i class="fas fa-search"></i>
+              <i class="fas fa-search" ></i>
             </li> 
             <li class="nav-item  flex justify-content-center align-items-center">
               <a href="/"  style="font-size: 17px;">Home</a> 
@@ -207,7 +206,7 @@
               <form action="/search/" method="get">
                 <div class="row relative mx-1 mx-md-3 flex align-items-center rounded-lg border p-2 col-12 col-md-11">
                   <input type="text" name="text" id="t" class="div-bg p-2 border-0 pr-5 col-9 col-md-10 " value="{{text}}" style="color:var(--dark-white);" placeholder="Search...">
-                  <button type="submit" class=" btn  text-center btn-sm py-md-3 px-1 btn-primary"><i class="fas fa-search  z-221 "></i> </button>
+                  <button type="submit"   class=" btn  text-center btn-sm py-md-3 px-1 btn-primary"><i class="fas fa-search  z-221 " style="color: white;"></i> </button>
                 </div>
               </form>
             </div>

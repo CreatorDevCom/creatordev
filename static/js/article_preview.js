@@ -13,9 +13,7 @@
   const addliketocomment = async(commentId) =>{
   
     try {
-        await fetch(`https://creatorsdev.herokuapp.com/article/likecomment/${commentId}`).then(res=>{
-          console.log(res);
-        })
+        await fetch(`https://creatorsdev.herokuapp.com/article/likecomment/${commentId}`)
     } catch (error) {
       console.log(error);
     }
@@ -66,10 +64,9 @@
 
 
   // Follow the user
-  const addFollower = async (username) => {
-    console.log(username);
+  const addFollower = async (username) => { 
     try {
-      await fetch(`https://creatorsdev.herokuapp.com/addfollower/${username}`)
+      await fetch(`https://creatorsdev.herokuapp.com/user/addfollower/${username}`)
     } catch (error) {
       console.log(error);
     }

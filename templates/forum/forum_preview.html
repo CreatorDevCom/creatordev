@@ -81,7 +81,7 @@
             <div class="col  pl-4">
               <!-- Author Other info -->
               <div class="row"> 
-                <span class=" mx-2 text-gray font-weight-500"> 
+                <span class=" mx-1 text-gray  "> 
                   {% if forum.author.first_name %}
                     {{forum.author.first_name}} {{forum.author.last_name}}
                   {% else %} 
@@ -90,24 +90,26 @@
                   {{article.author.username}}  
                   {% else %}
                   <div class="row mx-1">  
-                  {{ forum.author }} <div class="bg-secondary px-1 ml-1 rounded-lg text-primary text-sm">guest post</div>
+                  {{ forum.author }} <div class=" mx-2 font-weight-500 text-primary text-sm">guest post</div>
                   </div>
                   {% endif %}
                 </span>
             
               </div>
               <div class="row flex justify-content-between w-100">  
-                  <span class="text-sm mx-2"> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span></span>
+                  <span class="text-sm mx-3 flex "> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span>
+                  <!-- Forum info -->
+                  <div class="mx-1">
+                    <span class="text-gray text-md  px-2"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
+                    <span class="text-gray text-md  px-2"><i class="far fa-comment"></i> {{comments|length}}</span>
+                  </div>
+                
+                </span>
                 {% if request.user.is_authenticated %}
                   {% if forum.author == request.user %}
                   <div class="mx-5 "> <a href="/forum/edit/{{forum.id}}" class="font-sm"><i class="fas fa-pen"></i>edit</a></div>
                   {% endif %}
                 {% endif %}</div>
-              <!-- Forum info -->
-              <div class="row">
-                <span class="text-primary text-md  px-2"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
-                <span class="text-primary text-md  px-2"><i class="far fa-comment"></i> {{comments|length}}</span>
-              </div>
             </div>
           </div>
       </div>
@@ -371,13 +373,13 @@ const addFollower = async (username) => {
 
     // Call Copy function
     function copytoclipboard() {
-      console.log(codeSnippets); 
+      navigator.clipboard.writeText(codeSnippets)
+
     }
 
   }
 
 </script>
-
 {% endblock scripts %}
 
  
