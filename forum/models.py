@@ -1,11 +1,11 @@
-from uuid import uuid4
+import uuid
 from django.db import models
 from user.models  import CustomUser as User
 from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Forum(models.Model):
-  id = models.UUIDField( default=uuid4, primary_key=True  , null=False , unique=True )
+  id= models.AutoField(primary_key = True , null=False)
   author = models.ForeignKey(User , on_delete=models.CASCADE , related_name="forum_author")
   title = models.CharField(max_length=400 )
   body = RichTextField()
@@ -19,7 +19,7 @@ class Forum(models.Model):
     return f'{self.title} - by - {self.author}'
 
 class GuestForum(models.Model):
-  id = models.UUIDField( default=uuid4, primary_key=True  , null=False , unique=True )
+  id = models.UUIDField( default=uuid.uuid4(), primary_key=True  , null=False  )
   author = models.CharField(max_length=50)
   email = models.EmailField(max_length=150)
   title = models.CharField(max_length=400)
@@ -49,7 +49,7 @@ class Comment(models.Model):
     return f"By {self.author} - at {self.commented_at} - id {self.id}"
 
 class GuestForumComment(models.Model):
-  id = models.UUIDField(default=uuid4,primary_key=True , unique=True)
+  id = models.UUIDField(default=uuid.uuid4(),primary_key=True )
   parent = models.ForeignKey('self',on_delete=models.CASCADE , null=True)
   forum = models.ForeignKey(GuestForum ,on_delete=models.CASCADE)
   text = models.TextField(default="")
