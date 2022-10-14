@@ -86,8 +86,7 @@ DATABASES = {
         "HOST":"sql8.freesqldatabase.com"
     }
 }
-DatabaseWrapper.data_types['DateTimeField'] = 'datetime'
-DISABLE_COLLECTSTATIC=1
+DatabaseWrapper.data_types['DateTimeField'] = 'datetime' 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
