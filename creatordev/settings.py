@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
  
 SECRET_KEY = 'django-insecure-w3g+c8v@fo^#5ttn&-x(lca)7om676aj%#zchlw7nqibm%p5w7'
  
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['creatorsdev.herokuapp.com','*']
  
@@ -86,9 +86,10 @@ DATABASES = {
         "HOST":"ec2-3-220-207-90.compute-1.amazonaws.com"
     }
 }
-DatabaseWrapper.data_types['DateTimeField'] = 'datetime' 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+# DatabaseWrapper.data_types['DateTimeField'] = 'datetime' 
+
+
+# Password validation 
 
 AUTH_PASSWORD_VALIDATORS = [ 
     {

@@ -59,7 +59,7 @@
  
 <div class="container-fluid">
   <div class="row flex justify-content-center ">
-    <div class=" p-3 div-bg my-md-2 col-xl-7 col-lg-8  col-12 rounded-lg  p-2" style="border: 1px solid rgb(185, 185, 185);">
+    <div class=" p-3 div-bg my-md-2 col-xl-7 col-lg-8  col-12 rounded-lg  p-2" style="border: 1px solid var(--text-light);">
     
       <!-- Header Content --> 
       <div>
@@ -81,18 +81,8 @@
             <div class="col  pl-4">
               <!-- Author Other info -->
               <div class="row"> 
-                <span class=" mx-1 text-gray  "> 
-                  {% if forum.author.first_name %}
-                    {{forum.author.first_name}} {{forum.author.last_name}}
-                  {% else %} 
-                  {% endif %}
-                  {% if forum.author.username %} 
-                  {{article.author.username}}  
-                  {% else %}
-                  <div class="row mx-1">  
-                  {{ forum.author }} <div class=" mx-2 font-weight-500 text-primary text-sm">guest post</div>
-                  </div>
-                  {% endif %}
+                <span class=" mx-1 text-gray  ">  
+                    {{forum.author.first_name}} {{forum.author.last_name}}  
                 </span>
             
               </div>
@@ -100,8 +90,8 @@
                   <span class="text-sm mx-3 flex "> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span>
                   <!-- Forum info -->
                   <div class="mx-1">
-                    <span class="text-gray text-md  px-2"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
-                    <span class="text-gray text-md  px-2"><i class="far fa-comment"></i> {{comments|length}}</span>
+                    <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
+                    <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-comment"></i> {{comments|length}}</span>
                   </div>
                 
                 </span>
@@ -128,11 +118,7 @@
         <!-- Comments -->
         <div class="comments-div mx-md-2  ">
           <h2 class="text-gray">Comments <i class="far fa-comment"></i> ({{comments | length}})</h2>
-          {% if comments %}
-          {% if forum.author.first_name %}
-          {% else %}
-          <p class="text-warning">Comment likes not avaliable at guest post</p> 
-          {% endif %}
+          {% if comments %} 
           {% for comment in comments %}
           <div class="user-comment-box my-2" id="{{comment.id}}">
             <!-- <img src="https://creatorsdev.herokuapp.com/media/{{profilepic}}" alt="" class="comment-author-profile-pic"> -->
@@ -141,10 +127,7 @@
                   class="comment-commented-at">{{comment.commented_at | naturaltime }}</span></span>
               <div class="p-2 mx-3 text-gray">{{comment.text}}</div>
               <div class="likes-replay-div flex text-primary pb-2" style="border-bottom: 1px solid var(--text-light);">
-                {% if forum.author.first_name %}
-                <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="far fa-thumbs-up"></i> {{comment.count_comment_likes}}</span>
-                {% else %} 
-                {% endif%}
+                
                 <span class="comment-replay ">  
                   <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
                   {{reply |get_val:comment.id | length}}
@@ -237,46 +220,7 @@
   {% else %} 
   <!-- Guest Forum uplaod / Create new Account -->
   <div class="p-md-4 p-2 div-bg">
-    <div class="row div-bg">
-      <!-- Guest Form -->
-      <div class="col-md-6 div-bg py-2 border border-primary ">
-      <h2 class="text-gray">Post Forum as a guest</h2>
-        <p class="describtion">if you have any doubt . upload your own forum as a <strong class="text-danger">Guest</strong></p>
-        <form action="/forum/guest/uploadforum" method="post" >
-          {% csrf_token %} 
-          <h6 class="heading-small text-muted mb-4">User information</h6> 
-          <div class=" mt--4 "> 
-              <div class="mt-2"> 
-                <label class="form-control-label" for="input-username">Username</label>
-                <input type="text" required id="username" name='guest-username' class="div-bg form-control" placeholder="Username (e.g John Wick)" >
-              </div> 
-            <div> 
-              <div class="mt-2">
-                <label class="form-control-label" for="input-username">Email</label>
-                <input type="email" required id="email" class="div-bg form-control" name="guest-email" placeholder="Email ( example@gmail.com )" >
-              </div>
-            </div> 
-          </div>
-          <!-- Forum information -->
-          <h6 class="heading-small text-muted mb-4 mt-4">Forum information</h6> 
-          <div class=" mt--4 "> 
-              <div class="mt-2"> 
-                <label class="form-control-label" for="input-username">Forum title</label>
-                <input type="text" required id="title" name='guest-forum-title' class="div-bg form-control" placeholder="What the title of forum?" >
-              </div> 
-            <div> 
-              <div class="mt-2">
-                <label class="form-control-label" for="input-username">Forum body</label>
-                <textarea  required id="editor" class="div-bg form-control " name="guest-forum-body" placeholder="Describe your forum here..." ></textarea>
-              </div>
-            </div>
-            <div class="float-right py-4">
-              <button type="submit" class="btn btn-primary">Upload</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
+    <div class="row div-bg"> 
       <!-- Join Creator Dev -->
       <div class="col-md-4 div-bg mx-auto border-md-left mt-md-2 mt-4 ">
         <h1 class="text-gray">Join now Creator Dev </h1>

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from article.models import Article
-from forum.models import Forum ,GuestForum
+from forum.models import Forum  
 # Create your views here.
 def homeRenderer(request):
   return render(request , "index.html")
@@ -19,13 +19,11 @@ def search(request):
 
     # articles 
     articles = Article.objects.filter(title__icontains = text )
-    forums = Forum.objects.filter(title__icontains = text )
-    guest_forums = GuestForum.objects.filter(title__icontains = text )
+    forums = Forum.objects.filter(title__icontains = text ) 
 
     context= {
       "articles":articles,
-      "forums":forums,
-      "guest_forums":guest_forums,
+      "forums":forums, 
       "text":text,
     }
 

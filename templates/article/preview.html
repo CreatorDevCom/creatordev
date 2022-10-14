@@ -162,12 +162,12 @@ table{
               {% endif %}
             {% endif %}
           </div>
-          <div class="flex   align-items-center mx-3 " style="position: relative; top:1px; font-size: 17px;">
-            <span class="font-sm  sec-head-info-date mx-1 mt-1">.{{ article.posted_at | naturaltime }}</span>
+          <div class="flex   align-items-center mx-3 " style="position: relative; top:1px; font-size: 15px;">
+            <span class="font-sm text-gray sec-head-info-date mx-1 mt-1"><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
 
-            <span class="mx-2  "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
-            <span class="mx-2  "><i class="far fa-comment"></i> {{comments | length }}</span>
-            <span class="mx-2  "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
+            <span class="mx-md-2 mx-1 text-gray "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
+            <span class="mx-md-2 mx-1 text-gray "><i class="far fa-comment"></i> {{comments | length }}</span>
+            <span class="mx-md-2 mx-1 text-gray "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
           </div>
         </div>
       </div>
@@ -238,7 +238,7 @@ table{
     <div class="row " >     
       <!-- Autho info -->
         <div class="col col-md-4  col-xl-3 order-md-1 order-2 mx-md-0 mx-3 my-md-0 my-2  my-2 " > 
-          <div class="div-bg rounded-lg style="border: 1px solid rgb(185, 185, 185);" >
+          <div class="div-bg rounded-lg" style="border: 1px solid var(--text-light);" >
             <div class=" ">
               <img src="https://creatorsdev.herokuapp.com/media/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top " style="height: 200px; background-size: cover; object-fit: cover;">
               <div class="row justify-content-center">
@@ -292,7 +292,7 @@ table{
     
       <!-- Main Article Body -->
       <div class="col-md-8 col-xl-7  order-md-2 order-1 "> 
-        <div class=" div-bg px-0   rounded-lg " style="border: 1px solid rgb(185, 185, 185);"> 
+        <div class=" div-bg px-0   rounded-lg " style="border: 1px solid var(--text-light);"> 
           <div class=" p-2 p-md-4 m-2  ">
             <div class=" mb-3 p-2  ">
                 <h5 class="display-4 text-gray text-md">Main heading in article</h5>

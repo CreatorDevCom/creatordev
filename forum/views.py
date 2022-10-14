@@ -1,17 +1,15 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
  
-from article.lib import isFollowing
-from forum.validaations import isAbleToUpload
-from forum.models import Forum   , Comment ,GuestForum, GuestForumComment
+from article.lib import isFollowing 
+from forum.models import Forum   , Comment 
 from user.models import Action, UserProfile
 
 # Forum Index Page (Home Page)
 def forumIndex(request):
 
   # Get All Forums
-  forums = Forum.objects.all().order_by('-pk')
-  guestForums = GuestForum.objects.all().order_by('-pk')
+  forums = Forum.objects.all().order_by('-pk') 
    
   # Get Forum User Profile
   userprofile= []
@@ -20,8 +18,7 @@ def forumIndex(request):
     userprofile = UserProfile.objects.get( author = author)     
   
   context = {
-    "forums":forums,
-    "guestForums":guestForums,
+    "forums":forums, 
     "userprofile":userprofile,
   }
 
@@ -37,14 +34,7 @@ def forumPreview(request,id):
     comments = Comment.objects.filter(forum = forum , parent=None)
     replies = Comment.objects.filter(forum = forum).exclude(parent=None)
     repDict = {}    
-    isfollowing = isFollowing(request , followers)  
-  else:
-    forum = GuestForum.objects.get(id = id) 
-    comments = GuestForumComment.objects.filter(forum = forum , parent=None)
-    replies = GuestForumComment.objects.filter(forum = forum).exclude(parent=None)
-    repDict = {}    
-    isfollowing = ""
-    profile = ""
+    isfollowing = isFollowing(request , followers)   
     
   
  
@@ -79,13 +69,8 @@ def createAComment(request,id):
         comment = Comment.objects.create(forum = on_forum , author = request.user , text=text)
         Action.objects.create(by = request.user , to = on_forum.author ,action=f"Comment on your forum '{text[0:30]}'" , redirect_link =f"/forum/preview/{on_forum.id}#{comment.id}")
         messages.success(request,"Comment is been submitted") 
-        return redirect(f'/forum/preview/{on_forum.id}')
-        
-      elif GuestForum.objects.filter(id = id).exists():
-        on_forum = GuestForum.objects.get(id = id)
-        comment = GuestForumComment.objects.create(forum = on_forum , author = request.user , text=text)
-        messages.success(request,"Comment is been submitted for Guest post") 
-        return redirect(f'/forum/preview/{on_forum.id}')
+        return redirect(f'/forum/preview/{on_forum.id}') 
+ 
         
 
       
@@ -111,14 +96,7 @@ def sendReply(request,id):
         Comment.objects.create(forum = on_forum,author = request.user , text=text , parent = on_comment )
         messages.success(request,"replay is been submitted")
         return redirect(f"/forum/preview/{on_forum.id}") 
-
-        # Check is Guest forum
-      elif GuestForum.objects.filter(id = forum_id).exists():
-        on_forum = GuestForum.objects.get(id = forum_id)
-        on_comment = GuestForumComment.objects.get(id = id)
-        GuestForumComment.objects.create(forum = on_forum,author = request.user , text=text , parent = on_comment )
-        messages.success(request,"replay is been submitted")
-        return redirect(f"/forum/preview/{on_forum.id}")  
+ 
  
     else:
       messages.error(request,"Login required to post a comment")
@@ -134,9 +112,7 @@ def likeComment(request,id):
     try:
       comment = None
       if Comment.objects.filter(id = id).exists():
-        comment = Comment.objects.get(id = id)
-      elif GuestForumComment.objects.filter(id = id).exists():
-        comment = GuestForumComment.objects.get(id = id)
+        comment = Comment.objects.get(id = id) 
       
       already_like = comment.likes.filter() 
       if request.user in already_like:
@@ -190,10 +166,7 @@ def likeForum(request,id):
         pass
       else:
         Action.objects.create(by = request.user , to = forum.author ,action = f"Like your forum ' {forum.title[0:25]} ' " , redirect_link=f"/forum/preview/{forum.id}")
-
-    # Check if  forum is  GUEST DO
-    elif GuestForum.objects.filter(id = id).exists(): 
-      forum = GuestForum.objects.get(id = id)  
+ 
 
     try:
       # Add Like of request user
@@ -206,30 +179,7 @@ def likeForum(request,id):
     messages.error(request,"To like forum you will need for Login first")
 
 
-# Post as a Guest(-> non-registered users)
-
-def guestUpload(request):
-  if request.user.is_authenticated:
-    messages.error(request,"You can't upload as a guest  , this option is only avaliable for non-registered users")
-  else:
-    if request.method == 'POST':
-      username = request.POST['guest-username']
-      email = request.POST['guest-email']
-      title = request.POST['guest-forum-title']
-      body = request.POST['guest-forum-body']
-
-      is_able_to_upload = isAbleToUpload(email)
-      if is_able_to_upload: 
-        if email and body and title  and username :
-          guestforum = GuestForum.objects.create(author = username , email = email, title = title , body = body)
-          messages.success(request,f"Your forum is been published as a guest , Note : you can only upload 5 forums as a guest on this email {email} ")
-          return redirect(f'/forum/preview/{guestforum.id}')
-        else:
-          messages.success(request,"Please fill the form correctly")
-          return redirect("/forum")
-      else:
-        messages.warning(request,f"You've complete 5 forum as a guest at this email {email} , please Singn Up to upload more")
-    return redirect("/forum")
+ 
 
 
 
@@ -250,7 +200,7 @@ def eidtForum(request , id):
         except ValueError :
             messages.error(request,"Error while Editing Forum , please try again")
     else:
-      messages.info(request,"Sorry! Guest forum are not able to edit")
+      messages.info(request,"not found")
 
 
     context={

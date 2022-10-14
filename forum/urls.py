@@ -8,6 +8,5 @@ urlpatterns = [
   path("uploadforum",views.uploadForum , name="upload_forum"),
   path("likeforum/<int:id>",views.likeForum , name="like_forum"),
   path("createacomment/<int:id>",views.createAComment , name="create_a_comment"),
-  path("preview/<int:id>",views.forumPreview , name="forum_preview"),
-  path("guest/uploadforum",views.guestUpload , name="guest_upload"),
+  path("preview/<int:id>",views.forumPreview , name="forum_preview"), 
 ]

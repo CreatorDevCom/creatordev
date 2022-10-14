@@ -82,29 +82,7 @@
     {% endif %}
     </div>  
 
-    <!-- Guest forums -->
-  
-    <h1 style="color: var(--text-gray);" class="mt-4 m-2  mx-md-6 mt-4">Guests Forums found ({{guest_forums|length}})</h1>
-    <div class="row px-3 flex flex-wrap justify-content-center"> 
-     {% if guest_forums %}
-     {% for guestform in guest_forums %}
-      <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden border border-gray">
-       <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{guestform.id}}">{{guestform.title}}</a></h2>
-       <div class="mx-1 mt--2 max-h-70 body">{{guestform.body | safe}}</div>  
-       <!-- Author Info -->
-       <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
-        <span class="text-sm ">By<b class="h4 text-gray"> {{guestform.author}}</b> </span>
-        <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ guestform.posted_at | naturaltime}}</span></span>
-        <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{guestform.count_forum_likes}}</span>
-      
-      </div>
-      </div> 
-     {% endfor %}
-     {% else %}
-      <h1 style="color: var(--text-gray);" class="mt-4 m-2  mx-md-6 mt-4">No Guest Forums found</h1>
-
-     {% endif %}
-    </div>
+ 
  
 
   </div>

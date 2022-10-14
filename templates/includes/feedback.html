@@ -1,6 +1,6 @@
 <form action="/api/feedback" method="post">
   {% csrf_token %}  
-  <div class="div-bg border border-primary p-2  px-3 mt-2 rounded-lg "style="border: 1px solid rgb(185, 185, 185);">
+  <div class="div-bg  p-2  px-3 mt-2 rounded-lg "style="border: 1px solid var(--text-light);">
     <h2>Send feedback </h2>
     <p class="describtion">Send us feedback , Describe your idea what will be the new features</p>
       {% if forum and forum.id %}
