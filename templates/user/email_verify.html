@@ -42,26 +42,23 @@
       <p>We have sent you an verification code to <i class="text-primary " style="text-decoration: underline;">{{request.user.email}}</i> , please ckeck and enter below</p>
       <form action="/user/email_verification" method="post" class="w-100 ">
         {% csrf_token %}
-        <label class="form-control-label" for="input-username">Enter OTP code (6 digits code)</label>
+        <label class="form-control-label" for="input-username">Enter OTP code (5 digits code)</label>
         <div class="flex mt-2">
-          <div class="form-group col-2">
+          <div class="form-group mx-auto col-2">
             <input type="text" maxlength="1" placeholder="0" id="otp-code-1" onkeyup="autoFocus(this, 'otp-code-2')" required name="otp-code-1" class="div-bg form-control  text-lg text-primary otp-code ">
           </div>
-          <div class="form-group col-2">
+          <div class="form-group mx-auto col-2">
             <input type="text" maxlength="1" placeholder="0" id="otp-code-2" onkeyup="autoFocus(this, 'otp-code-3')" required name="otp-code-2" class="div-bg form-control  text-lg text-primary otp-code ">
           </div>
-          <div class="form-group col-2">
+          <div class="form-group mx-auto col-2">
             <input type="text" maxlength="1" placeholder="0" id="otp-code-3" onkeyup="autoFocus(this, 'otp-code-4')" required name="otp-code-3" class="div-bg form-control  text-lg text-primary otp-code ">
           </div>
-          <div class="form-group col-2 ">
+          <div class="form-group mx-auto col-2 ">
             <input type="text" maxlength="1" placeholder="0" id="otp-code-4" onkeyup="autoFocus(this, 'otp-code-5')" required name="otp-code-4" class="div-bg form-control  text-lg text-primary otp-code ">
           </div>
-          <div class="form-group col-2">
+          <div class="form-group mx-auto col-2">
             <input type="text" maxlength="1" placeholder="0" id="otp-code-5" onkeyup="autoFocus(this, 'otp-code-6')" required name="otp-code-5" class="div-bg form-control  text-lg text-primary otp-code ">
-          </div>
-          <div class="form-group col-2">
-            <input type="text" maxlength="1" placeholder="0" id="otp-code-6"  required name="otp-code-6" class="div-bg form-control text-lg text-primary otp-code ">
-          </div>
+          </div> 
         </div>
         <div class="col-12 flex justify-content-between">  
           <p></p>
@@ -78,18 +75,20 @@
 
     <script>
       var otpInput = document.querySelectorAll('.otp-code');
-      var countDown = 1 ;
+      var countDown = 2 ;
       var counting =true; 
 
       // resend click
       function resentClick(){ 
          if (counting == false || counting == true ) { 
             counting = true;  
-            countDown= 1; 
+            countDown= 2; 
             countDowning(); 
+ 
          }
      }
 
+   
 
       // Count Down
       let resendCode = document.querySelector('.not-recieved-time');
@@ -108,7 +107,7 @@
         }
          if (countDown <= 0 && counting == true) {
             counting = false;
-            resendCode.innerHTML = ` <input type="submit" class="text-primary" style="font-weight: 600; border:0px; background:white;" onclick="resentClick()" value="resend code">`;
+            resendCode.innerHTML = ` <a href="https://creatorsdev.herokuapp.com/user/email_verification/resend_otp" class="text-primary" style="font-weight: 600; border:0px; background:white;" >resend otp</a>`;
             clearTimeout(countTiming);
         }          
 

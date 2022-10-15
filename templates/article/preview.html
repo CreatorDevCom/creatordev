@@ -237,9 +237,9 @@ table{
  
     <div class="row " >     
       <!-- Autho info -->
-        <div class="col col-md-4  col-xl-3 order-md-1 order-2 mx-md-0 mx-3 my-md-0 my-2  my-2 " > 
+        <div class="col col-md-4  col-xl-3 order-md-1 order-2 mx-md-0 mx-3 my-md-0 my-2  my-2" style="position:sticky; top: 90px; height: 100vh;" > 
           <div class="div-bg rounded-lg" style="border: 1px solid var(--text-light);" >
-            <div class=" ">
+            <div class="">
               <img src="https://creatorsdev.herokuapp.com/media/{{profile.cover_pic}}" alt="Image placeholder" class="card-img-top " style="height: 200px; background-size: cover; object-fit: cover;">
               <div class="row justify-content-center">
                 <div class="col-lg-3 order-lg-2">
@@ -325,6 +325,7 @@ table{
                 
                           <span class="comment-likes" onclick="addliketocomment('{{comment.id}}')"><i class="far fa-thumbs-up"></i> {{comment.count_comment_likes}}</span>
                
+
                           <span class="comment-replay ">  
                             <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
                             {{reply |get_val:comment.id | length}}
@@ -354,14 +355,18 @@ table{
                           {% endif %}
                           {% for rep in reply|get_val:comment.id %}
                           <div class="rounded-lg  p-2 my-2" id="{{rep.id}}" style="border: 1px solid var(--text-light);">
-                            <span class="comment-author-name mx-1">{{rep.author.first_name}} {{rep.author.last_name}} <span
+                            <span class="comment-author-name mx-1">
+                               {% if rep.author.first_name %}
+                               {{rep.author.first_name}} {{rep.author.last_name}}
+                               {% else %}
+                               {{rep.author.username}} 
+                               {% endif %}
+                            <span
                                 class="reply-date"> {{rep.commented_at | naturaltime}}</span></span>
                             <div class="flex flex-col ">
-                              <span class="px-2 mx-1 text-gray  ">{{rep.text}}</span>
-                              {% if article.author.first_name %}
-                              <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="far fa-thumbs-up"></i> {{rep.count_comment_likes}} </span>
-                              {% else %}
-                              {% endif %}
+                              <span class="px-2 mx-1 text-gray  ">{{rep.text}}</span> 
+                              <span class="reply-likes m-1 mx-3 text-primary" onclick="addliketocomment('{{rep.id}}')"><i class="far fa-thumbs-up"></i> {{rep.count_comment_likes}}</span>
+                           
           
                             </div>
                           </div>

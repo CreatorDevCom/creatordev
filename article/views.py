@@ -173,7 +173,7 @@ def likeComment(request,commentId):
         messages.success(request,"Your have already liked !!")
       else:
         comment.likes.add(request.user) 
-        Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="#")
+        Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="/user/inbox#")
         messages.success(request,"You like a comment")  
     except : 
       print("You can't liked a comment") 

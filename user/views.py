@@ -65,26 +65,24 @@ def userRegister(request):
         if User.objects.filter(username = username).exists():    
           messages.error(request,"THis is username is not avaliable")
   
-        if User.objects.filter(email = email).exists():    
-          messages.error(request,"THis is email is already taken") 
-        # try:
-        user = User.objects.create(username = username , password = password  , email = email , first_name = first_name , last_name = last_name)
-        user.password = make_password(password)
-        user.otp = generateOtp(6)
-        user.save()  
-        try:
-          auth_user = authenticate(request , email = email , password = password)
-          if auth_user is not None:
-            login(request ,auth_user)  
-            return redirect('/')
-        except :        
-            messages.error(request,"Does't logined ,please try manually")
-            print("Does't logined ,please try manually")
-            return redirect('/user/login')
-        # except :      
-        #     messages.error(request,"Error while creating account , Please try again") 
-        #     print("Does't registerd")
-            
+        if User.objects.filter(email = email).exclude():     
+          try:
+            user = User.objects.create(username = username , password = password  , email = email , first_name = first_name , last_name = last_name)
+            user.password = make_password(password) 
+            user.save()  
+            try:
+              auth_user = authenticate(request , email = email , password = password)
+              if auth_user is not None:
+                login(request ,auth_user)  
+                return redirect('/')
+            except :        
+                messages.error(request,"Does't logined ,please try manually")
+                print("Does't logined ,please try manually")
+                return redirect('/user/login') 
+          except :      
+              messages.error(request,"Error while creating account , Please try again")  
+        else:
+          messages.error(request,"This email is already taken")   
       else:  
         messages.error(request,"Password is less than 8 character")
         
@@ -226,7 +224,7 @@ def profileEdit(request):
           # Bio
         if bio:
           profile.update(bio = bio) 
-          
+
         profile.save()
         messages.success(request  ,"Profile has been updated")
         return redirect("/user/editprofile/edit")
@@ -254,28 +252,27 @@ def veifyEmail(request):
       username = request.user.username
       email =  request.user.email 
       user = User.objects.filter(username = username) 
-      saved_opt = ''
+      otp = ''
 
       # otp code saved in user
       for i in user: 
-        saved_opt = str(i.otp)  
+        otp = str(i.otp)  
       try:
-        send_otp_code( username,email,saved_opt ) 
+        send_otp_code( username,email,otp )  
       except ConnectionError as e:
         print(e) 
   
+      print(otp)
       if request.method == "POST": 
           code1 = request.POST['otp-code-1']
           code2 = request.POST['otp-code-2']
           code3 = request.POST['otp-code-3']
           code4 = request.POST['otp-code-4']
-          code5 = request.POST['otp-code-5']
-          code6 = request.POST['otp-code-6']
+          code5 = request.POST['otp-code-5'] 
           
           # Otp code from user input
-          otpCode = str(code1+""+code2+""+code3+""+code4+""+code5+""+code6) 
- 
-          if saved_opt == otpCode:
+          otpCode = str(code1+""+code2+""+code3+""+code4+""+code5) 
+          if otp == otpCode:
             user.update(is_em_verified = True)
             messages.success(request,"Your email has been verified")
             return redirect('/')
@@ -288,4 +285,18 @@ def veifyEmail(request):
   return redirect("/")
 
  
- 
+def re_send_otp(request):
+  if request.user.is_authenticated:
+    if not request.user.is_em_verified:
+      user = User.objects.get(username = request.user.username)
+      user.ganarate_otp()
+      try:
+        send_otp_code( user.username,user.email,user.otp )  
+        messages.success(request,"Otp re-sent success ")
+        return redirect('/user/email_verification/resend_otp')
+      except ConnectionError as e:
+        print(e) 
+    else:
+      return redirect('/404')
+  else:
+    return redirect('/404')

@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.contrib import messages
- 
+
 from article.lib import isFollowing 
 from forum.models import Forum   , Comment 
 from user.models import Action, UserProfile
@@ -119,7 +119,7 @@ def likeComment(request,id):
         messages.success(request,f"Aleady Like a comment {comment.id}") 
       else:
         comment.likes.add(request.user) 
-        Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="/#")
+        Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="/user/inbox/#")
         messages.success(request,"You like a comment")  
     except : 
       print("You can't liked a comment") 
@@ -166,7 +166,6 @@ def likeForum(request,id):
         pass
       else:
         Action.objects.create(by = request.user , to = forum.author ,action = f"Like your forum ' {forum.title[0:25]} ' " , redirect_link=f"/forum/preview/{forum.id}")
- 
 
     try:
       # Add Like of request user

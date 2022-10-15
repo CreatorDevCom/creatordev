@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 # from article.models import Article 
 from user.manager import UserManager
+from api.lib import generateOtp
 
 # Custom User
 class CustomUser(AbstractUser): 
@@ -16,12 +17,17 @@ class CustomUser(AbstractUser):
   last_login_time = models.DateTimeField(null=True , blank=True)
   last_logout_time = models.DateTimeField(null=True , blank=True)
   otp = models.IntegerField(unique = True,null = True , blank = True)
-  objects = UserManager()
+  objects = UserManager() 
 
   USERNAME_FIELD = 'email'
 
   REQUIRED_FIELDS = ['username' ]
 
+  def ganarate_otp(self):
+    otp = generateOtp(5)
+    self.otp = otp
+    self.save()
+    return self.otp
 
 # User Profile
 class UserProfile(models.Model):  
