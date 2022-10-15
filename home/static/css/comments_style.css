@@ -1,0 +1,167 @@
+/*--------------------- comment ---------------------- */
+
+.comments-div {
+  width: 100%;
+  margin-top: 2rem;
+  max-width: 30rem;
+}
+.w-full {
+  width: 100%;
+}
+.user-comment-box {
+  width: 100%;
+  display: flex;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.user-comment-box .comment-author-profile-pic {
+  width: 45px;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 45px;
+}
+.user-comment-box .comment-author-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-gray);
+  margin: 0 1rem;
+}
+.user-comment-box .comment-author-name .comment-commented-at {
+  font-size: 14px;
+  color: var(--text-extra-gray);
+  font-weight: 400;
+}
+.comment-text-content {
+  padding: 6px;
+  font-size: 16px;
+  margin: 0 1rem;
+  color: var(--text-extra-gray);
+  border-radius: 10px;
+  background: var(--shadow);
+}
+.likes-replay-div {
+  margin: 0 2rem;
+  font-size: 13px;
+  padding: 0.2rem 0;
+  color: var(--text-extra-gray);
+}
+.likes-replay-div span {
+  margin: 0 0.2rem;
+  font-size: 14px;
+  font-weight: 400;
+}
+.comment-likes{
+  cursor: pointer;
+}
+.comment-input-div {
+  width: 100%;
+  padding: 1rem;
+}
+.comment-input-div input {
+  background: var(--bg-div);
+  color: var(--text-extra-gray);
+}
+.comment-input-div h2 {
+  color: var(--text-gray);
+  font-weight: 500;
+}
+.comment-input-div .comment-text {
+  margin: 0.5rem 0.2rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--text-gray);
+  font-size: 15px;
+  width: 100%;
+}
+.comment-btn {
+  position: relative;
+  padding: 0.6rem;
+  background: var(--primary);
+  color: white;
+  font-size: 15px;
+  float: right;
+  border-radius: 10px;
+  border: 0px;
+}
+.replay_btn {
+  cursor: pointer;
+  background: vaR(--bg-div);
+  border: none;
+  color: var(--text-extra-gray);
+}
+.replay-input-box {
+  width: 90%;
+  margin: 0 auto;
+
+  display: none;
+  border-radius: 6px;
+  padding: 0.4rem;
+  border: 1px solid var(--text-gray);
+}
+.replay-input-box .replay-input-field {
+  text-indent: 5px;
+  width: 90%;
+  border: none;
+  background: var(--bg-div);
+  border-radius: 8px;
+  color: var(--text-extra-gray);
+}
+.replay-sent-btn {
+  padding: 0.2rem 0.3rem;
+  background: var(--primary);
+  border-radius: 4px;
+  color: white;
+  border: none;
+}
+.active-replay-box {
+  display: flex;
+  border-left: 1px solid var(--text-extra-gray);
+}
+.replay-display-box {
+  width: 90%;
+  height: 25px;
+  overflow: hidden;
+}
+.reply-username {
+  font-size: 14px;
+  color: rgb(139, 139, 139);
+  font-weight: 500;
+}
+.reply-date {
+  font-size: 13px;
+  font-weight: 400;
+}
+.underline {
+  text-decoration: underline;
+}
+.reply-text {
+  font-size: 14px;
+  background: var(--bg-gray);
+  padding: 0.4rem;
+  border-radius: 5px;
+  color: var(--text-extra-gray);
+}
+.replay-box {
+  margin: 0.4rem 0;
+  flex-wrap: wrap;
+}
+.reply-likes {
+  color: var(--text-extra-gray);
+  font-size: 13px;
+  cursor: pointer;
+}
+.activeDislpayReplies {
+  height: auto;
+}
+
+@media (max-width:768px) {
+  .user-comment-box {
+    padding: 0.2rem 0;
+  }
+  .comment-input-div .comment-text {
+    width: 100%;
+  }
+ .comment-input-div {
+    padding: 0.2rem;
+  }
+}

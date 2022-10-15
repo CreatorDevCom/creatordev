@@ -71,8 +71,7 @@ def userRegister(request):
         user = User.objects.create(username = username , password = password  , email = email , first_name = first_name , last_name = last_name)
         user.password = make_password(password)
         user.otp = generateOtp(6)
-        user.save() 
-        print("User registered success") 
+        user.save()  
         try:
           auth_user = authenticate(request , email = email , password = password)
           if auth_user is not None:
@@ -206,6 +205,7 @@ def profileEdit(request):
         except :
           pass
 
+        username = request.POST['username']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         bio = request.POST['bio']
@@ -219,10 +219,15 @@ def profileEdit(request):
         if last_name:
           user.update(last_name = last_name) 
 
+          # UserName
+        if username:
+          user.update(username = username) 
+
           # Bio
         if bio:
           profile.update(bio = bio) 
           
+        profile.save()
         messages.success(request  ,"Profile has been updated")
         return redirect("/user/editprofile/edit")
       except :
@@ -244,21 +249,20 @@ def profileEdit(request):
 def veifyEmail(request):
   if request.user.is_authenticated:
     if not request.user.is_em_verified:
+
       # send an otp code
       username = request.user.username
       email =  request.user.email 
       user = User.objects.filter(username = username) 
       saved_opt = ''
+
       # otp code saved in user
       for i in user: 
-        saved_opt = str(i.otp) 
-
+        saved_opt = str(i.otp)  
       try:
-        send_otp_code( username,email,saved_opt )
-        print('email is sended')
+        send_otp_code( username,email,saved_opt ) 
       except ConnectionError as e:
-        print('hi')
-
+        print(e) 
   
       if request.method == "POST": 
           code1 = request.POST['otp-code-1']
@@ -270,12 +274,11 @@ def veifyEmail(request):
           
           # Otp code from user input
           otpCode = str(code1+""+code2+""+code3+""+code4+""+code5+""+code6) 
-
-
-      
+ 
           if saved_opt == otpCode:
             user.update(is_em_verified = True)
             messages.success(request,"Your email has been verified")
+            return redirect('/')
           else:
             messages.error(request,"Otp not matched")
 

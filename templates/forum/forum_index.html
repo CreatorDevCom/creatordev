@@ -31,13 +31,13 @@
 </style>
 <div class="container main-content ">
   <h1 class="title h1">Forums</h1>
-  <div class="row  px-3">
+  <div class="row  px-1 md-px-3">
    {% for forum in forums %}
-    <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden border border-gray">
+    <div class="col-lg-5 col-12 w-100 div-bg  my-md-4 my-2 mx-auto overflow-hidden rounded-lg" style="border: 1px solid var(--text-light);">
      <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{forum.id}}">{{forum.title}}</a></h2>
      <div class="mx-1 mt--2 max-h-70 body">{{forum.body | safe}}</div>  
      <!-- Author Info -->
-     <div class="row  px-3 p-1 border-top align-items-center shadow-top ">
+     <div class="row  px-3 p-1  align-items-center shadow-top " style="border-top: 1px solid var(--text-light);">
       <span class="text-sm ">By<b class="h4 text-gray">
       {% if forum.author.first_name %}
         {{forum.author.first_name}} {{forum.author.last_name}}
@@ -45,7 +45,7 @@
         {{forum.author.username}} 
       {% endif %}
       </b> </span>
-      <span class="text-sm px-2">posted. <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
+      <span class="text-sm px-2"><i class="far fa-clock"></i> <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
       <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
     
     </div>

@@ -50,6 +50,7 @@
   let tableOfContent = document.getElementById('tableofcontent');
   h1.forEach((item, ind) => {
     h1.item(ind).setAttribute("id", `${item.innerHTML}`)
+    item.innerText.replace("#","")
     tableOfContent.innerHTML += ` 
     <a href="#${item.innerHTML}"><span  class="h1-contents">${ind + 1}. ${item.innerHTML}</span></a>
     `
@@ -68,10 +69,9 @@
     try {
       await fetch(`https://creatorsdev.herokuapp.com/user/addfollower/${username}`)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
 
-
-// Share To social Media
+ 

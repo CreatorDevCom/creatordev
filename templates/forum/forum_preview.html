@@ -87,19 +87,20 @@
             
               </div>
               <div class="row flex justify-content-between w-100">  
-                  <span class="text-sm mx-3 flex "> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span>
-                  <!-- Forum info -->
-                  <div class="mx-1">
-                    <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
-                    <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-comment"></i> {{comments|length}}</span>
-                  </div>
-                
+                <span class="text-sm mx-3 flex "> <span class=" text-gray text-sm"><i class="far fa-clock"></i> {{forum.posted_at.date }}</span>
+                <!-- Forum info -->
+                <div class="mx-1">
+                  <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-thumbs-up"></i> {{forum.count_forum_likes}}</span>
+                  <span class="text-gray text-md  px-md-2 px-1"><i class="far fa-comment"></i> {{comments|length}}</span>
+                </div>
+              
                 </span>
                 {% if request.user.is_authenticated %}
                   {% if forum.author == request.user %}
                   <div class="mx-5 "> <a href="/forum/edit/{{forum.id}}" class="font-sm"><i class="fas fa-pen"></i>edit</a></div>
                   {% endif %}
-                {% endif %}</div>
+                {% endif %}
+              </div>
             </div>
           </div>
       </div>
@@ -114,7 +115,7 @@
       <p class="mx-2">Click to like </p>
       </div>
     
-      <div class="pb-5 px-3">
+      <div class="pb-5 px-0 px-md-3">
         <!-- Comments -->
         <div class="comments-div mx-md-2  ">
           <h2 class="text-gray">Comments <i class="far fa-comment"></i> ({{comments | length}})</h2>
@@ -128,7 +129,11 @@
               <div class="p-2 mx-3 text-gray">{{comment.text}}</div>
               <div class="likes-replay-div flex text-primary pb-2" style="border-bottom: 1px solid var(--text-light);">
                 
-                <span class="comment-replay ">  
+                <span class="comment-replay text-gray ">  
+                  <span>
+                    <i class="far fa-thumbs-up mx-1" onclick="addliketocomment('{{comment.id}}')"></i>
+                    <span >{{comment.count_comment_likes}}</span>
+                  </span> 
                   <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
                   {{reply |get_val:comment.id | length}}
                 </span>
@@ -267,17 +272,14 @@
   }
 
   const addliketocomment = async(commentId) =>{
-  
-
- 
-
-  try {
-      await fetch(`https://creatorsdev.herokuapp.com/forum/likecomment/${commentId}`).then(res=>{
-        console.log(res);
-      })
-  } catch (error) {
-    console.log(error);
-  }
+   
+    try {
+        await fetch(`https://creatorsdev.herokuapp.com/forum/likecomment/${commentId}`).then(res=>{
+          console.log(res);
+        })
+    } catch (error) {
+      console.log(error);
+    }
 }
 // Reply box active
 const replayActive = (id) => {

@@ -20,7 +20,7 @@ def send_otp_code(username,email,otp):
   try:
     send_mail( 
       subject = "Verify email address",
-      message = f"Hi {username} ! \nYour email varification code is \n <h1> {otp}</h1> ",
+      message = f"Hi {username} ! \nYour email varification code is \n   \n{otp} \n Please enter the virification code and You will redirect to home page of Creator Dev   ",
       from_email =  "creatordevcommunity@gmail.com",
       recipient_list = [email],
       fail_silently=False,

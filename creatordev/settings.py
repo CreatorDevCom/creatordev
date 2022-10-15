@@ -13,7 +13,7 @@ ALLOWED_HOSTS = ['creatorsdev.herokuapp.com','*']
 # Application definition
 
 INSTALLED_APPS = [
-    # added
+    # added 
     'ckeditor',    
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,7 +54,9 @@ ROOT_URLCONF = 'creatordev.urls'
 # Custom user manually added
 AUTH_USER_MODEL = 'user.CustomUser'
 
-
+# Google drive configurations
+ 
+ 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
