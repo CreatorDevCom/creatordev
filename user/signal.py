@@ -13,11 +13,11 @@ def create_profile(sender , instance , created , **kwargs):
   if created:
 
     # Create profile
-    userProfile = UserProfile.objects.create(author = instance)
+    userProfile = UserProfile.objects.create(author = instance ,  stars =0)
     userProfile.save()
 
     # generate otp 
-    user = User.objects.get(username = instance.username, stars =0)
+    user = User.objects.get(username = instance.username)
     user.ganarate_otp()
 
     # Send congrates email
