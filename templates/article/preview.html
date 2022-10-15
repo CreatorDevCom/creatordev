@@ -168,6 +168,7 @@ table{
             <span class="mx-md-2 mx-1 text-sm text-gray "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
             <span class="mx-md-2 mx-1 text-sm text-gray "><i class="far fa-comment"></i> {{comments | length }}</span>
             <span class="mx-md-2 mx-1 text-sm text-gray "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
+            <span class="font-sm mx-2 sec-head-info-date"><i class="ni ni-book-bookmark mx-1 "></i>{{article.body|readtime}}</span> 
           </div>
         </div>
       </div>
@@ -213,9 +214,13 @@ table{
               <span class="info mx-2 top-div-likes-comments"><i class="far fa-thumbs-up mx-1"></i>{{article.count_article_likes}}
                  <span class="info mx-2"><i class="far fa-comment mx-1 "></i>{{comments |length }} </span> 
                  <span class="info "> <i class="fas fa-eye"></i> {{article.count_article_views}}</span> 
+                 <span class="font-sm mx-2 sec-head-info-date"><i class="ni ni-book-bookmark mx-1"></i>{{article.body|readtime}}</span> 
               </span>
             </div>
           </div>
+
+
+
           <!-- Tags body -->
         <div class="row align-items-center mx-4">
           <i class="fas fa-tag"></i>

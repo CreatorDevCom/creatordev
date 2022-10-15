@@ -17,7 +17,7 @@ def create_profile(sender , instance , created , **kwargs):
     userProfile.save()
 
     # generate otp 
-    user = User.objects.get(username = instance.username)
+    user = User.objects.get(username = instance.username, stars =0)
     user.ganarate_otp()
 
     # Send congrates email
