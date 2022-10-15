@@ -162,13 +162,15 @@ table{
               {% endif %}
             {% endif %}
           </div>
-          <div class="flex   align-items-center  " style="position: relative; top:1px; ">
-            <span class="font-sm text-gray sec-head-info-date ml-1 mx-1  mt-1"><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
+          <div class="flex   align-items-center  " style="position: relative; ">
+            <span class="font-sm text-gray sec-head-info-date ml-2   mt-1"><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-comment"></i> {{comments | length }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
-            <span class="mx-md-2 font-sm mx-1 sec-head-info-date"><i class="ni ni-book-bookmark mx-1 "></i>{{article.body|readtime}}</span> 
           </div>
+         <div class="flex align-items-center">
+          <span class="font-sm mx-2 sec-head-info-date"><i class="ni ni-book-bookmark mx-1 "></i>{{article.body|readtime}}</span> 
+         </div>
         </div>
       </div>
     </div>
