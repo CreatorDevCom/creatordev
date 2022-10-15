@@ -145,8 +145,8 @@ table{
       <div class="sec-header-author-info">
         <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" class="sec-header-user-pic" alt="asstes-loading">
         <div class="sec-header-text-info">
-          <div class="flex items-center">
-            <span class="font-sm  ml-2 ">by <span class="text-gray font-weight-500" >
+          <div class="flex align-items-center">
+            <span class="font-sm  ml-2 " style="position: relative; top:1px;">by <span class="text-gray font-weight-500" >
               {% if article.author.first_name %}
                 {{article.author.first_name}} {{article.author.last_name}}
               {% else %}
@@ -163,7 +163,7 @@ table{
             {% endif %}
           </div>
           <div class="flex   align-items-center  " style="position: relative; ">
-            <span class="font-sm text-gray sec-head-info-date ml-2   mt-1"><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
+            <span class="font-sm text-gray sec-head-info-date mx-2 "><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-comment"></i> {{comments | length }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
