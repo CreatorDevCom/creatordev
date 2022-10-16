@@ -139,7 +139,7 @@ table{
 
 </style>
 <div class="main-content" id="main-content" style="width: 100wh ; overflow-x: hidden;">
-  <!-- Secound Head of an article -->
+  <!-- Second Head of an article -->
   <div class="sec-header  shadow " id="sec-header">
     <div class="sec-header-content">
       <div class="sec-header-author-info">
@@ -156,21 +156,20 @@ table{
             </span>
             {% if request.user.is_authenticated and article.author != request.user %} 
               {% if isFollowing == True  %}
-              <span class="sec-header-follow-btn" >.Following</span>
+              <span class="sec-header-follow-btn mx-1" >.Following</span>
               {% else %}
-              <button class="sec-header-follow-btn" onclick="addFollower('{{article.author.username}}')">Follow</button>
+              <button class="sec-header-follow-btn mx-1" onclick="addFollower('{{article.author.username}}')">Follow</button>
               {% endif %}
             {% endif %}
           </div>
-          <div class="flex   align-items-center  " style="position: relative; ">
-            <span class="font-sm text-gray sec-head-info-date mx-2 "><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
+          <div class="flex  flex-wrap align-items-center  " style="position: relative; ">
+            <span class="font-sm text-gray sec-head-info-date mx-2 ml-3 "><i class="far fa-clock"></i> {{ article.posted_at | naturaltime }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-thumbs-up"></i> {{article.count_article_likes}}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="far fa-comment"></i> {{comments | length }}</span>
             <span class="mx-md-2 mx-1 font-sm text-gray "><i class="fas fa-eye"></i> {{article.count_article_views }}</span>
-          </div>
-         <div class="flex align-items-center">
-          <span class="font-sm mx-2 sec-head-info-date"><i class="ni ni-book-bookmark mx-1 "></i>{{article.body|readtime}}</span> 
-         </div>
+            <span class="font-sm mx-2 sec-head-info-date"><i class="ni ni-book-bookmark mx-1 font-sm"></i>{{article.body|readtime}}</span> 
+          </div> 
+ 
         </div>
       </div>
     </div>
@@ -180,15 +179,14 @@ table{
 
   {% if article %}
   <div class="top-content " id="top-content">
-    <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="bg-image" id="bg-img">
     <div class="top-content-div ">
-      <div class="showcase-article">
-        <div class="left-container">
+      <div class="showcase-article text-center">
+        <div class="left-container col-12 flex  flex-col justify-content-center align-items-center">
           <h2 class="main-title-article">{{article.title}}</h2>
           <div class="flex  authorallinfo items-center">
             <img src="https://creatorsdev.herokuapp.com/media/{{profile.profile_pic}}" alt="asstes-loading" class="profielPic">
-            <div class="author_info mx-2">
-              <span class="info mx-2 ">by
+            <div class="author_info mx-2 my-2">
+              <span class="info  ">by
                 <a href="/user/profile/{{article.author.username}}" class="username mx-1">
                   {% if article.author.first_name %}
                    {{article.author.first_name}} {{article.author.last_name}}
@@ -205,7 +203,7 @@ table{
                 {% endif %}
                 </span>
              <div class="row">
-              <span class="info ml-4 text-sm ">posted <span class="date mx-1 ">{{article.posted_at.date }}</span></span>
+              <span class="info ml-4 text-sm  ">posted <span class="date mx-1 ">{{article.posted_at.date }}</span></span>
               {% if request.user.is_authenticated %}
                 {% if article.author == request.user %}
                 <div class="mx-md-5 mx-2"> <a href="/article/edit/{{article.id}}" class="font-sm text-white" ><i class="fas fa-pen"></i>edit</a></div>
@@ -228,9 +226,7 @@ table{
           <div class="flex  tags-div" id="tags"></div>
         </div>
         </div>
-        <div class="right-container ">
-          <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="mainImage">
-        </div>
+    
       </div>
     </div>
   </div>
@@ -463,6 +459,7 @@ table{
 
 
 <script src="/static/js/article_preview.js"></script>
+<script src="{% static 'js/article_preview.js' %}"></script>
 <script src="/static/js/socialshare.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
@@ -478,13 +475,9 @@ table{
 
   async function handleLikeArticle() {
     try {
-      await fetch('https://creatorsdev.herokuapp.com/article/likearticle/{{article.id}}').then(res=>{
-        console.log(res);
-      }).then(data=>{
-        console.log(data);
-      }); 
-    } catch (error) {
-      console.log(error);
+      await fetch('https://creatorsdev.herokuapp.com/article/likearticle/{{article.id}}'); 
+    } catch (error) { 
+
     }
   } 
 

@@ -18,11 +18,8 @@
       {% if articles %}
         {% for article in articles %}
           <div class=" shadow div-bg col-lg-3 p-0 col-12 my-md-0 my-2 mx-2 rounded-lg overflow-hidden">
-            <div class="main-image-div">
-              <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image">
-            </div>
-            <div class="article-info-div">
-              <h2 class="article-title">{{article.title}}</h2>
+            <div class="article-info-div" style="max-height: 200px;overflow: hidden; ">
+              <h2 class=" display-4" style="color:var(--text-gray)">{{article.title}}</h2>
               <div class="flex author-info">
                 <span class="font-sm mx-1 text-gray">
                   By

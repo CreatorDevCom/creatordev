@@ -27,15 +27,7 @@
           <div class="input-box" >
             <label for="article-body" class="input-label">Article Content / Body</label>
             <textarea required name="article-body" id="editor" placeholder="Write your Article content" class="input-field" >{{old_article.body}}</textarea>
-          </div> 
-          <div class="input-box">
-            <label for="article-body" class="input-label">Main image / Thumbnail</label>
-            <span class="text-red">Main Image are not editable , your can't change the image right now</span>
-            <label class="main-image-label" style="overflow: hidden; height:350px; position: relative;" >
-              <img src="https://creatorsdev.herokuapp.com/media{{old_article.mainImage}}" alt="ss" style="position: absolute;  ">
-           
-            </label>
-          </div>
+          </div>  
         
         <div class="input-box"> 
           <button type="submit"  class="input-field button">Submit</button>

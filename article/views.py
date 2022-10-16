@@ -91,16 +91,15 @@ def createNew(request):
 
       title = request.POST['title']
       tags = request.POST['tags']
-      articleBody = request.POST['article-body']
-      mainImage = request.FILES['main-image']
+      articleBody = request.POST['article-body'] 
 
       userProfile = UserProfile.objects.get(author = request.user)  
 
       following = userProfile.following.all() 
       
-      if title and mainImage and articleBody:
+      if title  and articleBody:
         # try:
-          article = Article.objects.create( title = title , author = request.user ,tags = tags , body = articleBody , mainImage = mainImage )
+          article = Article.objects.create( title = title , author = request.user ,tags = tags , body = articleBody , mainImage = "" )
           for user_b in following:
             Action.objects.create(by = request.user , to = user_b ,action = f"Create New Article , you are following him" , redirect_link=f"/article/{article.id}")
 
@@ -124,21 +123,16 @@ def ckEditor(request):
 
  
 def likeArticle(request,article_id):
-  if request.user.is_authenticated: 
-    try:
-      article = Article.objects.get(id = article_id)
-      already_liked = article.likes.filter()
-      if request.user in already_liked:
-        print("Already Liked")
-      else:
-        article.likes.add(request.user)
-        Action.objects.create(by = request.user , to = article.author ,action = f"Like your post ' {article.title[0:25]} ' " , redirect_link=f"/article/{article.id}")
-        messages.success(request,"You like this article")
-        return redirect(f'/article/{article_id}')
-    except : 
-      messages.success(request,"Can't liked article")
-      print("Error occured")
-      return redirect(f'/article/{article_id}')
+  if request.user.is_authenticated:  
+    article = Article.objects.get(id = article_id)
+    already_liked = article.likes.filter()
+    if request.user in already_liked:
+      print("Already Liked")
+    else:
+      article.likes.add(request.user)
+      Action.objects.create(by = request.user , to = article.author ,action = f"Like your post ' {article.title[0:25]} ' " , redirect_link=f"/article/{article.id}")
+      messages.success(request,"You like this article")
+      return redirect(f'/article/{article_id}') 
   else:
     messages.error(request,  "please login first")
  
@@ -165,18 +159,17 @@ def postAComment(request,id):
 # Like a Comment
 def likeComment(request,commentId):
   if request.user.is_authenticated: 
-    try:
-      comment = Comment.objects.get(id = commentId)
-      already_like = comment.likes.filter()
+    
+    comment = Comment.objects.get(id = commentId)
+    already_like = comment.likes.filter()
 
-      if request.user in already_like:
-        messages.success(request,"Your have already liked !!")
-      else:
-        comment.likes.add(request.user) 
-        Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="/user/inbox#")
-        messages.success(request,"You like a comment")  
-    except : 
-      print("You can't liked a comment") 
+    if request.user in already_like:
+      messages.success(request,"Your have already liked !!")
+    else:
+      comment.likes.add(request.user) 
+      Action.objects.create(by = request.user , to = comment.author ,action = f"Like your comment ' {comment.text[0:25]} ' " , redirect_link="/user/inbox#")
+      messages.success(request,"You like a comment")  
+  
   else:
     messages.error(request,  "please login first")
  

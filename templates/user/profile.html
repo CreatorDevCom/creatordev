@@ -76,11 +76,8 @@
          {% if articles %}
          {% for article in articles %}
          <div class=" shadow div-bg col-lg-3 p-0 col-md-5 mx-auto col-11 my-md-0 my-2 rounded-lg ">
-          <div class="main-image-div "   style="overflow: hidden ;">
-            <img src="https://creatorsdev.herokuapp.com/media/{{article.mainImage}}" alt="asstes-loading" class="main-image" style="height: 150px;  object-fit: cover;">
-          </div>
           <div class="article-info-div">
-            <h2 class="article-title " style="font-size: 15px; width: 100%;overflow: hidden;">{{article.title}}</h2>
+            <h2 class="article-title " style="font-size: 24px; width: 100%;overflow: hidden;">{{article.title}}</h2>
             <div class="flex author-info justify-content-between align-items-center">
               <span class="font-sm mx-1 text-gray">  
                 <span class="posted_at mx-1"><i class="ni ni-like-2"></i> {{article.count_article_likes}}</span>

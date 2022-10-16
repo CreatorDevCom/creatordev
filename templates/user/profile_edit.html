@@ -68,39 +68,7 @@
   <div class="col mx-lg-10 my-2">
   <form action="/user/editprofile/edit" method="post"  enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- User Profile Pics -->
-    <div class="col"> 
-      {% for i in profile %}
-       <div class="cover_pic border-1 ">
-        {% if i.cover_pic %}
-         <img src="https://creatorsdev.herokuapp.com/media/{{i.cover_pic}}" alt="cover pic">
-        {% else %}
-          <img src="/static/assets/img/icons/user_profile_pic_default.png" alt="cover pic">
-        {% endif %} 
-        <label  class="pic_select_btn" > 
-          <input type="file" name="cover_pic"  onchange="cover_change()"  id="cover_pic" class="d-none">
-          <div  class=" bg-white p-2 shadow rounded-lg border-0 text-primary " id="is_selected">
-            <i class="fas fa-edit text-lg"></i>
-            <span class="text-sm">Change </span>
-          </div>
-        </label>
-       </div>
-       <div class="profile_pic mt--6 rounded-circle ">
-        {% if i.profile_pic %}
-          <img src="https://creatorsdev.herokuapp.com/media/{{i.profile_pic}}" class="shadow" alt="cover pic">
-        {% else %}
-         <img src="/static/assets/img/icons/user_profile_pic_default.png" class="shadow" alt="cover pic">
-        {% endif %} 
-        <label  class="pic_select_btn profile_pic_btn" > 
-          <input type="file" name="pro_pic"  onchange="profile_change()"    id="pro_pic" class="d-none">
-          <div  class=" bg-white p-2 shadow rounded-lg border-0 text-primary " id="is_selected_proifle">
-            <i class="fas fa-edit text-lg"></i>
-            <span class="text-sm">Change </span>
-          </div>
-        </label>
-       </div> 
-      {% endfor %}
-    </div>
+    <!-- User Profile Pics --> 
  
       <div class=" my-2 mt-4">
         <div class=" p-2 border-bottom div-bg">

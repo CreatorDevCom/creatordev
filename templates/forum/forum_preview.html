@@ -130,8 +130,8 @@
               <div class="likes-replay-div flex text-primary pb-2" style="border-bottom: 1px solid var(--text-light);">
                 
                 <span class="comment-replay text-gray ">  
-                  <span>
-                    <i class="far fa-thumbs-up mx-1" onclick="addliketocomment('{{comment.id}}')"></i>
+                  <span class="text-primary">
+                    <i class="far fa-thumbs-up " onclick="addliketocomment('{{comment.id}}')"></i>
                     <span >{{comment.count_comment_likes}}</span>
                   </span> 
                   <button class='replay_btn' onclick="replayActive('{{comment.id}}')"><i class="fas fa-reply text-primary "></i> </button>
@@ -309,21 +309,21 @@ const addFollower = async (username) => {
 }
 
 
- // Code Copy btn
- if (document.querySelector('.forum-body pre')){
-    let codeSnippets = document.querySelector('.forum-body pre code').innerText;
-    console.log(codeSnippets);
-    document.querySelector('.forum-body pre').innerHTML +=`
-      <button class="btn btn-sm btn-primary  " onClick="copytoclipboard()" style="position:absolute; top:1rem; right:1rem;">Copy</button>
-    `; 
+//  // Code Copy btn
+//  if (document.querySelector('.forum-body pre')){
+//     let codeSnippets = document.querySelector('.forum-body pre code').innerText;
+//     console.log(codeSnippets);
+//     document.querySelector('.forum-body pre').innerHTML +=`
+//       <button class="btn btn-sm btn-primary  " onClick="copytoclipboard()" style="position:absolute; top:1rem; right:1rem;">Copy</button>
+//     `; 
 
-    // Call Copy function
-    function copytoclipboard() {
-      navigator.clipboard.writeText(codeSnippets)
+//     // Call Copy function
+//     function copytoclipboard() {
+//       navigator.clipboard.writeText(codeSnippets)
 
-    }
+//     }
 
-  }
+//   }
 
 </script>
 {% endblock scripts %}

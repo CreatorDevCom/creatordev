@@ -37,16 +37,16 @@
      <h2 class="h1 mt-1 text-gray"><a href="/forum/preview/{{forum.id}}">{{forum.title}}</a></h2>
      <div class="mx-1 mt--2 max-h-70 body">{{forum.body | safe}}</div>  
      <!-- Author Info -->
-     <div class="row  px-3 p-1  align-items-center shadow-top " style="border-top: 1px solid var(--text-light);">
-      <span class="text-sm ">By<b class="h4 text-gray">
+     <div class="row  px-3 py-2  align-items-center shadow-top " style="border-top: 1px solid var(--text-light);">
+      <span class="">By<b class="h4 text-gray">
       {% if forum.author.first_name %}
         {{forum.author.first_name}} {{forum.author.last_name}}
       {% else %}
         {{forum.author.username}} 
       {% endif %}
       </b> </span>
-      <span class="text-sm px-2"><i class="far fa-clock"></i> <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
-      <span class="text-sm px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
+      <span class=" px-2"><i class="far fa-clock"></i> <span class="h5 text-gray">{{ forum.posted_at | naturaltime}}</span></span>
+      <span class=" px-2"><i class="ni ni-like-2"></i> {{forum.count_forum_likes}}</span>
     
     </div>
     </div>  

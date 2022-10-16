@@ -165,15 +165,14 @@ def likeForum(request,id):
       if request.user in already_like:
         pass
       else:
-        Action.objects.create(by = request.user , to = forum.author ,action = f"Like your forum ' {forum.title[0:25]} ' " , redirect_link=f"/forum/preview/{forum.id}")
-
-    try:
-      # Add Like of request user
-        forum.likes.add(request.user)
-        messages.success(request,"You Liked this forum") 
-        return redirect(f"/forum/preview/{forum.id}")
-    except : 
-        messages.error(request,"You Does't Like this forum") 
+        try:
+          # Add Like of request user
+            forum.likes.add(request.user)
+            messages.success(request,"You Liked this forum") 
+            Action.objects.create(by = request.user , to = forum.author ,action = f"Like your forum ' {forum.title[0:25]} ' " , redirect_link=f"/forum/preview/{forum.id}")
+            return redirect(f"/forum/preview/{forum.id}")
+        except : 
+            messages.error(request,"You Does't Like this forum") 
   else:
     messages.error(request,"To like forum you will need for Login first")
 

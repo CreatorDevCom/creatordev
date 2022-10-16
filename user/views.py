@@ -1,3 +1,4 @@
+import os
 from user.models import UserProfile
 from time import time 
 from django.contrib.auth.hashers import make_password 
@@ -129,25 +130,24 @@ def addFollower(request,username):
     article_user = User.objects.get(username = username)
     # Article user profile
     article_user_profile = UserProfile.objects.get(author = article_user)
-    try:
-      if request.user.is_authenticated:
-        # Request user profile ( loged in user)
-        req_user_profile = UserProfile.objects.get(author = request.user)
-        alreadyFollowing =article_user_profile.followers.filter()
-        if req_user_profile.author in alreadyFollowing:
-          print("You already followed them")
-          messages.success(request,f"You already following  {article_user.first_name} {article_user.last_name}")  
-        else:
-          article_user_profile.followers.add(request.user)
-          print("You started following them")
-          req_user_profile.following.add(article_user)
-          Action.objects.create(by = request.user , to = article_user ,action = f"Started Following You" , redirect_link=f"#")
-          messages.success(request,f"Now you are following {article_user.first_name} {article_user.last_name}") 
+    
+    if request.user.is_authenticated:
+      # Request user profile ( loged in user)
+      req_user_profile = UserProfile.objects.get(author = request.user)
+      alreadyFollowing =article_user_profile.followers.filter()
+      if req_user_profile.author in alreadyFollowing:
+        print("You already followed them")
+        messages.success(request,f"You already following  {article_user.first_name} {article_user.last_name}")  
       else:
-        messages.error(request,"You need to login first")
-        return redirect("/user/login")
-    except :
-        messages.error(request,"Error while attempting request, please try again")
+        article_user_profile.followers.add(request.user)
+        print("You started following them")
+        req_user_profile.following.add(article_user)
+        Action.objects.create(by = request.user , to = article_user ,action = f"Started Following You" , redirect_link=f"#")
+        messages.success(request,f"Now you are following {article_user.first_name} {article_user.last_name}") 
+    else:
+      messages.error(request,"You need to login first")
+      return redirect("/user/login")
+ 
   else:
     messages.warning(request,"Please login first...... to continue")
     return redirect('/user/login')
@@ -186,50 +186,34 @@ def deleteAllActions(request):
 def profileEdit(request):
   if request.user.is_authenticated:
     profile = UserProfile.objects.filter(author = request.user)
+    profile_get = UserProfile.objects.get(author = request.user)
     user = User.objects.filter(username = request.user.username)
-    if request.method == 'POST':
-      try:  
-        # Profile Pic 
-        try:
-          profile_pic = request.FILES['pro_pic']
-          profile.update(profile_pic = profile_pic)
-        except:
-          pass
-
-        # Cover Pic 
-        try:
-          cover_pic = request.FILES['cover_pic']
-          profile.update(cover_pic = cover_pic) 
-        except :
-          pass
-
-        username = request.POST['username']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        bio = request.POST['bio']
+    if request.method == 'POST':  
+      username = request.POST['username']
+      first_name = request.POST['first_name']
+      last_name = request.POST['last_name']
+      bio = request.POST['bio']
 
 
-          # First Name
-        if first_name:
-          user.update(first_name = first_name) 
-          
-          # Last Name
-        if last_name:
-          user.update(last_name = last_name) 
+        # First Name
+      if first_name:
+        user.update(first_name = first_name) 
+        
+        # Last Name
+      if last_name:
+        user.update(last_name = last_name) 
 
-          # UserName
-        if username:
-          user.update(username = username) 
+        # UserName
+      if username:
+        user.update(username = username) 
 
-          # Bio
-        if bio:
-          profile.update(bio = bio) 
+        # Bio
+      if bio:
+        profile.update(bio = bio) 
+ 
+      messages.success(request  ,"Profile has been updated")
+      return redirect("/user/editprofile/edit")
 
-        profile.save()
-        messages.success(request  ,"Profile has been updated")
-        return redirect("/user/editprofile/edit")
-      except :
-        messages.success(request  ,"Error Occured while updating profile") 
    
     context = {
       "user":user,
@@ -261,8 +245,10 @@ def veifyEmail(request):
         send_otp_code( username,email,otp )  
       except ConnectionError as e:
         print(e) 
-  
-      print(otp)
+
+        
+
+
       if request.method == "POST": 
           code1 = request.POST['otp-code-1']
           code2 = request.POST['otp-code-2']
@@ -285,18 +271,4 @@ def veifyEmail(request):
   return redirect("/")
 
  
-def re_send_otp(request):
-  if request.user.is_authenticated:
-    if not request.user.is_em_verified:
-      user = User.objects.get(username = request.user.username)
-      user.ganarate_otp()
-      try:
-        send_otp_code( user.username,user.email,user.otp )  
-        messages.success(request,"Otp re-sent success ")
-        return redirect('/user/email_verification/resend_otp')
-      except ConnectionError as e:
-        print(e) 
-    else:
-      return redirect('/404')
-  else:
-    return redirect('/404')
+ 

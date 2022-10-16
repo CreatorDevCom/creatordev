@@ -26,19 +26,7 @@
           <div class="input-box" >
             <label for="article-body" class="input-label">Article Content / Body</label>
             <textarea required name="article-body" id="editor" placeholder="Write your Article content" class="input-field" ></textarea>
-          </div> 
-          <div class="input-box">
-            <label for="article-body" class="input-label">Main image / Thumbnail</label>
-            <label class="main-image-label" >
-              <input type="file" onchange="fileSelect(event)" name="main-image" id="main-image" class="main-image">
-              <div class="main-image-inst" id="main-image-show">
-                <h2 class="main-image-bold-text">Click here to select an Image</h2>
-                <span class="main-image-inst">Type support .PNG , .JPG , .JPEG</span>
-                <span class="main-image-inst">width,height 700 x 500</span>
-              </div>
-            </label>
-          </div>
-        
+          </div>  
         <div class="input-box"> 
           <button type="submit"  class="input-field button">Create new</button>
         </div> 
@@ -52,25 +40,7 @@
  
   CKEDITOR.replace('editor');
 
-  function fileSelect (e) { 
-    let _file =e.target.value;
-    console.log(_file.replace("fakepath",'download'));
-    let show_inst = document.getElementById("main-image-show");
-    if (_file !== ""){ 
-      show_inst.innerHTML =`
-      <h2 class="main-image-bold-text">File selected success</h2>
-      <img src="${_file}" alt="asstes-loading"/>
-      `
-    }
-    else{
-      show_inst.innerHTML=`
-        <h2 class="main-image-bold-text">Click here to select an Image</h2>
-        <span class="main-image-inst">Type support .PNG , .JPG , .JPEG</span>
-        <span class="main-image-inst">width,height 700 x 500</span>
-      `;
-    }
   
-  }
 
 
  </script>
